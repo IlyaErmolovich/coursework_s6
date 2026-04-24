@@ -1,0 +1,4 @@
+repository "coursachk3s6/coursachk3s6@7972507902058@cloud"
+  path "/"
+    br "/main"
+    co "/main"
