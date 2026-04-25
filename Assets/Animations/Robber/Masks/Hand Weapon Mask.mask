@@ -1,0 +1,97 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!319 &31900000
+AvatarMask:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: Hand Weapon Mask
+  m_Mask: 00000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000
+  m_Elements:
+  - m_Path: 
+    m_Weight: 1
+  - m_Path: Felix:Hips
+    m_Weight: 0
+  - m_Path: Felix:Hips/Felix:LeftUpLeg
+    m_Weight: 0
+  - m_Path: Felix:Hips/Felix:LeftUpLeg/Felix:LeftLeg
+    m_Weight: 0
+  - m_Path: Felix:Hips/Felix:LeftUpLeg/Felix:LeftLeg/Felix:LeftFoot
+    m_Weight: 0
+  - m_Path: Felix:Hips/Felix:LeftUpLeg/Felix:LeftLeg/Felix:LeftFoot/Felix:LeftToeBase
+    m_Weight: 0
+  - m_Path: Felix:Hips/Felix:LeftUpLeg/Felix:LeftLeg/Felix:LeftFoot/Felix:LeftToeBase/Felix:LeftToe_End
+    m_Weight: 0
+  - m_Path: Felix:Hips/Felix:RightUpLeg
+    m_Weight: 0
+  - m_Path: Felix:Hips/Felix:RightUpLeg/Felix:RightLeg
+    m_Weight: 0
+  - m_Path: Felix:Hips/Felix:RightUpLeg/Felix:RightLeg/Felix:RightFoot
+    m_Weight: 0
+  - m_Path: Felix:Hips/Felix:RightUpLeg/Felix:RightLeg/Felix:RightFoot/Felix:RightToeBase
+    m_Weight: 0
+  - m_Path: Felix:Hips/Felix:RightUpLeg/Felix:RightLeg/Felix:RightFoot/Felix:RightToeBase/Felix:RightToe_End
+    m_Weight: 0
+  - m_Path: Felix:Hips/Felix:Spine
+    m_Weight: 0
+  - m_Path: Felix:Hips/Felix:Spine/Felix:Spine1
+    m_Weight: 0
+  - m_Path: Felix:Hips/Felix:Spine/Felix:Spine1/Felix:Spine2
+    m_Weight: 0
+  - m_Path: Felix:Hips/Felix:Spine/Felix:Spine1/Felix:Spine2/Felix:LeftShoulder
+    m_Weight: 0
+  - m_Path: Felix:Hips/Felix:Spine/Felix:Spine1/Felix:Spine2/Felix:LeftShoulder/Felix:LeftArm
+    m_Weight: 0
+  - m_Path: Felix:Hips/Felix:Spine/Felix:Spine1/Felix:Spine2/Felix:LeftShoulder/Felix:LeftArm/Felix:LeftForeArm
+    m_Weight: 0
+  - m_Path: Felix:Hips/Felix:Spine/Felix:Spine1/Felix:Spine2/Felix:LeftShoulder/Felix:LeftArm/Felix:LeftForeArm/Felix:LeftHand
+    m_Weight: 0
+  - m_Path: Felix:Hips/Felix:Spine/Felix:Spine1/Felix:Spine2/Felix:LeftShoulder/Felix:LeftArm/Felix:LeftForeArm/Felix:LeftHand/Felix:LeftHandIndex1
+    m_Weight: 0
+  - m_Path: Felix:Hips/Felix:Spine/Felix:Spine1/Felix:Spine2/Felix:LeftShoulder/Felix:LeftArm/Felix:LeftForeArm/Felix:LeftHand/Felix:LeftHandIndex1/Felix:LeftHandIndex2
+    m_Weight: 0
+  - m_Path: Felix:Hips/Felix:Spine/Felix:Spine1/Felix:Spine2/Felix:LeftShoulder/Felix:LeftArm/Felix:LeftForeArm/Felix:LeftHand/Felix:LeftHandIndex1/Felix:LeftHandIndex2/Felix:LeftHandIndex3
+    m_Weight: 0
+  - m_Path: Felix:Hips/Felix:Spine/Felix:Spine1/Felix:Spine2/Felix:LeftShoulder/Felix:LeftArm/Felix:LeftForeArm/Felix:LeftHand/Felix:LeftHandIndex1/Felix:LeftHandIndex2/Felix:LeftHandIndex3/Felix:LeftHandIndex4
+    m_Weight: 0
+  - m_Path: Felix:Hips/Felix:Spine/Felix:Spine1/Felix:Spine2/Felix:LeftShoulder/Felix:LeftArm/Felix:LeftForeArm/Felix:LeftHand/Felix:LeftHandThumb1
+    m_Weight: 0
+  - m_Path: Felix:Hips/Felix:Spine/Felix:Spine1/Felix:Spine2/Felix:LeftShoulder/Felix:LeftArm/Felix:LeftForeArm/Felix:LeftHand/Felix:LeftHandThumb1/Felix:LeftHandThumb2
+    m_Weight: 0
+  - m_Path: Felix:Hips/Felix:Spine/Felix:Spine1/Felix:Spine2/Felix:LeftShoulder/Felix:LeftArm/Felix:LeftForeArm/Felix:LeftHand/Felix:LeftHandThumb1/Felix:LeftHandThumb2/Felix:LeftHandThumb3
+    m_Weight: 0
+  - m_Path: Felix:Hips/Felix:Spine/Felix:Spine1/Felix:Spine2/Felix:LeftShoulder/Felix:LeftArm/Felix:LeftForeArm/Felix:LeftHand/Felix:LeftHandThumb1/Felix:LeftHandThumb2/Felix:LeftHandThumb3/Felix:LeftHandThumb4
+    m_Weight: 0
+  - m_Path: Felix:Hips/Felix:Spine/Felix:Spine1/Felix:Spine2/Felix:Neck
+    m_Weight: 0
+  - m_Path: Felix:Hips/Felix:Spine/Felix:Spine1/Felix:Spine2/Felix:Neck/Felix:Head
+    m_Weight: 0
+  - m_Path: Felix:Hips/Felix:Spine/Felix:Spine1/Felix:Spine2/Felix:Neck/Felix:Head/Felix:HeadTop_End
+    m_Weight: 0
+  - m_Path: Felix:Hips/Felix:Spine/Felix:Spine1/Felix:Spine2/Felix:RightShoulder
+    m_Weight: 0
+  - m_Path: Felix:Hips/Felix:Spine/Felix:Spine1/Felix:Spine2/Felix:RightShoulder/Felix:RightArm
+    m_Weight: 1
+  - m_Path: Felix:Hips/Felix:Spine/Felix:Spine1/Felix:Spine2/Felix:RightShoulder/Felix:RightArm/Felix:RightForeArm
+    m_Weight: 1
+  - m_Path: Felix:Hips/Felix:Spine/Felix:Spine1/Felix:Spine2/Felix:RightShoulder/Felix:RightArm/Felix:RightForeArm/Felix:RightHand
+    m_Weight: 1
+  - m_Path: Felix:Hips/Felix:Spine/Felix:Spine1/Felix:Spine2/Felix:RightShoulder/Felix:RightArm/Felix:RightForeArm/Felix:RightHand/Felix:RightHandIndex1
+    m_Weight: 1
+  - m_Path: Felix:Hips/Felix:Spine/Felix:Spine1/Felix:Spine2/Felix:RightShoulder/Felix:RightArm/Felix:RightForeArm/Felix:RightHand/Felix:RightHandIndex1/Felix:RightHandIndex2
+    m_Weight: 1
+  - m_Path: Felix:Hips/Felix:Spine/Felix:Spine1/Felix:Spine2/Felix:RightShoulder/Felix:RightArm/Felix:RightForeArm/Felix:RightHand/Felix:RightHandIndex1/Felix:RightHandIndex2/Felix:RightHandIndex3
+    m_Weight: 1
+  - m_Path: Felix:Hips/Felix:Spine/Felix:Spine1/Felix:Spine2/Felix:RightShoulder/Felix:RightArm/Felix:RightForeArm/Felix:RightHand/Felix:RightHandIndex1/Felix:RightHandIndex2/Felix:RightHandIndex3/Felix:RightHandIndex4
+    m_Weight: 1
+  - m_Path: Felix:Hips/Felix:Spine/Felix:Spine1/Felix:Spine2/Felix:RightShoulder/Felix:RightArm/Felix:RightForeArm/Felix:RightHand/Felix:RightHandThumb1
+    m_Weight: 1
+  - m_Path: Felix:Hips/Felix:Spine/Felix:Spine1/Felix:Spine2/Felix:RightShoulder/Felix:RightArm/Felix:RightForeArm/Felix:RightHand/Felix:RightHandThumb1/Felix:RightHandThumb2
+    m_Weight: 1
+  - m_Path: Felix:Hips/Felix:Spine/Felix:Spine1/Felix:Spine2/Felix:RightShoulder/Felix:RightArm/Felix:RightForeArm/Felix:RightHand/Felix:RightHandThumb1/Felix:RightHandThumb2/Felix:RightHandThumb3
+    m_Weight: 1
+  - m_Path: Felix:Hips/Felix:Spine/Felix:Spine1/Felix:Spine2/Felix:RightShoulder/Felix:RightArm/Felix:RightForeArm/Felix:RightHand/Felix:RightHandThumb1/Felix:RightHandThumb2/Felix:RightHandThumb3/Felix:RightHandThumb4
+    m_Weight: 1
+  - m_Path: Felix:Outfit_Default
+    m_Weight: 0

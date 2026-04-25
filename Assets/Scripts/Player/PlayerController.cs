@@ -6,6 +6,9 @@ using Mirror;
 [RequireComponent(typeof(CharacterController))]
 public class PlayerController : NetworkBehaviour
 {
+    public System.Action<float> OnWeaponScrollEvent;
+    public System.Action OnAttackEvent;
+
     [Header("Movement Settings")]
     [SerializeField] private float moveSpeed = 4f;
     [SerializeField] private float lookSensitivity = 10f;
@@ -136,5 +139,22 @@ public class PlayerController : NetworkBehaviour
     public Vector2 GetCurrentInput()
     {
         return _moveInput;
+    }
+
+    public void OnScroll(InputValue value)
+    {
+        float scrollY = value.Get<Vector2>().y;
+        if (Mathf.Abs(scrollY) > 0.1f)
+        {
+            OnWeaponScrollEvent?.Invoke(scrollY);
+        }
+    }
+
+    public void OnAttack(InputValue value)
+    {
+        if (value.isPressed)
+        {
+            OnAttackEvent?.Invoke();
+        }
     }
 }

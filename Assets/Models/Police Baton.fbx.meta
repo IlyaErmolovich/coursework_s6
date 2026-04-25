@@ -1,19 +1,9 @@
 fileFormatVersion: 2
-guid: 969800aedd139574aa76166cd73be7b1
+guid: 791d796ca70785c40aa87f28859d20d7
 ModelImporter:
   serializedVersion: 24200
   internalIDToNameTable: []
-  externalObjects:
-  - first:
-      type: UnityEngine:Material
-      assembly: UnityEngine.CoreModule
-      name: Felix_Body_Mat
-    second: {fileID: 2100000, guid: 44b398a432bc4044e843c4d71ca69081, type: 2}
-  - first:
-      type: UnityEngine:Material
-      assembly: UnityEngine.CoreModule
-      name: Felix_Outfit_Default_Mat
-    second: {fileID: 2100000, guid: 68104222dfc845a4dbc6eb0e1f6ffe8c, type: 2}
+  externalObjects: {}
   materials:
     materialImportMode: 2
     materialName: 0
@@ -110,7 +100,7 @@ ModelImporter:
   autoGenerateAvatarMappingIfUnspecified: 1
   animationType: 2
   humanoidOversampling: 1
-  avatarSetup: 1
+  avatarSetup: 0
   addHumanoidExtraRootOnlyWhenUsingAvatar: 1
   importBlendShapeDeformPercent: 1
   remapMaterialsIfMaterialImportModeIsNone: 0
