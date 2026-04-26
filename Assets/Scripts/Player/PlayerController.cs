@@ -8,6 +8,7 @@ public class PlayerController : NetworkBehaviour
 {
     public System.Action<float> OnWeaponScrollEvent;
     public System.Action OnAttackEvent;
+    public System.Action OnInteractEvent;
 
     [Header("Movement Settings")]
     [SerializeField] private float moveSpeed = 4f;
@@ -155,6 +156,14 @@ public class PlayerController : NetworkBehaviour
         if (value.isPressed)
         {
             OnAttackEvent?.Invoke();
+        }
+    }
+
+    public void OnInteract(InputValue value)
+    {
+        if (value.isPressed)
+        {
+            OnInteractEvent?.Invoke();
         }
     }
 }
