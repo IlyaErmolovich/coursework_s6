@@ -1125,6 +1125,8 @@ GameObject:
   - component: {fileID: 2737731285945482292}
   - component: {fileID: -1331849199913085348}
   - component: {fileID: -5257501137675945060}
+  - component: {fileID: -3158457962747633076}
+  - component: {fileID: -1954076483034423886}
   m_Layer: 0
   m_Name: Robber
   m_TagString: Untagged
@@ -1288,13 +1290,11 @@ MonoBehaviour:
   syncMode: 0
   syncInterval: 0
   moveSpeed: 4
-  sprintSpeed: 6
   lookSensitivity: 10
   gravity: -9.81
   cameraTransform: {fileID: 1595249561377071789}
   acceleration: 10
   backPedalMultiplier: 0.55
-  sprintSideMultiplier: 0.7
   animationSmoothness: 5
 --- !u!114 &2737731285945482292
 MonoBehaviour:
@@ -1349,6 +1349,38 @@ MonoBehaviour:
   interactLayer:
     serializedVersion: 2
     m_Bits: 64
+--- !u!114 &-3158457962747633076
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5223590591996085966}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f3e68d137d13f814c969e5cce6659ee1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::PlayerLobbyData
+  syncDirection: 0
+  syncMode: 0
+  syncInterval: 0
+  currentTeam: 0
+  playerName: 
+--- !u!114 &-1954076483034423886
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5223590591996085966}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e6954bc6b831e8e4a83e659bda3c2d52, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::PlayerLobbyVisuals
+  syncDirection: 0
+  syncMode: 0
+  syncInterval: 0
 --- !u!1 &5256556932336751801
 GameObject:
   m_ObjectHideFlags: 0

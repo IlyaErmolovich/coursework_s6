@@ -31,7 +31,6 @@ public class PlayerController : NetworkBehaviour
     private Vector2 _lookInput;
     private Vector3 _velocity; 
     private float _cameraRotationX;
-    private bool _isCursorLocked = true;
 
     private void Start()
     {
@@ -45,31 +44,19 @@ public class PlayerController : NetworkBehaviour
             _controller.enabled = false;
             return;
         }
-
-        ToggleCursor(true);
     }
 
     private void Update()
     {
         if (!isLocalPlayer) return;
 
-        HandleCursorLogic();
-        
-        if (_isCursorLocked)
-        {
-            ApplyMovement();
-            ApplyLook();
-        }
+        ApplyMovement();
+        ApplyLook();
     }
 
     public void OnMove(InputValue value) => _moveInput = value.Get<Vector2>();
     public void OnLook(InputValue value) => _lookInput = value.Get<Vector2>();
     
-    public void OnToggleCursor(InputValue value)
-    {
-        if (value.isPressed) ToggleCursor(!_isCursorLocked);
-    }
-
     private void ApplyMovement()
     {
         // Гравитация
@@ -119,24 +106,6 @@ public class PlayerController : NetworkBehaviour
         transform.Rotate(Vector3.up * (_lookInput.x * finalSensitivity));
     }
     
-    private void HandleCursorLogic()
-    {
-        if (!_isCursorLocked && Mouse.current.leftButton.wasPressedThisFrame)
-        {
-            if (!EventSystem.current.IsPointerOverGameObject())
-            {
-                ToggleCursor(true);
-            }
-        }
-    }
-
-    private void ToggleCursor(bool lockIt)
-    {
-        _isCursorLocked = lockIt;
-        Cursor.lockState = lockIt ? CursorLockMode.Locked : CursorLockMode.None;
-        Cursor.visible = !lockIt;
-    }
-
     public Vector2 GetCurrentInput()
     {
         return _moveInput;

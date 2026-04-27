@@ -1,0 +1,82 @@
+using Mirror;
+using UnityEngine;
+
+public enum PlayerTeam { None, Guards, Thieves }
+
+public class PlayerLobbyData : NetworkBehaviour
+{
+    [SyncVar(hook = nameof(OnTeamChanged))]
+    public PlayerTeam currentTeam = PlayerTeam.None;
+
+    [SyncVar(hook = nameof(OnNameChanged))]
+    public string playerName;
+
+    public override void OnStartLocalPlayer()
+    {
+        // Берем имя из сохраненных настроек
+        string savedName = PlayerPrefs.GetString("PlayerName", "Player " + netId);
+        CmdSetName(savedName);
+        
+        // Просим сервер назначить нам команду автоматически
+        CmdAutoAssignTeam();
+    }
+
+    void OnNameChanged(string oldName, string newName)
+    {
+        if (LobbyUI.singleton != null) LobbyUI.singleton.RefreshUI();
+    }
+
+    [Command]
+    private void CmdAutoAssignTeam()
+    {
+        LobbyManager.singleton.AutoAssign(this);
+    }
+
+    // Метод для кнопки "Сменить команду"
+    [Command]
+    public void CmdSwitchTeam()
+    {
+        PlayerTeam target = (currentTeam == PlayerTeam.Guards) ? PlayerTeam.Thieves : PlayerTeam.Guards;
+        LobbyManager.singleton.TryChangeTeam(this, target);
+    }
+
+    [Command]
+    public void CmdSetName(string name) 
+    {
+        playerName = name;
+        // На сервере хук не вызывается автоматически, поэтому вызываем обновление списка вручную
+        if (LobbyUI.singleton != null) LobbyUI.singleton.RefreshUI();
+    }
+
+    [Command]
+    public void CmdRequestTeamChange(PlayerTeam team)
+    {
+        LobbyManager.singleton.TryChangeTeam(this, team);
+    }
+
+    void OnTeamChanged(PlayerTeam oldTeam, PlayerTeam newTeam)
+    {
+        if (LobbyUI.singleton != null) LobbyUI.singleton.RefreshUI();
+    }
+    
+    public override void OnStartClient()
+    {
+        // Используем Invoke с небольшой задержкой, чтобы Mirror успел 
+        // создать объекты всех игроков в сцене клиента перед обновлением UI
+        Invoke(nameof(UpdateUIWithDelay), 0.1f);
+    }
+
+    void UpdateUIWithDelay()
+    {
+        if (LobbyUI.singleton != null) LobbyUI.singleton.RefreshUI();
+    }
+
+    private void OnDestroy()
+    {
+        // Проверяем не только синглтон, но и само существование объекта
+        if (LobbyUI.singleton != null && LobbyUI.singleton.gameObject != null) 
+        {
+            LobbyUI.singleton.RefreshUI();
+        }
+    }
+}
