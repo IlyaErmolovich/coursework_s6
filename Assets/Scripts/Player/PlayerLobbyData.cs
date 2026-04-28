@@ -9,7 +9,7 @@ public class PlayerLobbyData : NetworkBehaviour
     public PlayerTeam currentTeam = PlayerTeam.None;
 
     [SyncVar(hook = nameof(OnNameChanged))]
-    public string playerName;
+    public string playerName = "Player";
 
     public override void OnStartLocalPlayer()
     {
@@ -23,7 +23,12 @@ public class PlayerLobbyData : NetworkBehaviour
 
     void OnNameChanged(string oldName, string newName)
     {
-        if (LobbyUI.singleton != null) LobbyUI.singleton.RefreshUI();
+        // Ищем компонент ника и просим его обновиться
+        PlayerNameTag nameTag = GetComponentInChildren<PlayerNameTag>();
+        if (nameTag != null)
+        {
+            nameTag.UpdateDisplayName(newName);
+        }
     }
 
     [Command]

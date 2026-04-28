@@ -25,15 +25,24 @@ public class PlayerAnimations : NetworkBehaviour
 
     private void Update()
     {
-        // Ноги анимируем только у себя (LocalPlayer)
         if (isLocalPlayer)
         {
             HandleLocomotion();
+            HandleAnimationSpeed(); // Добавляем новый метод
         }
         
-        // А вот плавность веса оружия должна работать ДЛЯ ВСЕХ игроков на сцене
         HandleWeightsSmoothing();
         HandleAttackLayerBlending();
+    }
+
+    private void HandleAnimationSpeed()
+    {
+        // Берем фактор ускорения напрямую из контроллера
+        float speedFactor = _controller.CurrentSprintFactor;
+        
+        // Передаем в Animator. 
+        // В Unity у стейта бега нажми "Multiplier" и выбери этот параметр
+        _animator.SetFloat("SprintSpeed", speedFactor);
     }
 
     private void HandleLocomotion()
