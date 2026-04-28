@@ -46,8 +46,10 @@ public class PlayerController : NetworkBehaviour
     {
         get 
         {
-            if (_isSprinting && _moveInput.y > 0.1f && _currentStamina > 1f) 
+            // Если кнопка зажата и стамина есть — возвращаем множитель, иначе — 1 (обычный бег/шаг)
+            if (_isSprinting && _currentStamina > 0.5f && _moveInput.y > 0.1f)
                 return sprintMultiplier;
+            
             return 1f;
         }
     }
@@ -85,10 +87,10 @@ public class PlayerController : NetworkBehaviour
 
         Vector3 targetDirection = transform.right * _moveInput.x + transform.forward * _moveInput.y;
 
-        // Считаем коэффициент ускорения: Shift + идем вперед (W или W+диагонали)
-        float currentSprintFactor = (_isSprinting && _moveInput.y > 0.1f) ? sprintMultiplier : 1f;
+        // ИСПРАВЛЕНИЕ: Используем CurrentSprintFactor, который уже учитывает стамину и направление
+        float currentSprintFactor = CurrentSprintFactor;
 
-        float targetSpeed = moveSpeed * currentSprintFactor; // Применяем ускорение здесь
+        float targetSpeed = moveSpeed * currentSprintFactor; 
         
         if (_moveInput.y < 0) targetSpeed *= backPedalMultiplier;
         if (_moveInput.sqrMagnitude == 0) targetSpeed = 0;

@@ -7,6 +7,8 @@ public class PlayerInteraction : MonoBehaviour
     private Camera _cam;
     private IInteractable _currentInteractable;
 
+    public IInteractable GetCurrentInteractable => _currentInteractable;
+
     private float _dist;
     private LayerMask _layer;
 
