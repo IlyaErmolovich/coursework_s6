@@ -42,6 +42,8 @@ public class PlayerController : NetworkBehaviour
     private Vector2 _lookInput;
     private Vector3 _velocity; 
     private float _cameraRotationX;
+    [SyncVar] private bool _isStunned;
+    public bool IsStunned => _isStunned;
     public float CurrentSprintFactor 
     {
         get 
@@ -72,11 +74,28 @@ public class PlayerController : NetworkBehaviour
     private void Update()
     {
         if (!isLocalPlayer) return;
+        if (_isStunned) 
+        {
+            // Сбрасываем скорость, чтобы игрок не "катился" по инерции
+            _currentVelocity = Vector3.zero; 
+            return; 
+        }
 
         HandleStamina();
         ApplyMovement();
         ApplyLook();
     }
+
+    [Server]
+    public void Stun(float duration)
+    {
+        _isStunned = true;
+        CancelInvoke(nameof(ResetStun)); // Сброс, если уже был застанен
+        Invoke(nameof(ResetStun), duration);
+    }
+
+    [Server]
+    private void ResetStun() => _isStunned = false;
 
     public void OnMove(InputValue value) => _moveInput = value.Get<Vector2>();
     public void OnLook(InputValue value) => _lookInput = value.Get<Vector2>();

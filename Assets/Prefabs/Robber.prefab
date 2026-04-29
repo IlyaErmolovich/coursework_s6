@@ -9,7 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3654730137510593032}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Felix:Spine2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -33,7 +33,7 @@ Transform:
   - {fileID: 2758116520961905303}
   - {fileID: 3640691178623648360}
   m_Father: {fileID: 1494023961897993441}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 0.5992712, y: -3.7301059, z: 0.7632416}
 --- !u!1 &919132149155446097
 GameObject:
   m_ObjectHideFlags: 0
@@ -45,7 +45,7 @@ GameObject:
   - component: {fileID: -8679921383154817045}
   - component: {fileID: -5754084199372789682}
   - component: {fileID: -7511558181221131132}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Police Baton
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -137,7 +137,7 @@ GameObject:
   - component: {fileID: 8384991691463496360}
   - component: {fileID: 5230677982547265101}
   - component: {fileID: 5567309627495310143}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Camera
   m_TagString: MainCamera
   m_Icon: {fileID: 0}
@@ -283,7 +283,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3640691178623648360}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Felix:RightShoulder
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -305,7 +305,7 @@ Transform:
   m_Children:
   - {fileID: 4932054353424115241}
   m_Father: {fileID: 3654730137510593032}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 85.54846, y: 135.55428, z: 60.12101}
 --- !u!1 &1257017810487095209
 GameObject:
   m_ObjectHideFlags: 0
@@ -315,7 +315,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3315366381218431911}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Felix:RightHandIndex3
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -337,7 +337,7 @@ Transform:
   m_Children:
   - {fileID: 6842576920961893942}
   m_Father: {fileID: 3255171609923608153}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 59.44728, y: 2.4635015, z: 1.1052907}
 --- !u!1 &1266960694266134653
 GameObject:
   m_ObjectHideFlags: 0
@@ -347,7 +347,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7072523144020165005}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Felix:RightToe_End
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -378,7 +378,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8251888584746660965}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Felix:LeftHandIndex2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -400,7 +400,7 @@ Transform:
   m_Children:
   - {fileID: 4543037657016404213}
   m_Father: {fileID: 2763284325503615908}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 67.00363, y: -10.215048, z: -12.002504}
 --- !u!1 &1308964805548902213
 GameObject:
   m_ObjectHideFlags: 0
@@ -410,7 +410,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3255050404858086702}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Felix:RightHand
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -434,7 +434,7 @@ Transform:
   - {fileID: 392488304319891814}
   - {fileID: -8679921383154817045}
   m_Father: {fileID: 5285759559600115580}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: -10.937527, y: 4.0901165, z: -8.226669}
 --- !u!1 &1330472856790432375
 GameObject:
   m_ObjectHideFlags: 0
@@ -445,7 +445,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1760173477161063628}
   - component: {fileID: 377515368797700008}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Felix:Outfit_Default
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -571,7 +571,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7567697798317634176}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Felix:RightLeg
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -593,7 +593,7 @@ Transform:
   m_Children:
   - {fileID: 1743614582767964109}
   m_Father: {fileID: 3889845544130875541}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: -44.611614, y: -33.560387, z: 22.834137}
 --- !u!1 &1668778739696005016
 GameObject:
   m_ObjectHideFlags: 0
@@ -603,7 +603,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7380869949577013993}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Felix:LeftForeArm
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -625,7 +625,7 @@ Transform:
   m_Children:
   - {fileID: 3087116239610640268}
   m_Father: {fileID: 8088555289486725608}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 10.76767, y: 1.2866209, z: -81.93899}
 --- !u!1 &1785213004390388578
 GameObject:
   m_ObjectHideFlags: 0
@@ -635,7 +635,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1743614582767964109}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Felix:RightFoot
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -657,7 +657,7 @@ Transform:
   m_Children:
   - {fileID: 2924107610853788569}
   m_Father: {fileID: 7567697798317634176}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 65.345406, y: -63.46051, z: -59.4218}
 --- !u!1 &2124986744071556625
 GameObject:
   m_ObjectHideFlags: 0
@@ -667,7 +667,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3978693795418455765}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Felix:LeftToe_End
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -700,7 +700,7 @@ GameObject:
   - component: {fileID: 7987805687377480137}
   - component: {fileID: 3330267823176949761}
   - component: {fileID: 8219085693287151086}
-  m_Layer: 5
+  m_Layer: 3
   m_Name: PlayerName
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -835,7 +835,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1468798894394721797}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Felix:RightHandThumb3
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -857,7 +857,7 @@ Transform:
   m_Children:
   - {fileID: 1266274708725700730}
   m_Father: {fileID: 5950717290918752852}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: -14.191443, y: -15.908357, z: 2.2035427}
 --- !u!1 &2513544884372823543
 GameObject:
   m_ObjectHideFlags: 0
@@ -867,7 +867,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 536319152890278168}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Felix:RightHandIndex1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -889,7 +889,7 @@ Transform:
   m_Children:
   - {fileID: 3255171609923608153}
   m_Father: {fileID: 3255050404858086702}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 61.372005, y: -4.536469, z: -3.5185072}
 --- !u!1 &2728085119022955432
 GameObject:
   m_ObjectHideFlags: 0
@@ -899,7 +899,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3161753699952186749}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Felix:LeftLeg
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -921,7 +921,7 @@ Transform:
   m_Children:
   - {fileID: 8624888346181973879}
   m_Father: {fileID: 5375785239508078732}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: -64.37171, y: -73.37776, z: 68.07283}
 --- !u!1 &2946071534135621985
 GameObject:
   m_ObjectHideFlags: 0
@@ -931,7 +931,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6106236615476799387}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Felix:LeftHandIndex4
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -962,7 +962,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5285759559600115580}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Felix:RightForeArm
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -984,7 +984,7 @@ Transform:
   m_Children:
   - {fileID: 3255050404858086702}
   m_Father: {fileID: 4932054353424115241}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 35.0331, y: -103.061356, z: -0.7464642}
 --- !u!1 &3908216675500257979
 GameObject:
   m_ObjectHideFlags: 0
@@ -994,7 +994,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8088555289486725608}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Felix:LeftArm
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1016,7 +1016,7 @@ Transform:
   m_Children:
   - {fileID: 7380869949577013993}
   m_Father: {fileID: 3447752233735769106}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 33.136173, y: 1.4657645, z: -7.160035}
 --- !u!1 &4131597533189811551
 GameObject:
   m_ObjectHideFlags: 0
@@ -1026,7 +1026,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4157054703244387848}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Felix:Hips
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1050,7 +1050,7 @@ Transform:
   - {fileID: 3889845544130875541}
   - {fileID: 887080417256530845}
   m_Father: {fileID: 8447445074874939714}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 13.9512, y: -7.325115, z: -4.6850314}
 --- !u!1 &4409354518511975317
 GameObject:
   m_ObjectHideFlags: 0
@@ -1060,7 +1060,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2924107610853788569}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Felix:RightToeBase
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1082,7 +1082,7 @@ Transform:
   m_Children:
   - {fileID: 7072523144020165005}
   m_Father: {fileID: 1743614582767964109}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 46.07017, y: -30.171366, z: 1.6999853}
 --- !u!1 &4546263929758350986
 GameObject:
   m_ObjectHideFlags: 0
@@ -1092,7 +1092,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7750586370958898114}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: NicknameAnchor
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1124,7 +1124,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3255171609923608153}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Felix:RightHandIndex2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1146,7 +1146,7 @@ Transform:
   m_Children:
   - {fileID: 3315366381218431911}
   m_Father: {fileID: 536319152890278168}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 65.96501, y: 11.526737, z: 13.531666}
 --- !u!1 &4592840134566979108
 GameObject:
   m_ObjectHideFlags: 0
@@ -1156,7 +1156,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3889845544130875541}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Felix:RightUpLeg
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1178,7 +1178,136 @@ Transform:
   m_Children:
   - {fileID: 7567697798317634176}
   m_Father: {fileID: 4157054703244387848}
+  m_LocalEulerAnglesHint: {x: 11.006866, y: 25.975887, z: -151.61684}
+--- !u!1 &5030169219612328972
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 5089606527834571282}
+  - component: {fileID: 7019384321760840796}
+  m_Layer: 3
+  m_Name: SlapSource
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &5089606527834571282
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5030169219612328972}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1131312231511421602}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!82 &7019384321760840796
+AudioSource:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5030169219612328972}
+  m_Enabled: 1
+  serializedVersion: 4
+  OutputAudioMixerGroup: {fileID: 0}
+  m_audioClip: {fileID: 0}
+  m_Resource: {fileID: 0}
+  m_PlayOnAwake: 1
+  m_Volume: 1
+  m_Pitch: 1
+  Loop: 0
+  Mute: 0
+  Spatialize: 0
+  SpatializePostEffects: 0
+  Priority: 128
+  DopplerLevel: 1
+  MinDistance: 1
+  MaxDistance: 7
+  Pan2D: 0
+  rolloffMode: 0
+  BypassEffects: 0
+  BypassListenerEffects: 0
+  BypassReverbZones: 0
+  rolloffCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 1
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  panLevelCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  spreadCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  reverbZoneMixCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
 --- !u!1 &5158269641358826669
 GameObject:
   m_ObjectHideFlags: 0
@@ -1188,7 +1317,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3087116239610640268}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Felix:LeftHand
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1211,7 +1340,7 @@ Transform:
   - {fileID: 2763284325503615908}
   - {fileID: 3242442427982742670}
   m_Father: {fileID: 7380869949577013993}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 21.18517, y: -3.612011, z: 4.77907}
 --- !u!1 &5172381436507132971
 GameObject:
   m_ObjectHideFlags: 0
@@ -1221,7 +1350,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3242442427982742670}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Felix:LeftHandThumb1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1243,7 +1372,7 @@ Transform:
   m_Children:
   - {fileID: 1612881582989498487}
   m_Father: {fileID: 3087116239610640268}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 32.77867, y: -25.578577, z: -41.313263}
 --- !u!1 &5173838741999024552
 GameObject:
   m_ObjectHideFlags: 0
@@ -1253,7 +1382,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1106512094624853744}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Felix:LeftToeBase
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1275,7 +1404,7 @@ Transform:
   m_Children:
   - {fileID: 3978693795418455765}
   m_Father: {fileID: 8624888346181973879}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 29.40181, y: 4.002336, z: -1.7920117}
 --- !u!1 &5223590591996085966
 GameObject:
   m_ObjectHideFlags: 0
@@ -1296,7 +1425,8 @@ GameObject:
   - component: {fileID: -5257501137675945060}
   - component: {fileID: -3158457962747633076}
   - component: {fileID: -1954076483034423886}
-  m_Layer: 0
+  - component: {fileID: 8539230958569271936}
+  m_Layer: 3
   m_Name: Robber
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1312,13 +1442,17 @@ Transform:
   m_GameObject: {fileID: 5223590591996085966}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.57371974, y: 8.710117e-10, z: 0.2409755}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 8447445074874939714}
   - {fileID: 1595249561377071789}
   - {fileID: 7750586370958898114}
+  - {fileID: 8568620278912051409}
+  - {fileID: 1409367850992406511}
+  - {fileID: 8676559777893153004}
+  - {fileID: 5089606527834571282}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &3337028989021583518
@@ -1466,6 +1600,10 @@ MonoBehaviour:
   sprintMultiplier: 1.5
   acceleration: 10
   backPedalMultiplier: 0.55
+  maxStamina: 100
+  staminaDrainRate: 25
+  staminaRegenRate: 15
+  staminaRegenDelay: 1.5
   animationSmoothness: 5
 --- !u!114 &2737731285945482292
 MonoBehaviour:
@@ -1482,6 +1620,13 @@ MonoBehaviour:
   syncDirection: 0
   syncMode: 0
   syncInterval: 0
+  attackDistance: 1
+  attackRadius: 0.6
+  playerLayer:
+    serializedVersion: 2
+    m_Bits: 8
+  stunHeight: 1.1
+  stunDuration: 3
 --- !u!114 &-1331849199913085348
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1552,6 +1697,28 @@ MonoBehaviour:
   syncDirection: 0
   syncMode: 0
   syncInterval: 0
+--- !u!114 &8539230958569271936
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5223590591996085966}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 88c8ba610e0bd24489a6c65bebe9954c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::PlayerAudioManager
+  syncDirection: 0
+  syncMode: 0
+  syncInterval: 0
+  footstepSource: {fileID: 4486044615554065338}
+  combatSource: {fileID: 822884886243230061}
+  inventorySource: {fileID: 1713835164502356974}
+  footstepSound: {fileID: 8300000, guid: 9e847312a3dc2d64f8bf7e81b38e9a47, type: 3}
+  swingAirSound: {fileID: 8300000, guid: 7412b1e48ebc6eb4b8040a4cd0d9d3ff, type: 3}
+  hitTargetSound: {fileID: 8300000, guid: 68228b7c736170f4fbd9af932ba22c6a, type: 3}
+  itemPickupSound: {fileID: 8300000, guid: a932fbac1c4e0eb44adc95beb7b5f941, type: 3}
 --- !u!1 &5256556932336751801
 GameObject:
   m_ObjectHideFlags: 0
@@ -1561,7 +1728,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5375785239508078732}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Felix:LeftUpLeg
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1583,7 +1750,7 @@ Transform:
   m_Children:
   - {fileID: 3161753699952186749}
   m_Father: {fileID: 4157054703244387848}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: -74.961716, y: -35.60215, z: -152.42586}
 --- !u!1 &5407758401168039279
 GameObject:
   m_ObjectHideFlags: 0
@@ -1593,7 +1760,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5950717290918752852}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Felix:RightHandThumb2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1615,7 +1782,7 @@ Transform:
   m_Children:
   - {fileID: 1468798894394721797}
   m_Father: {fileID: 392488304319891814}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: -11.438653, y: 16.806631, z: -6.9259596}
 --- !u!1 &5594584801681964571
 GameObject:
   m_ObjectHideFlags: 0
@@ -1625,7 +1792,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8624888346181973879}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Felix:LeftFoot
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1647,7 +1814,7 @@ Transform:
   m_Children:
   - {fileID: 1106512094624853744}
   m_Father: {fileID: 3161753699952186749}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 77.80668, y: -23.460657, z: -31.421467}
 --- !u!1 &6037923753499708403
 GameObject:
   m_ObjectHideFlags: 0
@@ -1657,7 +1824,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3447752233735769106}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Felix:LeftShoulder
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1679,7 +1846,7 @@ Transform:
   m_Children:
   - {fileID: 8088555289486725608}
   m_Father: {fileID: 3654730137510593032}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 63.827576, y: 78.25406, z: -175.14886}
 --- !u!1 &6165236132724737308
 GameObject:
   m_ObjectHideFlags: 0
@@ -1689,7 +1856,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7313596004908886527}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Felix:HeadTop_End
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1720,7 +1887,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 887080417256530845}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Felix:Spine
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1742,7 +1909,7 @@ Transform:
   m_Children:
   - {fileID: 1494023961897993441}
   m_Father: {fileID: 4157054703244387848}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 13.306827, y: -10.376016, z: 8.309823}
 --- !u!1 &6538904916043483264
 GameObject:
   m_ObjectHideFlags: 0
@@ -1752,7 +1919,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1494023961897993441}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Felix:Spine1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1774,7 +1941,7 @@ Transform:
   m_Children:
   - {fileID: 3654730137510593032}
   m_Father: {fileID: 887080417256530845}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 0.75947356, y: -3.7655823, z: 0.7446117}
 --- !u!1 &6561711841878927532
 GameObject:
   m_ObjectHideFlags: 0
@@ -1784,7 +1951,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2758116520961905303}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Felix:Neck
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1806,7 +1973,136 @@ Transform:
   m_Children:
   - {fileID: 2862525028802921362}
   m_Father: {fileID: 3654730137510593032}
+  m_LocalEulerAnglesHint: {x: 1.7007836, y: 2.9381418, z: -0.8498924}
+--- !u!1 &6651905317759685046
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 8676559777893153004}
+  - component: {fileID: 1713835164502356974}
+  m_Layer: 3
+  m_Name: InventorySource
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &8676559777893153004
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6651905317759685046}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1131312231511421602}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!82 &1713835164502356974
+AudioSource:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6651905317759685046}
+  m_Enabled: 1
+  serializedVersion: 4
+  OutputAudioMixerGroup: {fileID: 0}
+  m_audioClip: {fileID: 0}
+  m_Resource: {fileID: 0}
+  m_PlayOnAwake: 1
+  m_Volume: 1
+  m_Pitch: 1
+  Loop: 0
+  Mute: 0
+  Spatialize: 0
+  SpatializePostEffects: 0
+  Priority: 128
+  DopplerLevel: 1
+  MinDistance: 1
+  MaxDistance: 500
+  Pan2D: 0
+  rolloffMode: 0
+  BypassEffects: 0
+  BypassListenerEffects: 0
+  BypassReverbZones: 0
+  rolloffCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 1
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  panLevelCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  spreadCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  reverbZoneMixCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
 --- !u!1 &6803734390963118728
 GameObject:
   m_ObjectHideFlags: 0
@@ -1816,7 +2112,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3283907690788876770}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Felix:LeftHandThumb4
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1847,7 +2143,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6842576920961893942}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Felix:RightHandIndex4
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1878,7 +2174,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1266274708725700730}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Felix:RightHandThumb4
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1909,7 +2205,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7559109529367691034}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Felix:LeftHandThumb3
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1931,7 +2227,7 @@ Transform:
   m_Children:
   - {fileID: 3283907690788876770}
   m_Father: {fileID: 1612881582989498487}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 30.28864, y: -57.262787, z: -12.408782}
 --- !u!1 &8234708515484017058
 GameObject:
   m_ObjectHideFlags: 0
@@ -1941,7 +2237,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 392488304319891814}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Felix:RightHandThumb1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1963,7 +2259,7 @@ Transform:
   m_Children:
   - {fileID: 5950717290918752852}
   m_Father: {fileID: 3255050404858086702}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 53.307976, y: 24.158655, z: 14.845363}
 --- !u!1 &8286217849480651072
 GameObject:
   m_ObjectHideFlags: 0
@@ -1977,7 +2273,7 @@ GameObject:
   - component: {fileID: 5759286825591314664}
   - component: {fileID: 5129949309856948891}
   - component: {fileID: 9090378599389471195}
-  m_Layer: 5
+  m_Layer: 3
   m_Name: Canvas
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2092,7 +2388,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2763284325503615908}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Felix:LeftHandIndex1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2114,7 +2410,136 @@ Transform:
   m_Children:
   - {fileID: 8251888584746660965}
   m_Father: {fileID: 3087116239610640268}
+  m_LocalEulerAnglesHint: {x: 77.7474, y: -39.3674, z: -45.656998}
+--- !u!1 &8368669671434716815
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1409367850992406511}
+  - component: {fileID: 822884886243230061}
+  m_Layer: 3
+  m_Name: CombatSource
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1409367850992406511
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8368669671434716815}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1131312231511421602}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!82 &822884886243230061
+AudioSource:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8368669671434716815}
+  m_Enabled: 1
+  serializedVersion: 4
+  OutputAudioMixerGroup: {fileID: 0}
+  m_audioClip: {fileID: 0}
+  m_Resource: {fileID: 0}
+  m_PlayOnAwake: 1
+  m_Volume: 1
+  m_Pitch: 1
+  Loop: 0
+  Mute: 0
+  Spatialize: 0
+  SpatializePostEffects: 0
+  Priority: 128
+  DopplerLevel: 1
+  MinDistance: 1
+  MaxDistance: 7
+  Pan2D: 0
+  rolloffMode: 0
+  BypassEffects: 0
+  BypassListenerEffects: 0
+  BypassReverbZones: 0
+  rolloffCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 1
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  panLevelCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  spreadCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  reverbZoneMixCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
 --- !u!1 &8515664869005450134
 GameObject:
   m_ObjectHideFlags: 0
@@ -2126,8 +2551,10 @@ GameObject:
   - component: {fileID: 8447445074874939714}
   - component: {fileID: 1800819999948881885}
   - component: {fileID: 3669878810054457090}
+  - component: {fileID: 7111634441290192399}
   - component: {fileID: 1917258321232922258}
-  m_Layer: 0
+  - component: {fileID: 4032137418123874571}
+  m_Layer: 3
   m_Name: Model
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2203,6 +2630,29 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
+--- !u!136 &7111634441290192399
+CapsuleCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8515664869005450134}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 1
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Radius: 0.5
+  m_Height: 1.85
+  m_Direction: 1
+  m_Center: {x: 0, y: 1, z: 0}
 --- !u!114 &1917258321232922258
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2218,6 +2668,18 @@ MonoBehaviour:
   syncDirection: 0
   syncMode: 0
   syncInterval: 0
+--- !u!114 &4032137418123874571
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8515664869005450134}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 58da566ae030de04e88736f30e23a0f7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::PlayerAnimationEvents
 --- !u!1 &8722992965592480885
 GameObject:
   m_ObjectHideFlags: 0
@@ -2227,7 +2689,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4932054353424115241}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Felix:RightArm
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2249,7 +2711,136 @@ Transform:
   m_Children:
   - {fileID: 5285759559600115580}
   m_Father: {fileID: 3640691178623648360}
+  m_LocalEulerAnglesHint: {x: 32.515034, y: -60.43418, z: 14.911443}
+--- !u!1 &8845324518816686460
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 8568620278912051409}
+  - component: {fileID: 4486044615554065338}
+  m_Layer: 3
+  m_Name: FootstepsSource
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &8568620278912051409
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8845324518816686460}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1131312231511421602}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!82 &4486044615554065338
+AudioSource:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8845324518816686460}
+  m_Enabled: 1
+  serializedVersion: 4
+  OutputAudioMixerGroup: {fileID: 0}
+  m_audioClip: {fileID: 0}
+  m_Resource: {fileID: 0}
+  m_PlayOnAwake: 1
+  m_Volume: 1
+  m_Pitch: 1
+  Loop: 0
+  Mute: 0
+  Spatialize: 0
+  SpatializePostEffects: 0
+  Priority: 128
+  DopplerLevel: 1
+  MinDistance: 1
+  MaxDistance: 7
+  Pan2D: 0
+  rolloffMode: 0
+  BypassEffects: 0
+  BypassListenerEffects: 0
+  BypassReverbZones: 0
+  rolloffCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 1
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  panLevelCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  spreadCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  reverbZoneMixCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
 --- !u!1 &8953959229934005653
 GameObject:
   m_ObjectHideFlags: 0
@@ -2259,7 +2850,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1612881582989498487}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Felix:LeftHandThumb2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2281,7 +2872,7 @@ Transform:
   m_Children:
   - {fileID: 7559109529367691034}
   m_Father: {fileID: 3242442427982742670}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 2.9872634, y: -11.544622, z: 23.119053}
 --- !u!1 &8984946083911780964
 GameObject:
   m_ObjectHideFlags: 0
@@ -2291,7 +2882,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4543037657016404213}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Felix:LeftHandIndex3
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2313,7 +2904,7 @@ Transform:
   m_Children:
   - {fileID: 6106236615476799387}
   m_Father: {fileID: 8251888584746660965}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 69.59326, y: -0.29871407, z: 2.3388362}
 --- !u!1 &9018683963854403017
 GameObject:
   m_ObjectHideFlags: 0
@@ -2323,7 +2914,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2862525028802921362}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Felix:Head
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2345,4 +2936,4 @@ Transform:
   m_Children:
   - {fileID: 7313596004908886527}
   m_Father: {fileID: 2758116520961905303}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: -2.4326713, y: 2.9380825, z: -1.0620222}

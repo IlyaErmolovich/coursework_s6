@@ -20,8 +20,15 @@ public class PickupItem : NetworkBehaviour, IInteractable
 
     public void Interact(PlayerInventory inventory)
     {
-        // Передаем цену. true означает, что предмет всегда занимает слот
         inventory.CmdAddItem(value);
+
+        // Ищем аудиоменеджер на игроке, который инициировал взаимодействие
+        PlayerAudioManager playerAudio = inventory.GetComponent<PlayerAudioManager>();
+        if (playerAudio != null)
+        {
+            playerAudio.PlayPickupLocal();
+        }
+
         CmdDestroySelf();
     }
 

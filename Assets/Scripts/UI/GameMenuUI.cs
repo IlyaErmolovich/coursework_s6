@@ -19,6 +19,9 @@ public class GameMenuUI : MonoBehaviour
     [Header("Stamina UI")]
     [SerializeField] private Slider staminaSlider;
 
+    [Header("Stun UI")]
+    [SerializeField] private GameObject stunOverlay;
+
     private bool _isOpen;
     private PlayerInventory _localInventory;
     private PlayerInteraction _localInteraction;
@@ -44,6 +47,16 @@ public class GameMenuUI : MonoBehaviour
         if (!_isOpen)
         {
             UpdateHUD();
+            UpdateStunUI();
+        }
+    }
+
+    private void UpdateStunUI()
+    {
+        if (_localController != null && stunOverlay != null)
+        {
+            // Показываем надпись, если у игрока флаг IsStunned = true
+            stunOverlay.SetActive(_localController.IsStunned);
         }
     }
 

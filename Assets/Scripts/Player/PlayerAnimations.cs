@@ -11,12 +11,14 @@ public class PlayerAnimations : NetworkBehaviour
     private int _weaponIdleLayer;
     private int _fullBodyAttackLayer;
     private int _upperBodyAttackLayer;
+    private PlayerAudioManager _audio;
 
     private void Start()
     {
         _animator = GetComponent<Animator>();
         _controller = GetComponentInParent<PlayerController>();
         _equipment = GetComponentInParent<PlayerEquipmentManager>();
+        _audio = GetComponentInParent<PlayerAudioManager>();
         
         _weaponIdleLayer = _animator.GetLayerIndex("Weapon Idle");
         _fullBodyAttackLayer = _animator.GetLayerIndex("Full Body Attack");
@@ -27,8 +29,17 @@ public class PlayerAnimations : NetworkBehaviour
     {
         if (isLocalPlayer)
         {
-            HandleLocomotion();
-            HandleAnimationSpeed(); // Добавляем новый метод
+            // Если контроллер выключен (МЕНЮ) или игрок ОГЛУШЕН
+            if (!_controller.enabled || _controller.IsStunned)
+            {
+                // Плавно обнуляем анимацию, чтобы ноги не бежали на месте
+                StopLocomotion();
+            }
+            else
+            {
+                HandleLocomotion();
+                HandleAnimationSpeed();
+            }
         }
         
         HandleWeightsSmoothing();
@@ -53,6 +64,17 @@ public class PlayerAnimations : NetworkBehaviour
 
         _animator.SetFloat("moveX", _currentAnimationInput.x);
         _animator.SetFloat("moveY", _currentAnimationInput.y);
+    }
+
+    private void StopLocomotion()
+    {
+        // Используем AnimationSmoothness из контроллера для мягкой остановки
+        float step = _controller.AnimationSmoothness * Time.deltaTime;
+        _currentAnimationInput = Vector2.MoveTowards(_currentAnimationInput, Vector2.zero, step);
+
+        _animator.SetFloat("moveX", _currentAnimationInput.x);
+        _animator.SetFloat("moveY", _currentAnimationInput.y);
+        _animator.SetFloat("SprintSpeed", 1f); // Возвращаем скорость анимации в дефолт
     }
 
     private void HandleWeightsSmoothing()
@@ -117,6 +139,27 @@ public class PlayerAnimations : NetworkBehaviour
             // На месте: включаем Full Body, выключаем Upper Body
             _animator.SetLayerWeight(_fullBodyAttackLayer, Mathf.MoveTowards(_animator.GetLayerWeight(_fullBodyAttackLayer), 1f, step));
             _animator.SetLayerWeight(_upperBodyAttackLayer, Mathf.MoveTowards(_animator.GetLayerWeight(_upperBodyAttackLayer), 0f, step));
+        }
+    }
+
+    public void OnFootstep()
+    {
+        if (isLocalPlayer && _audio != null)
+        {
+            _audio.CmdPlayFootstep();
+        }
+    }
+
+    public void OnSwingAttack()
+    {
+        if (!isLocalPlayer) return;
+
+        // Если вдруг по какой-то причине _audio пустой (например, не успел найтись в Start)
+        if (_audio == null) _audio = GetComponentInParent<PlayerAudioManager>();
+
+        if (_audio != null)
+        {
+            _audio.CmdPlaySwing();
         }
     }
 }
