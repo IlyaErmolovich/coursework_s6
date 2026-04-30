@@ -9,7 +9,6 @@ public class PlayerLobbyVisuals : NetworkBehaviour
         UpdateState();
     }
 
-    // Вызывается при каждой смене сцены
     public override void OnStartClient()
     {
         UpdateState();
@@ -31,10 +30,8 @@ public class PlayerLobbyVisuals : NetworkBehaviour
 
     void SetPlayerActive(bool state)
     {
-        // Выключаем/включаем визуализацию (модели)
         foreach (var r in GetComponentsInChildren<Renderer>()) r.enabled = state;
 
-        // Выключаем/включаем камеру (только для своего игрока!)
         if (isLocalPlayer)
         {
             Camera cam = GetComponentInChildren<Camera>();
@@ -43,7 +40,6 @@ public class PlayerLobbyVisuals : NetworkBehaviour
             AudioListener listener = GetComponentInChildren<AudioListener>();
             if (listener != null) listener.enabled = state;
             
-            // Также выключаем скрипт управления (замените на название вашего скрипта)
             if (TryGetComponent(out PlayerController pc)) pc.enabled = state;
         }
     }

@@ -10,7 +10,7 @@ public class LobbyUI : MonoBehaviour
     [Header("Team Containers")]
     public Transform guardsContainer;
     public Transform thievesContainer;
-    public GameObject playerNamePrefab; // Просто текст (TMP)
+    public GameObject playerNamePrefab;
 
     [Header("Controls")]
     public Button startButton;
@@ -25,10 +25,8 @@ public class LobbyUI : MonoBehaviour
 
     public void RefreshUI()
     {
-        // Проверка: если мы уже выходим из сцены и контейнеров нет, ничего не делаем
         if (guardsContainer == null || thievesContainer == null) return; 
 
-        // Очищаем старые списки
         foreach (Transform t in guardsContainer) 
         {
             if (t != null) Destroy(t.gameObject); 
@@ -73,7 +71,6 @@ public class LobbyUI : MonoBehaviour
 
     public void OnSwitchTeamClick()
     {
-        // Обращаемся к своему объекту игрока и просим сменить команду
         if (NetworkClient.localPlayer != null)
         {
             var data = NetworkClient.localPlayer.GetComponent<PlayerLobbyData>();

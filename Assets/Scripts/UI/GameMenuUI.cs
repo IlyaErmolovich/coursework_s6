@@ -13,7 +13,6 @@ public class GameMenuUI : MonoBehaviour
     [SerializeField] private TextMeshProUGUI slotsText;
     
     [Header("Interaction Hint")]
-    // Оставляем только текст. Будем включать/выключать сам объект текста.
     [SerializeField] private TextMeshProUGUI interactionText;
 
     [Header("Stamina UI")]
@@ -30,7 +29,6 @@ public class GameMenuUI : MonoBehaviour
     void Start()
     {
         if (escapePanel != null) escapePanel.SetActive(false);
-        // При старте скрываем текст подсказки
         if (interactionText != null) interactionText.gameObject.SetActive(false);
         
         _isOpen = false;
@@ -55,7 +53,6 @@ public class GameMenuUI : MonoBehaviour
     {
         if (_localController != null && stunOverlay != null)
         {
-            // Показываем надпись, если у игрока флаг IsStunned = true
             stunOverlay.SetActive(_localController.IsStunned);
         }
     }
@@ -73,28 +70,23 @@ public class GameMenuUI : MonoBehaviour
             return;
         }
 
-        // 1. Стамина
         if (staminaSlider != null && _localController != null)
             staminaSlider.value = _localController.StaminaProgress;
 
-        // 2. Инвентарь
         if (moneyText != null) moneyText.text = $"$: {_localInventory.TotalMoney}";
         if (slotsText != null) slotsText.text = $"Slots: {_localInventory.OccupiedSlots}/{_localInventory.MaxSlots}";
 
-        // 3. Подсказка взаимодействия
         if (_localInteraction != null && interactionText != null)
         {
             var interactable = _localInteraction.GetCurrentInteractable;
             
             if (interactable != null)
             {
-                // Включаем объект текста и меняем его содержимое
                 interactionText.gameObject.SetActive(true);
                 interactionText.text = interactable.GetInteractionText(_localInventory);
             }
             else
             {
-                // Если не смотрим на предмет — выключаем объект текста
                 interactionText.gameObject.SetActive(false);
             }
         }
@@ -113,7 +105,6 @@ public class GameMenuUI : MonoBehaviour
         _isOpen = !_isOpen;
         if (escapePanel != null) escapePanel.SetActive(_isOpen);
         
-        // Если открыли меню, принудительно скрываем подсказку
         if (_isOpen && interactionText != null) interactionText.gameObject.SetActive(false);
         
         ApplyCursorState();

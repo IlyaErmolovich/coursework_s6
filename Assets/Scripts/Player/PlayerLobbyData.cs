@@ -13,17 +13,14 @@ public class PlayerLobbyData : NetworkBehaviour
 
     public override void OnStartLocalPlayer()
     {
-        // Берем имя из сохраненных настроек
         string savedName = PlayerPrefs.GetString("PlayerName", "Player " + netId);
         CmdSetName(savedName);
         
-        // Просим сервер назначить нам команду автоматически
         CmdAutoAssignTeam();
     }
 
     void OnNameChanged(string oldName, string newName)
     {
-        // Ищем компонент ника и просим его обновиться
         PlayerNameTag nameTag = GetComponentInChildren<PlayerNameTag>();
         if (nameTag != null)
         {
@@ -37,7 +34,6 @@ public class PlayerLobbyData : NetworkBehaviour
         LobbyManager.singleton.AutoAssign(this);
     }
 
-    // Метод для кнопки "Сменить команду"
     [Command]
     public void CmdSwitchTeam()
     {
@@ -49,7 +45,6 @@ public class PlayerLobbyData : NetworkBehaviour
     public void CmdSetName(string name) 
     {
         playerName = name;
-        // На сервере хук не вызывается автоматически, поэтому вызываем обновление списка вручную
         if (LobbyUI.singleton != null) LobbyUI.singleton.RefreshUI();
     }
 
@@ -66,8 +61,6 @@ public class PlayerLobbyData : NetworkBehaviour
     
     public override void OnStartClient()
     {
-        // Используем Invoke с небольшой задержкой, чтобы Mirror успел 
-        // создать объекты всех игроков в сцене клиента перед обновлением UI
         Invoke(nameof(UpdateUIWithDelay), 0.1f);
     }
 
@@ -78,7 +71,6 @@ public class PlayerLobbyData : NetworkBehaviour
 
     private void OnDestroy()
     {
-        // Проверяем не только синглтон, но и само существование объекта
         if (LobbyUI.singleton != null && LobbyUI.singleton.gameObject != null) 
         {
             LobbyUI.singleton.RefreshUI();

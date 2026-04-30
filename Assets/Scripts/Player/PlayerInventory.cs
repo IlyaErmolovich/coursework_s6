@@ -14,7 +14,6 @@ public class PlayerInventory : NetworkBehaviour
     public float interactDistance = 3f;
     public LayerMask interactLayer;
 
-    // Публичные свойства для чтения (например, для UI)
     public int TotalMoney => _totalMoney;
     public int OccupiedSlots => _occupiedSlots;
     public int MaxSlots => maxSlots;

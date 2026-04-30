@@ -13,21 +13,21 @@ public class PlayerController : NetworkBehaviour
     [Header("Movement Settings")]
     [SerializeField] private float moveSpeed = 4f;
     [SerializeField] private float lookSensitivity = 10f;
-    [SerializeField] private float gravity = -9.81f; // Гравитация нужна всегда
+    [SerializeField] private float gravity = -9.81f; 
     [SerializeField] private Transform cameraTransform;
     [SerializeField] private float sprintMultiplier = 1.5f;
-    private bool _isSprinting; // Храним состояние
+    private bool _isSprinting; 
 
     [Header("Movement Fine Tuning")]
-    [SerializeField] private float acceleration = 10f; // Скорость разгона
-    [SerializeField] private float backPedalMultiplier = 0.55f; // Коэффициент скорости назад (60%)
-    private Vector3 _currentVelocity; // Текущая расчетная скорость для плавности
+    [SerializeField] private float acceleration = 10f; 
+    [SerializeField] private float backPedalMultiplier = 0.55f; 
+    private Vector3 _currentVelocity; 
     
     [Header("Stamina Settings")]
     [SerializeField] private float maxStamina = 100f;
-    [SerializeField] private float staminaDrainRate = 25f; // Расход в сек.
-    [SerializeField] private float staminaRegenRate = 15f;  // Реген в сек.
-    [SerializeField] private float staminaRegenDelay = 1.5f; // Пауза перед регеном
+    [SerializeField] private float staminaDrainRate = 25f; 
+    [SerializeField] private float staminaRegenRate = 15f;  
+    [SerializeField] private float staminaRegenDelay = 1.5f; 
 
     [SyncVar] private float _currentStamina;
     private float _lastSprintTime;
@@ -44,16 +44,14 @@ public class PlayerController : NetworkBehaviour
     private float _cameraRotationX;
     [SyncVar] private bool _isStunned;
     public bool IsStunned => _isStunned;
-    public float CurrentSprintFactor 
+    private bool _canSprint;
+    public float CurrentSprintFactor => _canSprint ? sprintMultiplier : 1f;
+
+    [Server]
+    public void DecreaseStamina(float amount)
     {
-        get 
-        {
-            // Если кнопка зажата и стамина есть — возвращаем множитель, иначе — 1 (обычный бег/шаг)
-            if (_isSprinting && _currentStamina > 0.5f && _moveInput.y > 0.1f)
-                return sprintMultiplier;
-            
-            return 1f;
-        }
+        _currentStamina = Mathf.Max(_currentStamina - amount, 0f);
+        // Синхронизация произойдет автоматически через [SyncVar]
     }
 
     private void Start()
@@ -63,9 +61,7 @@ public class PlayerController : NetworkBehaviour
 
         if (!isLocalPlayer)
         {
-            // Отключаем камеру у чужих игроков
             if (cameraTransform != null) cameraTransform.gameObject.SetActive(false);
-            // Отключаем сам контроллер, чтобы он не конфликтовал с сетевой синхронизацией
             _controller.enabled = false;
             return;
         }
@@ -76,21 +72,47 @@ public class PlayerController : NetworkBehaviour
         if (!isLocalPlayer) return;
         if (_isStunned) 
         {
-            // Сбрасываем скорость, чтобы игрок не "катился" по инерции
             _currentVelocity = Vector3.zero; 
+            _canSprint = false; // Сбрасываем при стане
             return; 
         }
 
+        // ВАЖНО: Сначала определяем, можем ли мы бежать
+        UpdateSprintState(); 
+        
         HandleStamina();
         ApplyMovement();
         ApplyLook();
+    }
+
+    private void UpdateSprintState()
+    {
+        // Условие 1: Нажата кнопка и игрок идет вперед
+        bool isTryingToSprint = _isSprinting && _moveInput.y > 0.1f;
+
+        // Условие 2: Если мы еще НЕ бежим, то начать можем ТОЛЬКО при 100% стамины
+        if (!_canSprint)
+        {
+            if (isTryingToSprint && _currentStamina >= maxStamina - 0.1f)
+            {
+                _canSprint = true;
+            }
+        }
+        else
+        {
+            // Условие 3: Если мы УЖЕ бежим, то прекращаем, если отпустили кнопку или стамина кончилась
+            if (!isTryingToSprint || _currentStamina <= 0)
+            {
+                _canSprint = false;
+            }
+        }
     }
 
     [Server]
     public void Stun(float duration)
     {
         _isStunned = true;
-        CancelInvoke(nameof(ResetStun)); // Сброс, если уже был застанен
+        CancelInvoke(nameof(ResetStun)); 
         Invoke(nameof(ResetStun), duration);
     }
 
@@ -105,16 +127,15 @@ public class PlayerController : NetworkBehaviour
         if (_controller.isGrounded && _velocity.y < 0) _velocity.y = -2f;
 
         Vector3 targetDirection = transform.right * _moveInput.x + transform.forward * _moveInput.y;
+        float currentSpeedMagnitude = new Vector3(_currentVelocity.x, 0, _currentVelocity.z).magnitude;
 
-        // ИСПРАВЛЕНИЕ: Используем CurrentSprintFactor, который уже учитывает стамину и направление
-        float currentSprintFactor = CurrentSprintFactor;
+        // Используем нашу переменную для определения скорости
+        float currentSprintFactor = _canSprint ? sprintMultiplier : 1f;
 
         float targetSpeed = moveSpeed * currentSprintFactor; 
-        
         if (_moveInput.y < 0) targetSpeed *= backPedalMultiplier;
         if (_moveInput.sqrMagnitude == 0) targetSpeed = 0;
 
-        float currentSpeedMagnitude = new Vector3(_currentVelocity.x, 0, _currentVelocity.z).magnitude;
         float smoothSpeed = Mathf.Lerp(currentSpeedMagnitude, targetSpeed, acceleration * Time.deltaTime);
 
         _currentVelocity = targetDirection.normalized * smoothSpeed;
@@ -126,7 +147,6 @@ public class PlayerController : NetworkBehaviour
 
     private void ApplyLook()
     {
-        // Умножаем на 0.01 (или даже 0.001), чтобы в инспекторе были целые числа
         float finalSensitivity = lookSensitivity * 0.01f; 
 
         _cameraRotationX -= _lookInput.y * finalSensitivity;
@@ -138,10 +158,8 @@ public class PlayerController : NetworkBehaviour
 
     private void HandleStamina()
     {
-        // Проверяем: нажата кнопка (твоя переменная), идем вперед и есть стамина
-        bool isActuallySprinting = _isSprinting && _moveInput.y > 0.1f && _currentStamina > 0;
-
-        if (isActuallySprinting)
+        // Теперь тратим стамину только если бег РЕАЛЬНО разрешен
+        if (_canSprint)
         {
             _currentStamina = Mathf.Max(_currentStamina - staminaDrainRate * Time.deltaTime, 0f);
             _lastSprintTime = Time.time;

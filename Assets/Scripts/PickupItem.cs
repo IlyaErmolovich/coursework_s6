@@ -15,14 +15,12 @@ public class PickupItem : NetworkBehaviour, IInteractable
         return $"Нажмите E, чтобы взять {itemName} (Стоимость: {value})";
     }
 
-    // Теперь ВСЕ предметы проверяют наличие свободного слота
     public bool CanInteract(PlayerInventory inventory) => inventory.HasFreeSlot();
 
     public void Interact(PlayerInventory inventory)
     {
         inventory.CmdAddItem(value);
 
-        // Ищем аудиоменеджер на игроке, который инициировал взаимодействие
         PlayerAudioManager playerAudio = inventory.GetComponent<PlayerAudioManager>();
         if (playerAudio != null)
         {

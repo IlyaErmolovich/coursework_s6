@@ -12,8 +12,6 @@ public class PlayerEquipmentManager : NetworkBehaviour
 
     [SerializeField] private WeaponModel[] weapons;
     
-    // Синхронизируем индекс текущего оружия. 
-    // При изменении вызывается метод ChangeWeaponLocal
     [SyncVar(hook = nameof(OnWeaponChanged))]
     private int _currentWeaponIndex = -1;
 
@@ -22,7 +20,7 @@ public class PlayerEquipmentManager : NetworkBehaviour
         if (weapons.Length == 0) return;
         
         int nextIndex = _currentWeaponIndex + 1;
-        if (nextIndex >= weapons.Length) nextIndex = -1; // -1 = убрать всё
+        if (nextIndex >= weapons.Length) nextIndex = -1; 
         
         CmdSetWeapon(nextIndex);
     }
@@ -32,13 +30,11 @@ public class PlayerEquipmentManager : NetworkBehaviour
 
     private void OnWeaponChanged(int oldIdx, int newIdx)
     {
-        // Выключаем всё оружие
         foreach (var weapon in weapons)
         {
             if (weapon.modelObject != null) weapon.modelObject.SetActive(false);
         }
 
-        // Включаем только выбранное
         if (newIdx >= 0 && newIdx < weapons.Length)
         {
             if (weapons[newIdx].modelObject != null)
@@ -46,6 +42,5 @@ public class PlayerEquipmentManager : NetworkBehaviour
         }
     }
 
-    // Полезный метод для аниматора: достал ли игрок хоть что-то?
     public bool IsAnyWeaponDrawn() => _currentWeaponIndex >= 0;
 }

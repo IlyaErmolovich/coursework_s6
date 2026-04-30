@@ -6,8 +6,8 @@ using TMPro;
 public class MainMenuUI : MonoBehaviour
 {
     [Header("Panels")]
-    [SerializeField] private GameObject mainPanel;      // Кнопки: Играть, Выход
-    [SerializeField] private GameObject connectPanel;   // Поле IP, кнопки: Хост, Клиент, Назад
+    [SerializeField] private GameObject mainPanel;      
+    [SerializeField] private GameObject connectPanel;   
     [SerializeField] private TMP_InputField nameInputField;
 
     [Header("Input Elements")]
@@ -17,11 +17,9 @@ public class MainMenuUI : MonoBehaviour
 
     void Start()
     {
-        // Показываем только главную панель
         mainPanel.SetActive(true);
         connectPanel.SetActive(false);
 
-        // Устанавливаем дефолтный адрес в поле ввода, чтобы не было ошибки
         if (string.IsNullOrEmpty(ipInputField.text))
             ipInputField.text = "localhost";
 
@@ -32,14 +30,12 @@ public class MainMenuUI : MonoBehaviour
         Cursor.visible = true;
     }
 
-    // Вызывается кнопкой "Играть"
     public void OpenConnectPanel()
     {
         mainPanel.SetActive(false);
         connectPanel.SetActive(true);
     }
 
-    // Вызывается кнопкой "Назад"
     public void OpenMainPanel()
     {
         connectPanel.SetActive(false);
@@ -50,7 +46,7 @@ public class MainMenuUI : MonoBehaviour
     {
         if (NetworkServer.active || NetworkClient.active) return;
 
-        SaveName(); // ДОБАВЬ ЭТУ СТРОКУ
+        SaveName();
         NetworkManager.singleton.StartHost();
     }
 
@@ -60,7 +56,6 @@ public class MainMenuUI : MonoBehaviour
 
         SaveName();
 
-        // Если поле пустое — подставляем localhost принудительно
         string address = string.IsNullOrEmpty(ipInputField.text) ? "localhost" : ipInputField.text;
         
         NetworkManager.singleton.networkAddress = address;
@@ -71,7 +66,7 @@ public class MainMenuUI : MonoBehaviour
     {
         string n = string.IsNullOrEmpty(nameInputField.text) ? "Player" : nameInputField.text;
         PlayerPrefs.SetString("PlayerName", n);
-        PlayerPrefs.Save(); // Гарантирует запись данных на диск
+        PlayerPrefs.Save();
     }
 
     public void ExitGame() => Application.Quit();

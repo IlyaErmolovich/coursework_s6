@@ -9,12 +9,10 @@ public class PlayerNameTag : NetworkBehaviour
 
     void Start()
     {
-        // Пробуем обновить при старте на всякий случай
         PlayerLobbyData data = GetComponentInParent<PlayerLobbyData>();
         if (data != null) UpdateDisplayName(data.playerName);
     }
 
-    // Делаем метод публичным и принимающим имя
     public void UpdateDisplayName(string newName)
     {
         if (nameText != null && !string.IsNullOrEmpty(newName))
@@ -31,7 +29,6 @@ public class PlayerNameTag : NetworkBehaviour
             return;
         }
 
-        // Билбординг
         transform.LookAt(transform.position + _mainCamTransform.forward);
     }
 }

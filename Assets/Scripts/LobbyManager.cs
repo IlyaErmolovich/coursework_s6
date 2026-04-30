@@ -17,7 +17,6 @@ public class LobbyManager : NetworkBehaviour
         var allPlayers = FindObjectsByType<PlayerLobbyData>(FindObjectsSortMode.None);
         int count = allPlayers.Count(p => p.currentTeam == targetTeam);
 
-        // Если место есть, меняем команду
         if (count < maxPlayersPerTeam)
         {
             player.currentTeam = targetTeam;
@@ -48,7 +47,6 @@ public class LobbyManager : NetworkBehaviour
 
         player.currentTeam = (guards <= thieves) ? PlayerTeam.Guards : PlayerTeam.Thieves;
         
-        // Принудительно обновляем UI на стороне сервера (хоста)
         if (LobbyUI.singleton != null) LobbyUI.singleton.RefreshUI();
     }
 }
