@@ -54,17 +54,21 @@ public class PlayerController : NetworkBehaviour
         // Синхронизация произойдет автоматически через [SyncVar]
     }
 
+    public override void OnStartLocalPlayer()
+    {
+        if (cameraTransform != null)
+        {
+            cameraTransform.gameObject.SetActive(true);
+            cameraTransform.tag = "MainCamera";
+        }
+        if (_controller != null) _controller.enabled = true;
+    }
+
     private void Start()
     {
         _controller = GetComponent<CharacterController>();
         _currentStamina = maxStamina;
 
-        if (!isLocalPlayer)
-        {
-            if (cameraTransform != null) cameraTransform.gameObject.SetActive(false);
-            _controller.enabled = false;
-            return;
-        }
     }
 
     private void Update()

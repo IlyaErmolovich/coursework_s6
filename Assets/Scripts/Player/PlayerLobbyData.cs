@@ -11,6 +11,12 @@ public class PlayerLobbyData : NetworkBehaviour
     [SyncVar(hook = nameof(OnNameChanged))]
     public string playerName = "Player";
 
+    private void Awake()
+    {
+        // Это не даст Unity удалить объект при загрузке сцены Game
+        DontDestroyOnLoad(gameObject);
+    }
+
     public override void OnStartLocalPlayer()
     {
         string savedName = PlayerPrefs.GetString("PlayerName", "Player " + netId);

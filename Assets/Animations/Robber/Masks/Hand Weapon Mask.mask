@@ -7,7 +7,7 @@ AvatarMask:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_Name: Hand Weapon Mask
-  m_Mask: 00000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000
+  m_Mask: 00000000000000000000000000000000000000000000000001000000000000000100000000000000000000000000000000000000
   m_Elements:
   - m_Path: 
     m_Weight: 1
@@ -72,26 +72,26 @@ AvatarMask:
   - m_Path: Felix:Hips/Felix:Spine/Felix:Spine1/Felix:Spine2/Felix:RightShoulder
     m_Weight: 0
   - m_Path: Felix:Hips/Felix:Spine/Felix:Spine1/Felix:Spine2/Felix:RightShoulder/Felix:RightArm
-    m_Weight: 1
+    m_Weight: 0
   - m_Path: Felix:Hips/Felix:Spine/Felix:Spine1/Felix:Spine2/Felix:RightShoulder/Felix:RightArm/Felix:RightForeArm
-    m_Weight: 1
+    m_Weight: 0
   - m_Path: Felix:Hips/Felix:Spine/Felix:Spine1/Felix:Spine2/Felix:RightShoulder/Felix:RightArm/Felix:RightForeArm/Felix:RightHand
-    m_Weight: 1
+    m_Weight: 0
   - m_Path: Felix:Hips/Felix:Spine/Felix:Spine1/Felix:Spine2/Felix:RightShoulder/Felix:RightArm/Felix:RightForeArm/Felix:RightHand/Felix:RightHandIndex1
-    m_Weight: 1
+    m_Weight: 0
   - m_Path: Felix:Hips/Felix:Spine/Felix:Spine1/Felix:Spine2/Felix:RightShoulder/Felix:RightArm/Felix:RightForeArm/Felix:RightHand/Felix:RightHandIndex1/Felix:RightHandIndex2
-    m_Weight: 1
+    m_Weight: 0
   - m_Path: Felix:Hips/Felix:Spine/Felix:Spine1/Felix:Spine2/Felix:RightShoulder/Felix:RightArm/Felix:RightForeArm/Felix:RightHand/Felix:RightHandIndex1/Felix:RightHandIndex2/Felix:RightHandIndex3
-    m_Weight: 1
+    m_Weight: 0
   - m_Path: Felix:Hips/Felix:Spine/Felix:Spine1/Felix:Spine2/Felix:RightShoulder/Felix:RightArm/Felix:RightForeArm/Felix:RightHand/Felix:RightHandIndex1/Felix:RightHandIndex2/Felix:RightHandIndex3/Felix:RightHandIndex4
-    m_Weight: 1
+    m_Weight: 0
   - m_Path: Felix:Hips/Felix:Spine/Felix:Spine1/Felix:Spine2/Felix:RightShoulder/Felix:RightArm/Felix:RightForeArm/Felix:RightHand/Felix:RightHandThumb1
-    m_Weight: 1
+    m_Weight: 0
   - m_Path: Felix:Hips/Felix:Spine/Felix:Spine1/Felix:Spine2/Felix:RightShoulder/Felix:RightArm/Felix:RightForeArm/Felix:RightHand/Felix:RightHandThumb1/Felix:RightHandThumb2
-    m_Weight: 1
+    m_Weight: 0
   - m_Path: Felix:Hips/Felix:Spine/Felix:Spine1/Felix:Spine2/Felix:RightShoulder/Felix:RightArm/Felix:RightForeArm/Felix:RightHand/Felix:RightHandThumb1/Felix:RightHandThumb2/Felix:RightHandThumb3
-    m_Weight: 1
+    m_Weight: 0
   - m_Path: Felix:Hips/Felix:Spine/Felix:Spine1/Felix:Spine2/Felix:RightShoulder/Felix:RightArm/Felix:RightForeArm/Felix:RightHand/Felix:RightHandThumb1/Felix:RightHandThumb2/Felix:RightHandThumb3/Felix:RightHandThumb4
-    m_Weight: 1
+    m_Weight: 0
   - m_Path: Felix:Outfit_Default
     m_Weight: 0
