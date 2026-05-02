@@ -1,5 +1,6 @@
 using Mirror;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public enum PlayerTeam { None, Guards, Thieves }
 
@@ -22,7 +23,12 @@ public class PlayerLobbyData : NetworkBehaviour
         string savedName = PlayerPrefs.GetString("PlayerName", "Player " + netId);
         CmdSetName(savedName);
         
-        CmdAutoAssignTeam();
+        // ПРОВЕРКА: Автоназначение только если мы в Лобби[cite: 3, 4]
+        // Замените "Lobby" на точное название вашей сцены с лобби
+        if (UnityEngine.SceneManagement.SceneManager.GetActiveScene().name == "Lobby") 
+        {
+            CmdAutoAssignTeam();
+        }
     }
 
     void OnNameChanged(string oldName, string newName)

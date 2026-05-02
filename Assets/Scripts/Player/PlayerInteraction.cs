@@ -43,6 +43,12 @@ public class PlayerInteraction : MonoBehaviour
 
     private void HandleInteraction()
     {
+        var lobbyData = GetComponentInParent<PlayerLobbyData>();
+        if (lobbyData != null && lobbyData.currentTeam == PlayerTeam.Guards)
+        {
+            return; // Охранник не может подбирать предметы
+        }
+
         if (_currentInteractable != null && _currentInteractable.CanInteract(_inventory))
         {
             _currentInteractable.Interact(_inventory);

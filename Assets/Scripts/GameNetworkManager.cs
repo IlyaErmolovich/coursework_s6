@@ -1,6 +1,7 @@
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using Mirror;
+using System.Linq;
 
 public class GameNetworkManager : NetworkManager
 {
@@ -18,27 +19,33 @@ public class GameNetworkManager : NetworkManager
     // Добавляем второй параметр (PlayerLobbyData lobbyData) в скобки
     private void ReplacePlayerForGame(NetworkConnectionToClient conn, PlayerLobbyData lobbyData)
     {
-        GameObject prefabToSpawn = (lobbyData.currentTeam == PlayerTeam.Guards) ? guardPrefab : thiefPrefab;
+        // 1. ОПРЕДЕЛЯЕМ ПРЕФАБ (проверьте еще раз: вор это Thieves, охранник это Guards)[cite: 3, 4]
+        GameObject prefabToSpawn = (lobbyData.currentTeam == PlayerTeam.Thieves) ? thiefPrefab : guardPrefab;
         
         Transform startPos = GetStartPosition();
         GameObject gamePlayer = Instantiate(prefabToSpawn, 
             startPos != null ? startPos.position : Vector3.zero, 
             startPos != null ? startPos.rotation : Quaternion.identity);
 
-        // Копируем имя и команду в нового персонажа
+        // 2. КОПИРУЕМ ДАННЫЕ[cite: 4]
         var newLobbyData = gamePlayer.GetComponent<PlayerLobbyData>();
         if (newLobbyData != null)
         {
             newLobbyData.playerName = lobbyData.playerName;
-            newLobbyData.currentTeam = lobbyData.currentTeam;
+            newLobbyData.currentTeam = lobbyData.currentTeam; 
         }
 
+        // 3. СПАВНИМ И ЗАМЕНЯЕМ[cite: 4]
+        // Важно: Сохраняем ссылку на старый объект до замены
         GameObject oldLobbyObject = conn.identity.gameObject;
 
-        // Сначала меняем связь[cite: 3, 5]
+        // Сначала спавним новый объект для этого конкретного владельца[cite: 4]
+        NetworkServer.Spawn(gamePlayer, conn);
+        
+        // Переключаем управление[cite: 4]
         NetworkServer.ReplacePlayerForConnection(conn, gamePlayer, true);
 
-        // Потом УДАЛЯЕМ старый объект, иначе он будет висеть как на скрине
+        // Удаляем старый объект, чтобы он не мешался[cite: 3, 4]
         NetworkServer.Destroy(oldLobbyObject);
     }
 
@@ -46,17 +53,21 @@ public class GameNetworkManager : NetworkManager
     {
         base.OnServerSceneChanged(sceneName);
 
-        // Если мы перешли в сцену игры
         if (sceneName == "Game")
         {
-            foreach (var conn in NetworkServer.connections.Values)
+            // Используем ToList(), чтобы зафиксировать состояние подключений на этот момент[cite: 5]
+            var connections = NetworkServer.connections.Values.ToList();
+            
+            foreach (var conn in connections)
             {
-                if (conn.identity != null)
+                // Проверяем, что у соединения есть объект и он живой
+                if (conn != null && conn.identity != null)
                 {
-                    PlayerLobbyData lobbyData = conn.identity.GetComponent<PlayerLobbyData>();
-                    if (lobbyData != null)
+                    PlayerLobbyData oldData = conn.identity.GetComponent<PlayerLobbyData>();
+                    if (oldData != null)
                     {
-                        ReplacePlayerForGame(conn, lobbyData);
+                        // Вызываем замену, передавая данные конкретного игрока
+                        ReplacePlayerForGame(conn, oldData);
                     }
                 }
             }

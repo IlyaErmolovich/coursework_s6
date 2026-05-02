@@ -68,7 +68,10 @@ public class PlayerController : NetworkBehaviour
     {
         _controller = GetComponent<CharacterController>();
         _currentStamina = maxStamina;
-
+        
+        // Добавьте это для теста:
+        var lobbyData = GetComponent<PlayerLobbyData>();
+        Debug.Log($"Игрок заспавнен. Команда: {lobbyData.currentTeam}");
     }
 
     private void Update()
@@ -91,7 +94,14 @@ public class PlayerController : NetworkBehaviour
 
     private void UpdateSprintState()
     {
-        // Условие 1: Нажата кнопка и игрок идет вперед
+        // Проверяем команду через LobbyData
+        var lobbyData = GetComponent<PlayerLobbyData>();
+        if (lobbyData != null && lobbyData.currentTeam == PlayerTeam.Guards)
+        {
+            _canSprint = false; // Охранник никогда не бегает
+            return;
+        }
+
         bool isTryingToSprint = _isSprinting && _moveInput.y > 0.1f;
 
         // Условие 2: Если мы еще НЕ бежим, то начать можем ТОЛЬКО при 100% стамины
@@ -115,8 +125,11 @@ public class PlayerController : NetworkBehaviour
     [Server]
     public void Stun(float duration)
     {
+        // Если игрок уже находится в состоянии стана, выходим, чтобы не перезапускать таймер
+        if (_isStunned) return; 
+
         _isStunned = true;
-        CancelInvoke(nameof(ResetStun)); 
+        // Убираем CancelInvoke, так как теперь метод не будет вызываться повторно во время стана
         Invoke(nameof(ResetStun), duration);
     }
 
@@ -186,6 +199,9 @@ public class PlayerController : NetworkBehaviour
 
     public void OnScroll(InputValue value)
     {
+        // Если курсор виден (меню открыто), игнорируем прокрутку оружия
+        if (Cursor.visible) return;
+
         float scrollY = value.Get<Vector2>().y;
         if (Mathf.Abs(scrollY) > 0.1f)
         {
