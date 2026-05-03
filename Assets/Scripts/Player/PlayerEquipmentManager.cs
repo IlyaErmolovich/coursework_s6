@@ -15,8 +15,11 @@ public class PlayerEquipmentManager : NetworkBehaviour
     [SyncVar(hook = nameof(OnWeaponChanged))]
     private int _currentWeaponIndex = -1;
 
+    [SyncVar] private bool _canUseEquipment = true;
+
     public void NextWeapon()
     {
+        if (!_canUseEquipment) return; // Если ведем грабителя, переключать нельзя
         if (weapons.Length == 0) return;
         
         int nextIndex = _currentWeaponIndex + 1;
@@ -43,4 +46,11 @@ public class PlayerEquipmentManager : NetworkBehaviour
     }
 
     public bool IsAnyWeaponDrawn() => _currentWeaponIndex >= 0;
+
+    [Server]
+    public void SetEquipmentAccess(bool allowed)
+    {
+        _canUseEquipment = allowed;
+        if (!allowed) CmdSetWeapon(-1); // Принудительно убираем оружие из рук[cite: 10]
+    }
 }

@@ -41,6 +41,10 @@ public class PlayerController : NetworkBehaviour
     [SerializeField] private float jumpHeight = 1.5f; // Высота прыжка в метрах
     private bool _jumpRequested;
 
+    [SyncVar(hook = nameof(OnCuffedChanged))] private bool _isCuffed;
+    public bool IsCuffed => _isCuffed;
+    [SyncVar] private NetworkIdentity _escortTarget;
+
     private CharacterController _controller;
     private Vector2 _moveInput;
     private Vector2 _lookInput;
@@ -80,20 +84,42 @@ public class PlayerController : NetworkBehaviour
 
     private void Update()
     {
+        // 1. Серверное следование (выполняется только на сервере)
+        if (isServer && _isCuffed && _escortTarget != null)
+        {
+            // Грабитель идет чуть позади охранника[cite: 4]
+            Vector3 targetPos = _escortTarget.transform.position - _escortTarget.transform.forward * 1.2f;
+            _controller.Move((targetPos - transform.position) * moveSpeed * Time.deltaTime);
+            transform.rotation = Quaternion.Lerp(transform.rotation, _escortTarget.transform.rotation, Time.deltaTime * 5f);
+        }
+
         if (!isLocalPlayer) return;
-        if (_isStunned) 
+
+        // 2. Блокировка управления при стане или наручниках[cite: 4]
+        if (_isStunned || _isCuffed) 
         {
             _currentVelocity = Vector3.zero; 
-            _canSprint = false; // Сбрасываем при стане
+            _canSprint = false; 
             return; 
         }
 
-        // ВАЖНО: Сначала определяем, можем ли мы бежать
-        UpdateSprintState(); 
-        
+        UpdateSprintState();
         HandleStamina();
         ApplyMovement();
         ApplyLook();
+    }
+
+    [Server]
+    public void SetCuffed(bool state, NetworkIdentity guard = null)
+    {
+        _isCuffed = state;
+        _escortTarget = guard;
+    }
+
+    private void OnCuffedChanged(bool oldVal, bool newVal)
+    {
+        var anims = GetComponentInChildren<PlayerAnimations>();
+        if (anims != null) anims.UpdateCuffedLayer(newVal);
     }
 
     private void UpdateSprintState()

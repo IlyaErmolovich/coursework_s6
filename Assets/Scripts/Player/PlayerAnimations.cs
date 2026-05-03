@@ -12,6 +12,7 @@ public class PlayerAnimations : NetworkBehaviour
     private int _fullBodyAttackLayer;
     private int _upperBodyAttackLayer;
     private PlayerAudioManager _audio;
+    private int _cuffedLayerIndex;
 
     private void Start()
     {
@@ -23,6 +24,7 @@ public class PlayerAnimations : NetworkBehaviour
         _weaponIdleLayer = _animator.GetLayerIndex("Weapon Idle");
         _fullBodyAttackLayer = _animator.GetLayerIndex("Full Body Attack");
         _upperBodyAttackLayer = _animator.GetLayerIndex("Upper Body Attack");
+        _cuffedLayerIndex = _animator.GetLayerIndex("Cuffed Layer");
     }
 
     private void Update()
@@ -149,6 +151,11 @@ public class PlayerAnimations : NetworkBehaviour
             _animator.SetLayerWeight(_upperBodyAttackLayer, Mathf.MoveTowards(_animator.GetLayerWeight(_upperBodyAttackLayer), 0f, step));
         }
     }
+
+    public void UpdateCuffedLayer(bool active)
+    {
+        _animator.SetLayerWeight(_cuffedLayerIndex, active ? 1f : 0f);
+    }   
 
     public void OnFootstep()
     {
