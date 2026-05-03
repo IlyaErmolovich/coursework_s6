@@ -7,6 +7,8 @@ public class PickupItem : NetworkBehaviour, IInteractable
     [SerializeField] private string itemName = "Предмет";
     [SerializeField] private int value = 100;
 
+    public bool CanGuardsInteract => false;
+
     public string GetInteractionText(PlayerInventory inventory)
     {
         if (!inventory.HasFreeSlot()) 

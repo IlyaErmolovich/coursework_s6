@@ -1,0 +1,631 @@
+fileFormatVersion: 2
+guid: 8576c36dcf1b5ae4f9d0442eb1751f48
+ModelImporter:
+  serializedVersion: 24200
+  internalIDToNameTable: []
+  externalObjects: {}
+  materials:
+    materialImportMode: 2
+    materialName: 0
+    materialSearch: 1
+    materialLocation: 1
+  animations:
+    legacyGenerateAnimations: 4
+    bakeSimulation: 0
+    resampleCurves: 1
+    optimizeGameObjects: 0
+    removeConstantScaleCurves: 0
+    motionNodeName: 
+    animationImportErrors: 
+    animationImportWarnings: 
+    animationRetargetingWarnings: 
+    animationDoRetargetingWarnings: 0
+    importAnimatedCustomProperties: 0
+    importConstraints: 0
+    animationCompression: 3
+    animationRotationError: 0.5
+    animationPositionError: 0.5
+    animationScaleError: 0.5
+    animationWrapMode: 0
+    extraExposedTransformPaths: []
+    extraUserProperties: []
+    clipAnimations:
+    - serializedVersion: 16
+      name: Falling Idle
+      takeName: Armature|mixamo.com
+      internalID: -4572650651892053679
+      firstFrame: 0
+      lastFrame: 21
+      wrapMode: 0
+      orientationOffsetY: 0
+      level: 0
+      cycleOffset: 0
+      loop: 0
+      hasAdditiveReferencePose: 0
+      loopTime: 1
+      loopBlend: 0
+      loopBlendOrientation: 1
+      loopBlendPositionY: 1
+      loopBlendPositionXZ: 1
+      keepOriginalOrientation: 1
+      keepOriginalPositionY: 1
+      keepOriginalPositionXZ: 1
+      heightFromFeet: 0
+      mirror: 0
+      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
+      curves: []
+      events: []
+      transformMask: []
+      maskType: 3
+      maskSource: {instanceID: 0}
+      additiveReferencePoseFrame: 0
+    isReadable: 0
+  meshes:
+    lODScreenPercentages: []
+    globalScale: 1
+    meshCompression: 0
+    addColliders: 0
+    useSRGBMaterialColor: 1
+    sortHierarchyByName: 1
+    importPhysicalCameras: 1
+    importVisibility: 1
+    importBlendShapes: 1
+    importCameras: 1
+    importLights: 1
+    nodeNameCollisionStrategy: 1
+    fileIdsGeneration: 2
+    swapUVChannels: 0
+    generateSecondaryUV: 0
+    useFileUnits: 1
+    keepQuads: 0
+    weldVertices: 1
+    bakeAxisConversion: 0
+    preserveHierarchy: 0
+    skinWeightsMode: 0
+    maxBonesPerVertex: 4
+    minBoneWeight: 0.001
+    optimizeBones: 1
+    generateMeshLods: 0
+    meshLodGenerationFlags: 0
+    maximumMeshLod: -1
+    meshOptimizationFlags: -1
+    indexFormat: 0
+    secondaryUVAngleDistortion: 8
+    secondaryUVAreaDistortion: 15.000001
+    secondaryUVHardAngle: 88
+    secondaryUVMarginMethod: 1
+    secondaryUVMinLightmapResolution: 40
+    secondaryUVMinObjectScale: 1
+    secondaryUVPackMargin: 4
+    useFileScale: 1
+    strictVertexDataChecks: 0
+  tangentSpace:
+    normalSmoothAngle: 60
+    normalImportMode: 0
+    tangentImportMode: 3
+    normalCalculationMode: 4
+    legacyComputeAllNormalsFromSmoothingGroupsWhenMeshHasBlendShapes: 0
+    blendShapeNormalImportMode: 1
+    normalSmoothingSource: 0
+  referencedClips: []
+  importAnimation: 1
+  humanDescription:
+    serializedVersion: 3
+    human:
+    - boneName: Felix:Hips
+      humanName: Hips
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: Felix:LeftUpLeg
+      humanName: LeftUpperLeg
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: Felix:RightUpLeg
+      humanName: RightUpperLeg
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: Felix:LeftLeg
+      humanName: LeftLowerLeg
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: Felix:RightLeg
+      humanName: RightLowerLeg
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: Felix:LeftFoot
+      humanName: LeftFoot
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: Felix:RightFoot
+      humanName: RightFoot
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: Felix:Spine
+      humanName: Spine
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: Felix:Spine1
+      humanName: Chest
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: Felix:Neck
+      humanName: Neck
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: Felix:Head
+      humanName: Head
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: Felix:LeftShoulder
+      humanName: LeftShoulder
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: Felix:RightShoulder
+      humanName: RightShoulder
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: Felix:LeftArm
+      humanName: LeftUpperArm
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: Felix:RightArm
+      humanName: RightUpperArm
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: Felix:LeftForeArm
+      humanName: LeftLowerArm
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: Felix:RightForeArm
+      humanName: RightLowerArm
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: Felix:LeftHand
+      humanName: LeftHand
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: Felix:RightHand
+      humanName: RightHand
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: Felix:LeftToeBase
+      humanName: LeftToes
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: Felix:RightToeBase
+      humanName: RightToes
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: Felix:LeftHandThumb1
+      humanName: Left Thumb Proximal
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: Felix:LeftHandThumb2
+      humanName: Left Thumb Intermediate
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: Felix:LeftHandThumb3
+      humanName: Left Thumb Distal
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: Felix:LeftHandIndex1
+      humanName: Left Index Proximal
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: Felix:LeftHandIndex2
+      humanName: Left Index Intermediate
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: Felix:LeftHandIndex3
+      humanName: Left Index Distal
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: Felix:RightHandThumb1
+      humanName: Right Thumb Proximal
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: Felix:RightHandThumb2
+      humanName: Right Thumb Intermediate
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: Felix:RightHandThumb3
+      humanName: Right Thumb Distal
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: Felix:RightHandIndex1
+      humanName: Right Index Proximal
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: Felix:RightHandIndex2
+      humanName: Right Index Intermediate
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: Felix:RightHandIndex3
+      humanName: Right Index Distal
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: Felix:Spine2
+      humanName: UpperChest
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    skeleton:
+    - name: Robber(Clone)
+      parentName: 
+      position: {x: 0, y: 0, z: 0}
+      rotation: {x: 0, y: 0, z: 0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    - name: Armature
+      parentName: Robber(Clone)
+      position: {x: -0, y: 0, z: 0}
+      rotation: {x: -0.000000037748947, y: 0, z: -0, w: 1}
+      scale: {x: 0.01, y: 0.01, z: 0.01}
+    - name: Felix:Hips
+      parentName: Armature
+      position: {x: 0.00035227975, y: 91.05074, z: -1.1504841}
+      rotation: {x: -0.000000029967463, y: 0.0000008434515, z: -0.000025853902, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    - name: Felix:Spine
+      parentName: Felix:Hips
+      position: {x: -2.737579e-10, y: 10.136887, z: -0.7340524}
+      rotation: {x: -0.036136005, y: -0.0000017771656, z: 0.000025806548, w: 0.9993469}
+      scale: {x: 1, y: 0.99999994, z: 0.99999994}
+    - name: Felix:Spine1
+      parentName: Felix:Spine
+      position: {x: -8.6134745e-11, y: 11.857342, z: -1.0658141e-14}
+      rotation: {x: 0.0000000037252903, y: 1.1858461e-20, z: -1.3552527e-20, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    - name: Felix:Spine2
+      parentName: Felix:Spine1
+      position: {x: -3.3477346e-11, y: 13.551245, z: 0.00000023841856}
+      rotation: {x: 0, y: 9.3173624e-21, z: -0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    - name: Felix:Neck
+      parentName: Felix:Spine2
+      position: {x: -3.9721372e-11, y: 15.245151, z: 0.0000009536743}
+      rotation: {x: 0.03613603, y: -1.5834035e-20, z: 1.7221428e-21, w: 0.9993469}
+      scale: {x: 1, y: 0.99999994, z: 0.99999994}
+    - name: Felix:Head
+      parentName: Felix:Neck
+      position: {x: 4.324809e-11, y: 6.4228516, z: 1.4794999}
+      rotation: {x: 8.881784e-16, y: -2.210174e-19, z: -3.3611741e-21, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    - name: Felix:HeadTop_End
+      parentName: Felix:Head
+      position: {x: 2.3584613e-11, y: 40.194138, z: 9.258721}
+      rotation: {x: 8.881784e-16, y: -2.210174e-19, z: -3.3611741e-21, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    - name: Felix:LeftShoulder
+      parentName: Felix:Spine2
+      position: {x: -7.5512958, y: 13.9300995, z: -0.050710678}
+      rotation: {x: 0.5351218, y: -0.46159953, z: 0.53811556, w: 0.45934972}
+      scale: {x: 0.9999998, y: 0.99999976, z: 1}
+    - name: Felix:LeftArm
+      parentName: Felix:LeftShoulder
+      position: {x: 0.000000923872, y: 15.28675, z: -0.000007897615}
+      rotation: {x: -0.076145455, y: -0.0008472778, z: -0.0025850274, w: 0.997093}
+      scale: {x: 1, y: 1.0000001, z: 1}
+    - name: Felix:LeftForeArm
+      parentName: Felix:LeftArm
+      position: {x: 0.00000050251765, y: 20.70131, z: 0.000013110344}
+      rotation: {x: 0.00000003049395, y: 0.0002159011, z: 0.00000049326616, w: 1}
+      scale: {x: 0.99999994, y: 1, z: 0.99999994}
+    - name: Felix:LeftHand
+      parentName: Felix:LeftForeArm
+      position: {x: -0.00000051248935, y: 25.9522, z: 0.000006702612}
+      rotation: {x: -0.00018335413, y: -0.048589926, z: -0.000008576268, w: 0.9988188}
+      scale: {x: 0.99999994, y: 1, z: 0.99999994}
+    - name: Felix:LeftHandThumb1
+      parentName: Felix:LeftHand
+      position: {x: 3.4138298, y: 3.7481241, z: 1.6677172}
+      rotation: {x: 0.049108427, y: -0.031203803, z: -0.3533962, w: 0.9336626}
+      scale: {x: 0.99999994, y: 1.0000001, z: 0.99999994}
+    - name: Felix:LeftHandThumb2
+      parentName: Felix:LeftHandThumb1
+      position: {x: 0.00026348233, y: 4.269618, z: 0.0000040382147}
+      rotation: {x: 0.00018703572, y: 0.0047921278, z: 0.038610414, w: 0.99924284}
+      scale: {x: 0.99999994, y: 1, z: 1}
+    - name: Felix:LeftHandThumb3
+      parentName: Felix:LeftHandThumb2
+      position: {x: 0.38424468, y: 4.9596205, z: -0.0000094771385}
+      rotation: {x: 0.00000032331874, y: -0.000093638424, z: -0.08174266, w: 0.9966535}
+      scale: {x: 1, y: 1, z: 0.99999994}
+    - name: Felix:LeftHandThumb4
+      parentName: Felix:LeftHandThumb3
+      position: {x: -0.3845055, y: 4.441409, z: 0.000014662743}
+      rotation: {x: 0.000000048428774, y: 0.0000002179295, z: 0.000000077765435, w: 1}
+      scale: {x: 0.99999994, y: 1, z: 1}
+    - name: Felix:LeftHandIndex1
+      parentName: Felix:LeftHand
+      position: {x: 0.0000003780442, y: 10.360635, z: 0.003789993}
+      rotation: {x: 0.00014992985, y: 0.005567041, z: -0.0059610805, w: 0.99996674}
+      scale: {x: 0.9999999, y: 1.0000001, z: 0.99999994}
+    - name: Felix:LeftHandIndex2
+      parentName: Felix:LeftHandIndex1
+      position: {x: -0.06017828, y: 5.048138, z: -0.000013174955}
+      rotation: {x: 0.000005148004, y: -0.00038912662, z: 0.0024170629, w: 0.999997}
+      scale: {x: 1, y: 1, z: 0.99999994}
+    - name: Felix:LeftHandIndex3
+      parentName: Felix:LeftHandIndex2
+      position: {x: -0.033923507, y: 4.780982, z: -0.0000052934047}
+      rotation: {x: 0.000005471447, y: 0.0007007745, z: 0.014996855, w: 0.9998873}
+      scale: {x: 1, y: 1, z: 0.99999994}
+    - name: Felix:LeftHandIndex4
+      parentName: Felix:LeftHandIndex3
+      position: {x: 0.09410262, y: 4.1077437, z: 0.000015688245}
+      rotation: {x: 0.0000004754386, y: -0.00000003246509, z: 0.000000013517139, w: 1}
+      scale: {x: 1, y: 0.99999994, z: 1}
+    - name: Felix:RightShoulder
+      parentName: Felix:Spine2
+      position: {x: 7.5512958, y: 13.936513, z: -0.13927937}
+      rotation: {x: -0.53172594, y: -0.4644811, z: 0.5410833, w: -0.45689574}
+      scale: {x: 0.99999976, y: 0.9999997, z: 0.99999994}
+    - name: Felix:RightArm
+      parentName: Felix:RightShoulder
+      position: {x: -0.00000020861626, y: 15.286748, z: -0.000017672777}
+      rotation: {x: -0.07570749, y: -0.0001575431, z: 0.008550294, w: 0.9970934}
+      scale: {x: 0.9999999, y: 1, z: 1.0000001}
+    - name: Felix:RightForeArm
+      parentName: Felix:RightArm
+      position: {x: 0.00000026998532, y: 20.69881, z: -0.0000056973076}
+      rotation: {x: 0.000000022560215, y: -0.0001869686, z: 0.00000019026376, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    - name: Felix:RightHand
+      parentName: Felix:RightForeArm
+      position: {x: 0.0000002623383, y: 25.955772, z: -0.000018444945}
+      rotation: {x: 0.0002506462, y: 0.053391173, z: -0.000013585401, w: 0.99857366}
+      scale: {x: 0.99999994, y: 1, z: 0.9999999}
+    - name: Felix:RightHandThumb1
+      parentName: Felix:RightHand
+      position: {x: -3.3768759, y: 3.878297, z: 1.6123943}
+      rotation: {x: 0.049331877, y: 0.02488328, z: 0.34396854, w: 0.9373542}
+      scale: {x: 0.99999994, y: 1, z: 1.0000001}
+    - name: Felix:RightHandThumb2
+      parentName: Felix:RightHandThumb1
+      position: {x: -0.062182814, y: 4.3109694, z: 0.0000018402934}
+      rotation: {x: 0.0006596267, y: -0.009770334, z: -0.052926376, w: 0.9985504}
+      scale: {x: 0.9999999, y: 0.9999999, z: 1.0000001}
+    - name: Felix:RightHandThumb3
+      parentName: Felix:RightHandThumb2
+      position: {x: -0.5961201, y: 4.9297905, z: -0.000013768673}
+      rotation: {x: -0.00006144102, y: -0.0024472512, z: 0.1448356, w: 0.9894527}
+      scale: {x: 1, y: 1.0000001, z: 1}
+    - name: Felix:RightHandThumb4
+      parentName: Felix:RightHandThumb3
+      position: {x: 0.6582868, y: 3.826748, z: 0.000012278557}
+      rotation: {x: 0.00000033155084, y: 0.00000003632158, z: -0.000000021071173, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    - name: Felix:RightHandIndex1
+      parentName: Felix:RightHand
+      position: {x: -0.00000025409827, y: 10.376415, z: -0.005171526}
+      rotation: {x: -0.0002589495, y: -0.0037678634, z: 0.0020920022, w: 0.9999907}
+      scale: {x: 1, y: 1.0000001, z: 1.0000001}
+    - name: Felix:RightHandIndex2
+      parentName: Felix:RightHandIndex1
+      position: {x: 0.021368295, y: 5.116144, z: 0.00003333982}
+      rotation: {x: 0.00000060366483, y: 0.00007440437, z: -0.0017632236, w: 0.99999845}
+      scale: {x: 1, y: 0.99999994, z: 1}
+    - name: Felix:RightHandIndex3
+      parentName: Felix:RightHandIndex2
+      position: {x: 0.0030751713, y: 4.7207847, z: -0.0000009862415}
+      rotation: {x: -0.00000040512148, y: -0.00014773848, z: -0.0033350491, w: 0.99999446}
+      scale: {x: 0.9999999, y: 0.99999994, z: 0.99999994}
+    - name: Felix:RightHandIndex4
+      parentName: Felix:RightHandIndex3
+      position: {x: -0.02444464, y: 4.057365, z: -0.0000007548224}
+      rotation: {x: 0.00000015926469, y: 0.00000008475484, z: -0.000000003278046, w: 1}
+      scale: {x: 0.99999994, y: 1.0000001, z: 0.9999999}
+    - name: Felix:LeftUpLeg
+      parentName: Felix:Hips
+      position: {x: -9.662644, y: -5.6497993, z: 1.1163967}
+      rotation: {x: -0.000024508008, y: 0.0077208695, z: 0.9999657, w: 0.002989539}
+      scale: {x: 0.99999994, y: 1.0000001, z: 0.99999994}
+    - name: Felix:LeftLeg
+      parentName: Felix:LeftUpLeg
+      position: {x: 0.000000410957, y: 39.919353, z: 0.00000009024734}
+      rotation: {x: -0.052753285, y: -0.0002834521, z: 0.0066467472, w: 0.9985854}
+      scale: {x: 1, y: 1, z: 1.0000001}
+    - name: Felix:LeftFoot
+      parentName: Felix:LeftLeg
+      position: {x: -0.0000015797705, y: 33.216965, z: 0.00000015972182}
+      rotation: {x: 0.54993796, y: 0.06272927, z: -0.04280555, w: 0.83174574}
+      scale: {x: 0.99999994, y: 1, z: 0.99999994}
+    - name: Felix:LeftToeBase
+      parentName: Felix:LeftFoot
+      position: {x: -0.0000005494803, y: 22.893557, z: 0.00000035762787}
+      rotation: {x: 0.2598597, y: -0.036133073, z: 0.009730902, w: 0.96492106}
+      scale: {x: 1, y: 1, z: 1}
+    - name: Felix:LeftToe_End
+      parentName: Felix:LeftToeBase
+      position: {x: 0.0000010281801, y: 10.229853, z: 0.000000074505806}
+      rotation: {x: -0.0000000058207665, y: 0.000000018044375, z: -0.000000009429641, w: 1}
+      scale: {x: 1, y: 0.99999994, z: 0.99999994}
+    - name: Felix:RightUpLeg
+      parentName: Felix:Hips
+      position: {x: 9.662644, y: -5.649807, z: 1.0939763}
+      rotation: {x: 0.000026039379, y: 0.009054834, z: 0.9999544, w: -0.003040354}
+      scale: {x: 0.99999994, y: 0.99999994, z: 1}
+    - name: Felix:RightLeg
+      parentName: Felix:RightUpLeg
+      position: {x: 0.00000034888944, y: 39.91926, z: 0.0000000656737}
+      rotation: {x: -0.055339757, y: 0.00031454465, z: -0.00664756, w: 0.9984454}
+      scale: {x: 0.99999994, y: 0.99999994, z: 0.99999994}
+    - name: Felix:RightFoot
+      parentName: Felix:RightLeg
+      position: {x: -0.00000025581176, y: 33.225506, z: -0.0000002188608}
+      rotation: {x: 0.5476627, y: -0.06392694, z: 0.04336504, w: 0.8331257}
+      scale: {x: 1, y: 1, z: 1.0000001}
+    - name: Felix:RightToeBase
+      parentName: Felix:RightFoot
+      position: {x: 0.0000007757917, y: 22.566458, z: 0.0000004172325}
+      rotation: {x: 0.2638654, y: 0.036431856, z: -0.009974007, w: 0.9638196}
+      scale: {x: 1, y: 0.99999994, z: 1}
+    - name: Felix:RightToe_End
+      parentName: Felix:RightToeBase
+      position: {x: -0.00000010430813, y: 10.088648, z: -0.00000010430813}
+      rotation: {x: 0.000000014202671, y: 0.000000024854673, z: 0.000000011292286, w: 1}
+      scale: {x: 1, y: 0.99999994, z: 0.99999994}
+    - name: Felix:Outfit_Default
+      parentName: Robber(Clone)
+      position: {x: -0, y: 0, z: 0}
+      rotation: {x: -0.000000015893253, y: 0, z: -0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    armTwist: 0.5
+    foreArmTwist: 0.5
+    upperLegTwist: 0.5
+    legTwist: 0.5
+    armStretch: 0.05
+    legStretch: 0.05
+    feetSpacing: 0
+    globalScale: 1
+    rootMotionBoneName: 
+    hasTranslationDoF: 0
+    hasExtraRoot: 1
+    skeletonHasParents: 1
+  lastHumanDescriptionAvatarSource: {fileID: 9000000, guid: 969800aedd139574aa76166cd73be7b1, type: 3}
+  autoGenerateAvatarMappingIfUnspecified: 1
+  animationType: 3
+  humanoidOversampling: 1
+  avatarSetup: 2
+  addHumanoidExtraRootOnlyWhenUsingAvatar: 1
+  importBlendShapeDeformPercent: 1
+  remapMaterialsIfMaterialImportModeIsNone: 0
+  additionalBone: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

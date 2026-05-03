@@ -67,16 +67,33 @@ public class GameMenuUI : MonoBehaviour
                 _localInventory = NetworkClient.localPlayer.GetComponent<PlayerInventory>();
                 _localInteraction = NetworkClient.localPlayer.GetComponentInChildren<PlayerInteraction>();
                 _localController = NetworkClient.localPlayer.GetComponent<PlayerController>();
-                // Получаем данные о команде игрока[cite: 3]
                 _localLobbyData = NetworkClient.localPlayer.GetComponent<PlayerLobbyData>();
             }
             return;
         }
 
-        // Определяем, является ли локальный игрок грабителем
+        // 1. Определяем команду игрока[cite: 15]
         bool isThief = _localLobbyData != null && _localLobbyData.currentTeam == PlayerTeam.Thieves;
 
-        // СТАМИНА: Показываем полоску только грабителю
+        // 2. ВЗАИМОДЕЙСТВИЕ (Подсказки)
+        if (_localInteraction != null && interactionText != null)
+        {
+            // Сначала получаем объект[cite: 19]
+            var interactable = _localInteraction.GetCurrentInteractable;
+            
+            // Проверяем: есть ли объект И разрешен ли он для текущего игрока
+            if (interactable != null && (isThief || interactable.CanGuardsInteract))
+            {
+                interactionText.gameObject.SetActive(true);
+                interactionText.text = interactable.GetInteractionText(_localInventory);
+            }
+            else
+            {
+                interactionText.gameObject.SetActive(false);
+            }
+        }
+
+        // 3. СТАМИНА[cite: 20]
         if (staminaSlider != null)
         {
             staminaSlider.gameObject.SetActive(isThief);
@@ -86,7 +103,7 @@ public class GameMenuUI : MonoBehaviour
             }
         }
 
-        // ИНВЕНТАРЬ (деньги и слоты): Обычно это тоже нужно только грабителю
+        // 4. ИНВЕНТАРЬ[cite: 20]
         if (moneyText != null) moneyText.gameObject.SetActive(isThief);
         if (slotsText != null) slotsText.gameObject.SetActive(isThief);
 
@@ -94,23 +111,6 @@ public class GameMenuUI : MonoBehaviour
         {
             if (moneyText != null) moneyText.text = $"$: {_localInventory.TotalMoney}";
             if (slotsText != null) slotsText.text = $"Slots: {_localInventory.OccupiedSlots}/{_localInventory.MaxSlots}";
-        }
-
-        // ВЗАИМОДЕЙСТВИЕ: Подсказки только для грабителя
-        if (_localInteraction != null && interactionText != null)
-        {
-            var interactable = _localInteraction.GetCurrentInteractable;
-            
-            // Показываем текст только если есть объект И игрок — грабитель[cite: 12]
-            if (interactable != null && isThief)
-            {
-                interactionText.gameObject.SetActive(true);
-                interactionText.text = interactable.GetInteractionText(_localInventory);
-            }
-            else
-            {
-                interactionText.gameObject.SetActive(false);
-            }
         }
     }
 

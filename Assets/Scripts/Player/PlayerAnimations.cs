@@ -29,6 +29,9 @@ public class PlayerAnimations : NetworkBehaviour
     {
         if (isLocalPlayer)
         {
+            // Передаем bool параметр isGrounded в Аниматор
+            _animator.SetBool("isGrounded", _controller.GetComponent<CharacterController>().isGrounded);
+
             if (!_controller.enabled || _controller.IsStunned)
             {
                 StopLocomotion();
@@ -83,6 +86,27 @@ public class PlayerAnimations : NetworkBehaviour
             float newWeight = Mathf.MoveTowards(currentWeight, targetWeight, step);
             _animator.SetLayerWeight(_weaponIdleLayer, newWeight);
         }
+    }
+
+    public void SetJumpTrigger()
+    {
+        if (isLocalPlayer)
+        {
+            CmdJump(); // Локальный игрок просит сервер синхронизировать прыжок
+        }
+    }
+
+    [Command]
+    private void CmdJump()
+    {
+        RpcJump(); // Сервер говорит всем клиентам нажать на триггер
+    }
+
+    [ClientRpc]
+    private void RpcJump()
+    {
+        // Этот код выполнится у всех игроков на их экранах
+        _animator.SetTrigger("jump");
     }
 
     [Command]

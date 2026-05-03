@@ -37,6 +37,10 @@ public class PlayerController : NetworkBehaviour
     [SerializeField] private float animationSmoothness = 5f;
     public float AnimationSmoothness => animationSmoothness;
 
+    [Header("Jump Settings")]
+    [SerializeField] private float jumpHeight = 1.5f; // Высота прыжка в метрах
+    private bool _jumpRequested;
+
     private CharacterController _controller;
     private Vector2 _moveInput;
     private Vector2 _lookInput;
@@ -141,23 +145,35 @@ public class PlayerController : NetworkBehaviour
     
     private void ApplyMovement()
     {
+        // Если на земле, обнуляем накопленную вертикальную скорость
         if (_controller.isGrounded && _velocity.y < 0) _velocity.y = -2f;
 
+        // ЛОГИКА ПРЫЖКА
+        if (_jumpRequested && _controller.isGrounded)
+        {
+            // Формула импульса: v = sqrt(h * -2 * g)
+            _velocity.y = Mathf.Sqrt(jumpHeight * -2f * gravity);
+            
+            // Вызываем запуск анимации взлета
+            var anims = GetComponentInChildren<PlayerAnimations>();
+            if (anims != null) anims.SetJumpTrigger();
+        }
+        _jumpRequested = false;
+
+        // Твой текущий код горизонтального перемещения
         Vector3 targetDirection = transform.right * _moveInput.x + transform.forward * _moveInput.y;
         float currentSpeedMagnitude = new Vector3(_currentVelocity.x, 0, _currentVelocity.z).magnitude;
-
-        // Используем нашу переменную для определения скорости
         float currentSprintFactor = _canSprint ? sprintMultiplier : 1f;
-
         float targetSpeed = moveSpeed * currentSprintFactor; 
+        
         if (_moveInput.y < 0) targetSpeed *= backPedalMultiplier;
         if (_moveInput.sqrMagnitude == 0) targetSpeed = 0;
 
         float smoothSpeed = Mathf.Lerp(currentSpeedMagnitude, targetSpeed, acceleration * Time.deltaTime);
-
         _currentVelocity = targetDirection.normalized * smoothSpeed;
         _controller.Move(_currentVelocity * Time.deltaTime);
 
+        // ПРИМЕНЕНИЕ ГРАВИТАЦИИ
         _velocity.y += gravity * Time.deltaTime;
         _controller.Move(_velocity * Time.deltaTime);
     }
@@ -211,7 +227,8 @@ public class PlayerController : NetworkBehaviour
 
     public void OnAttack(InputValue value)
     {
-        if (value.isPressed)
+        // Добавляем проверку: атака разрешена, только если нажата кнопка И игрок на земле
+        if (value.isPressed && _controller.isGrounded)
         {
             OnAttackEvent?.Invoke();
         }
@@ -228,5 +245,10 @@ public class PlayerController : NetworkBehaviour
     public void OnSprint(InputValue value)
     {
         _isSprinting = value.isPressed;
+    }
+
+    public void OnJump(InputValue value)
+    {
+        if (value.isPressed) _jumpRequested = true;
     }
 }
