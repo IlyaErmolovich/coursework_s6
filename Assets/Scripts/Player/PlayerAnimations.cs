@@ -13,6 +13,8 @@ public class PlayerAnimations : NetworkBehaviour
     private int _upperBodyAttackLayer;
     private PlayerAudioManager _audio;
     private int _cuffedLayerIndex;
+    private Vector3 _lastPosition;
+    private float _calculatedSpeed;
 
     private void Start()
     {
@@ -29,11 +31,26 @@ public class PlayerAnimations : NetworkBehaviour
 
     private void Update()
     {
-        if (isLocalPlayer)
-        {
-            // Передаем bool параметр isGrounded в Аниматор
-            _animator.SetBool("isGrounded", _controller.GetComponent<CharacterController>().isGrounded);
+        // Рассчитываем скорость перемещения для всех (и для себя, и для прокси)
+        // Это работает даже если CharacterController выключен
+        float distanceMoved = Vector3.Distance(transform.position, _lastPosition);
+        _calculatedSpeed = distanceMoved / Time.deltaTime;
+        _lastPosition = transform.position;
 
+        // Параметр земли берем из контроллера только если он активен, иначе считаем true (или через Raycast)
+        bool isGrounded = _controller.GetComponent<CharacterController>().enabled 
+            ? _controller.GetComponent<CharacterController>().isGrounded 
+            : true; 
+
+        _animator.SetBool("isGrounded", isGrounded);
+
+        if (_controller.IsCuffed)
+        {
+            // Вызываем обновленный метод
+            HandleCuffedLocomotion();
+        }
+        else if (isLocalPlayer)
+        {
             if (!_controller.enabled || _controller.IsStunned)
             {
                 StopLocomotion();
@@ -44,9 +61,39 @@ public class PlayerAnimations : NetworkBehaviour
                 HandleAnimationSpeed();
             }
         }
+        else
+        {
+            // Для других игроков (не в наручниках)
+            HandleProxyLocomotion();
+        }
         
         HandleWeightsSmoothing();
         HandleAttackLayerBlending();
+    } 
+
+    private void HandleProxyLocomotion()
+    {
+        float targetY = (_calculatedSpeed > 0.1f) ? 1f : 0f;
+        
+        float step = _controller.AnimationSmoothness * Time.deltaTime;
+        _currentAnimationInput.y = Mathf.MoveTowards(_currentAnimationInput.y, targetY, step);
+        _currentAnimationInput.x = Mathf.MoveTowards(_currentAnimationInput.x, 0f, step);
+
+        _animator.SetFloat("moveX", _currentAnimationInput.x);
+        _animator.SetFloat("moveY", _currentAnimationInput.y);
+    }
+
+    private void HandleCuffedLocomotion()
+    {
+        // Используем расчетную скорость вместо controller.velocity
+        float targetY = (_calculatedSpeed > 0.1f) ? 1f : 0f;
+        
+        float step = _controller.AnimationSmoothness * Time.deltaTime;
+        _currentAnimationInput.y = Mathf.MoveTowards(_currentAnimationInput.y, targetY, step);
+        _currentAnimationInput.x = Mathf.MoveTowards(_currentAnimationInput.x, 0f, step);
+
+        _animator.SetFloat("moveX", _currentAnimationInput.x);
+        _animator.SetFloat("moveY", _currentAnimationInput.y);
     }
 
     private void HandleAnimationSpeed()

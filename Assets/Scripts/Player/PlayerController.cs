@@ -55,6 +55,9 @@ public class PlayerController : NetworkBehaviour
     private bool _canSprint;
     public float CurrentSprintFactor => _canSprint ? sprintMultiplier : 1f;
 
+    private Vector3 _lastPosition;
+    private float _calculatedSpeed;
+
     [Server]
     public void DecreaseStamina(float amount)
     {
@@ -84,29 +87,58 @@ public class PlayerController : NetworkBehaviour
 
     private void Update()
     {
-        // 1. Серверное следование (выполняется только на сервере)
-        if (isServer && _isCuffed && _escortTarget != null)
+        // --- ЭТОТ БЛОК ВЫПОЛНЯЕТСЯ ТОЛЬКО ДЛЯ ТОГО, КТО УПРАВЛЯЕТ ПЕРСОНАЖЕМ ---
+        if (isLocalPlayer)
         {
-            // Грабитель идет чуть позади охранника[cite: 4]
-            Vector3 targetPos = _escortTarget.transform.position - _escortTarget.transform.forward * 1.2f;
-            _controller.Move((targetPos - transform.position) * moveSpeed * Time.deltaTime);
-            transform.rotation = Quaternion.Lerp(transform.rotation, _escortTarget.transform.rotation, Time.deltaTime * 5f);
+            // 1. Гравитация (только для себя, остальные синхронизируют позицию через NetworkTransform)
+            ApplyGravity();
+
+            // 2. Логика следования за охранником
+            if (_isCuffed && _escortTarget != null)
+            {
+                HandleClientEscortLogic();
+            }
+            // 3. Обычное управление
+            else if (!_isStunned)
+            {
+                UpdateSprintState();
+                HandleStamina();
+                ApplyMovement();
+                ApplyLook();
+            }
+        }
+    }
+    private void ApplyGravity()
+    {
+        if (_controller.isGrounded && _velocity.y < 0) _velocity.y = -2f;
+        _velocity.y += gravity * Time.deltaTime;
+        
+        // Двигаем только если мы локальный игрок или сервер (если нет Client Authority)
+        // В нашем случае — только локальный игрок.
+        _controller.Move(_velocity * Time.deltaTime);
+    }
+
+    private void HandleClientEscortLogic()
+    {
+        Vector3 targetPos = _escortTarget.transform.position;
+        Vector3 offset = transform.position - targetPos;
+        float currentDistance = offset.magnitude;
+
+        // ПОВОРОТ
+        Vector3 lookDir = targetPos - transform.position;
+        lookDir.y = 0;
+        if (lookDir.sqrMagnitude > 0.1f)
+        {
+            transform.rotation = Quaternion.Lerp(transform.rotation, Quaternion.LookRotation(lookDir), Time.deltaTime * 5f);
         }
 
-        if (!isLocalPlayer) return;
-
-        // 2. Блокировка управления при стане или наручниках[cite: 4]
-        if (_isStunned || _isCuffed) 
+        // ПЕРЕМЕЩЕНИЕ
+        if (currentDistance > 1.8f) // Дистанция остановки
         {
-            _currentVelocity = Vector3.zero; 
-            _canSprint = false; 
-            return; 
+            Vector3 moveDest = targetPos + offset.normalized * 1.5f;
+            Vector3 moveDirection = (moveDest - transform.position).normalized;
+            _controller.Move(moveDirection * moveSpeed * 1.2f * Time.deltaTime);
         }
-
-        UpdateSprintState();
-        HandleStamina();
-        ApplyMovement();
-        ApplyLook();
     }
 
     [Server]
@@ -253,8 +285,7 @@ public class PlayerController : NetworkBehaviour
 
     public void OnAttack(InputValue value)
     {
-        // Добавляем проверку: атака разрешена, только если нажата кнопка И игрок на земле
-        if (value.isPressed && _controller.isGrounded)
+        if (value.isPressed)
         {
             OnAttackEvent?.Invoke();
         }
