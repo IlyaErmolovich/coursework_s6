@@ -1214,6 +1214,37 @@ MonoBehaviour:
   interactionText: {fileID: 1046632979}
   staminaSlider: {fileID: 555062672}
   stunOverlay: {fileID: 475896479}
+--- !u!1 &972495721
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 972495722}
+  m_Layer: 0
+  m_Name: GameObject
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &972495722
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 972495721}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0.06, y: -0.02, z: -3.87}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1002516777
 GameObject:
   m_ObjectHideFlags: 0
@@ -1495,8 +1526,8 @@ GameObject:
   - component: {fileID: 1199589328}
   - component: {fileID: 1199589330}
   - component: {fileID: 1199589331}
-  - component: {fileID: 1199589333}
   - component: {fileID: 1199589332}
+  - component: {fileID: 1199589334}
   m_Layer: 6
   m_Name: Door
   m_TagString: Untagged
@@ -1513,8 +1544,8 @@ Transform:
   m_GameObject: {fileID: 1199589327}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0.5, z: -0.918}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalPosition: {x: 0, y: 1, z: -0.918}
+  m_LocalScale: {x: 2, y: 2, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 157390246}
@@ -1592,7 +1623,7 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 0.5412711, y: 1, z: 0.04184083}
   m_Center: {x: 0.26372194, y: 0, z: 0}
---- !u!114 &1199589333
+--- !u!114 &1199589334
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -1601,12 +1632,14 @@ MonoBehaviour:
   m_GameObject: {fileID: 1199589327}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: faf36a6b93c3d6144897bf7ef8cbf3a4, type: 3}
+  m_Script: {fileID: 11500000, guid: bf7429a86aff3ed44b0d6c2dfdd8fc1f, type: 3}
   m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::DoorInteractable
+  m_EditorClassIdentifier: Assembly-CSharp::JailDoor
   syncDirection: 0
   syncMode: 0
   syncInterval: 0
+  jailInsidePoint: {fileID: 972495722}
+  breakTime: 5
   openAngle: 90
 --- !u!1 &1261851384
 GameObject:
@@ -2802,3 +2835,4 @@ SceneRoots:
   - {fileID: 1339254671}
   - {fileID: 1767365542}
   - {fileID: 1199589328}
+  - {fileID: 972495722}

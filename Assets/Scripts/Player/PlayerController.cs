@@ -30,6 +30,7 @@ public class PlayerController : NetworkBehaviour
     [SerializeField] private float staminaRegenDelay = 1.5f; 
 
     [SyncVar] private float _currentStamina;
+    [SyncVar] private NetworkIdentity _escortedIdentity;
     private float _lastSprintTime;
     public float StaminaProgress => _currentStamina / maxStamina;
 
@@ -39,6 +40,14 @@ public class PlayerController : NetworkBehaviour
 
     [Header("Jump Settings")]
     [SerializeField] private float jumpHeight = 1.5f; // Высота прыжка в метрах
+    
+    [Header("Cuffed Settings")]
+    [SerializeField] private float stopDistance = 1.8f;  // Дистанция, на которой грабитель останавливается
+    [SerializeField] private float followDistance = 1.5f; // На каком расстоянии от охранника он должен стоять
+    [SerializeField] private float followSpeedMultiplier = 1.2f; // Насколько быстрее обычного он идет за охранником
+
+    [Header("Visuals")]
+    [SerializeField] private GameObject handcuffsModel;
     private bool _jumpRequested;
 
     [SyncVar(hook = nameof(OnCuffedChanged))] private bool _isCuffed;
@@ -108,6 +117,32 @@ public class PlayerController : NetworkBehaviour
             }
         }
     }
+
+    // Метод обязательно должен быть public, чтобы JailDoor его видел
+[ClientRpc]
+public void RpcTeleport(Vector3 newPosition)
+{
+    // 1. Выключаем контроллер
+    if (_controller == null) _controller = GetComponent<CharacterController>();
+    if (_controller != null) _controller.enabled = false;
+
+    // 2. Перемещаем
+    transform.position = newPosition;
+
+    // 3. Сообщаем сетевому компоненту о телепортации через SendMessage
+    // Это сработает, даже если мы не прописываем тип NetworkTransform в коде
+    SendMessage("OnTeleport", newPosition, SendMessageOptions.DontRequireReceiver);
+
+    // 4. Включаем обратно через физический кадр
+    StartCoroutine(ReEnableController());
+}
+
+    private System.Collections.IEnumerator ReEnableController()
+    {
+        yield return new WaitForFixedUpdate(); // Ждем один такт физики
+        if (_controller != null) _controller.enabled = true;
+    }
+
     private void ApplyGravity()
     {
         if (_controller.isGrounded && _velocity.y < 0) _velocity.y = -2f;
@@ -133,11 +168,14 @@ public class PlayerController : NetworkBehaviour
         }
 
         // ПЕРЕМЕЩЕНИЕ
-        if (currentDistance > 1.8f) // Дистанция остановки
+        // Если расстояние больше установленной дистанции остановки — идем к цели
+        if (currentDistance > stopDistance) 
         {
-            Vector3 moveDest = targetPos + offset.normalized * 1.5f;
+            // Рассчитываем точку, в которую нужно прийти (на расстоянии followDistance от охранника)
+            Vector3 moveDest = targetPos + offset.normalized * followDistance;
             Vector3 moveDirection = (moveDest - transform.position).normalized;
-            _controller.Move(moveDirection * moveSpeed * 1.2f * Time.deltaTime);
+            
+            _controller.Move(moveDirection * moveSpeed * followSpeedMultiplier * Time.deltaTime);
         }
     }
 
@@ -150,8 +188,28 @@ public class PlayerController : NetworkBehaviour
 
     private void OnCuffedChanged(bool oldVal, bool newVal)
     {
+        // 1. Обновляем слой анимации
         var anims = GetComponentInChildren<PlayerAnimations>();
         if (anims != null) anims.UpdateCuffedLayer(newVal);
+
+        // 2. Включаем/выключаем саму модель
+        if (handcuffsModel != null)
+        {
+            handcuffsModel.SetActive(newVal);
+        }
+    }
+
+    [Server]
+    public void SetEscorting(PlayerController target)
+    {
+        _escortedIdentity = target != null ? target.netIdentity : null;
+    }
+
+    // Метод для получения объекта того, кого ведем (используется в UI)
+    public PlayerController GetEscortedPlayer()
+    {
+        if (_escortedIdentity == null) return null;
+        return _escortedIdentity.GetComponent<PlayerController>();
     }
 
     private void UpdateSprintState()

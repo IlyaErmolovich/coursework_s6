@@ -36,7 +36,13 @@ public class ThiefInteractable : NetworkBehaviour, IInteractable
     {
         _rootController.SetCuffed(true, guardIdentity);
         
-        // Запрещаем охраннику использовать оружие[cite: 10]
+        // НОВОЕ: Находим контроллер охранника и записываем ему в SyncVar текущего вора
+        var guardController = guardIdentity.GetComponent<PlayerController>();
+        if (guardController != null)
+        {
+            guardController.SetEscorting(_rootController);
+        }
+        
         var guardEquipment = guardIdentity.GetComponent<PlayerEquipmentManager>();
         if (guardEquipment != null) guardEquipment.SetEquipmentAccess(false);
     }

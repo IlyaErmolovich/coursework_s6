@@ -1637,10 +1637,11 @@ MonoBehaviour:
   staminaRegenDelay: 1.5
   animationSmoothness: 5
   jumpHeight: 1.5
-  followDistance: 3
-  stopThreshold: 1
-  startFollowThreshold: 1
-  escortRotationSmoothness: 7
+  stopDistance: 1.5
+  followDistance: 1.5
+  followSpeedMultiplier: 1
+  handcuffsModel: {fileID: 0}
+  interactRange: 3
 --- !u!114 &2737731285945482292
 MonoBehaviour:
   m_ObjectHideFlags: 0
