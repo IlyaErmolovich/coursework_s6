@@ -366,4 +366,13 @@ public void RpcTeleport(Vector3 newPosition)
     {
         if (value.isPressed) _jumpRequested = true;
     }
+
+    public bool IsInteractPressed
+    {
+        get
+        {
+            if (Keyboard.current == null) return false;
+            return Keyboard.current.eKey.isPressed;
+        }
+    }
 }

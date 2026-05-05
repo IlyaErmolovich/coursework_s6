@@ -1,107 +1,257 @@
 using UnityEngine;
 using Mirror;
+using System.Collections;
 
 public class JailDoor : NetworkBehaviour, IInteractable
 {
-    [SerializeField] private Transform jailInsidePoint; // Точка внутри камеры
-    [SyncVar] private bool _isOpen = false;
+    [Header("Door Visual")]
+    [SerializeField] private float openAngle = 90f;
+    [SyncVar] private bool _isOpen = true;  // по умолчанию открыта
+
     public enum DoorState { Closed, Broken, LockedWithPrisoner }
-    public DoorState currentState = DoorState.Closed;
+    [SyncVar] private DoorState _currentState = DoorState.Closed;
+
+    [Header("Hacking Settings")]
+    [SerializeField] private float holdDuration = 2f;
+
+    [Header("Prison Zone")]
+    [SerializeField] private Collider prisonZone;       // Trigger-коллайдер внутри камеры
+
+    [Header("References")]
+    [SerializeField] private Transform jailInsidePoint; // точка телепортации вора
+
+    // Событие для UI прогресса взлома
+    public static System.Action<float> OnHackProgressChanged;
+
+    [SyncVar] private int _prisonerCount;
+
+    private Coroutine _hackCoroutine;
+    private bool _isHacking = false;
+
     public bool CanGuardsInteract => true;
 
-    public string GetInteractionText(PlayerInventory inventory)
-    {
-        var controller = inventory.GetComponent<PlayerController>();
-        // Проверяем через наш новый метод, ведет ли охранник вора
-        var escorted = controller.GetEscortedPlayer();
+    #region IInteractable
 
-        if (escorted != null) 
-            return "Нажмите E, чтобы посадить в карцер";
-        
-        return _isOpen ? "Нажмите E, чтобы закрыть" : "Нажмите E, чтобы открыть";
+    public string GetInteractionText(PlayerInventory inv)
+    {
+        var controller = inv.GetComponent<PlayerController>();
+        var lobbyData = inv.GetComponent<PlayerLobbyData>();
+        bool isGuard = lobbyData != null && lobbyData.currentTeam == PlayerTeam.Guards;
+
+        if (isGuard)
+        {
+            if (controller.GetEscortedPlayer() != null) // убрали && _currentState != DoorState.Broken
+                return "Нажмите E, чтобы посадить в карцер";
+            return "";
+        }
+
+        if (_currentState == DoorState.LockedWithPrisoner && !IsInsidePrisonZone(controller))
+            return $"Зажмите E, чтобы взломать ({holdDuration} сек)";
+
+        return "";
     }
 
-    public bool CanInteract(PlayerInventory inventory) => true;
-
-    public void Interact(PlayerInventory inventory)
+    public bool CanInteract(PlayerInventory inv)
     {
-        var controller = inventory.GetComponent<PlayerController>();
-        var captive = controller.GetEscortedPlayer();
+        var controller = inv.GetComponent<PlayerController>();
+        var lobbyData = inv.GetComponent<PlayerLobbyData>();
+        bool isGuard = lobbyData != null && lobbyData.currentTeam == PlayerTeam.Guards;
 
-        if (captive != null)
+        if (isGuard)
         {
-            // Если ведем кого-то — вызываем команду тюрьмы
-            CmdPutInJail(captive.netIdentity);
+            // Можно взаимодействовать, если ведёт вора (дверь может быть даже сломанной)
+            return controller.GetEscortedPlayer() != null;
         }
         else
         {
-            // Иначе просто открываем/закрываем
-            CmdToggle();
+            return _currentState == DoorState.LockedWithPrisoner && !IsInsidePrisonZone(controller) && !_isHacking;
         }
     }
 
-    [Server]
-    public void BreakDoor() 
+    public void Interact(PlayerInventory inv)
     {
-        if (currentState == DoorState.Closed)
+        var controller = inv.GetComponent<PlayerController>();
+        var lobbyData = inv.GetComponent<PlayerLobbyData>();
+        bool isGuard = lobbyData != null && lobbyData.currentTeam == PlayerTeam.Guards;
+        
+        Debug.Log($"🎮 Interact вызван: isGuard={isGuard}, InsidePrisonZone={IsInsidePrisonZone(controller)}");
+
+        // ДЛЯ ВОРА: если он внутри зоны – НЕЛЬЗЯ взаимодействовать
+        if (!isGuard && IsInsidePrisonZone(controller))
         {
-            currentState = DoorState.Broken;
-            RpcOpenDoor(); // Анимация открытия
+            Debug.Log("Изнутри карцера нельзя взаимодействовать с дверью!");
+            return;
+        }
+
+        if (isGuard)
+        {
+            var captive = controller.GetEscortedPlayer();
+            if (captive != null)
+                CmdPutInJail(captive.netIdentity);
+        }
+        else
+        {
+            if (_hackCoroutine != null) StopCoroutine(_hackCoroutine);
+            _hackCoroutine = StartCoroutine(HackRoutine(controller));
         }
     }
 
-    [ClientRpc]
-    private void RpcOpenDoor()
+    private IEnumerator HackRoutine(PlayerController player)
     {
-        // Здесь твоя логика открытия (анимация или просто поворот)
-        // Например: animator.SetBool("IsOpen", true);
-        Debug.Log("Дверь взломана и открыта!");
+        _isHacking = true;
+        float elapsed = 0f;
+        OnHackProgressChanged?.Invoke(0f);
+
+        while (elapsed < holdDuration)
+        {
+            if (!player.IsInteractPressed)
+            {
+                OnHackProgressChanged?.Invoke(-1f);
+                _isHacking = false;
+                yield break;
+            }
+            elapsed += Time.deltaTime;
+            OnHackProgressChanged?.Invoke(elapsed / holdDuration);
+            yield return null;
+        }
+
+        OnHackProgressChanged?.Invoke(-1f);
+        _isHacking = false;
+        CmdCompleteHack();
     }
 
-    [ClientRpc]
-    private void RpcCloseDoor()
-    {
-        // Логика закрытия
-        // Например: animator.SetBool("IsOpen", false);
-        Debug.Log("Вор в тюрьме, дверь заперта!");
-    }
+    #endregion
 
-    [Server]
-    public void CloseWithPrisoner()
+    #region Commands & Server
+
+    [Command(requiresAuthority = false)]
+    private void CmdCompleteHack(NetworkConnectionToClient sender = null)
     {
-        currentState = DoorState.LockedWithPrisoner;
-        RpcCloseDoor(); // Анимация закрытия
+        PlayerController thief = sender.identity.GetComponent<PlayerController>();
+        if (thief == null) return;
+
+        if (_currentState == DoorState.LockedWithPrisoner && !IsInsidePrisonZone(thief))
+            BreakDoor();
     }
 
     [Command(requiresAuthority = false)]
     private void CmdPutInJail(NetworkIdentity captiveIdentity, NetworkConnectionToClient sender = null)
     {
         PlayerController captive = captiveIdentity.GetComponent<PlayerController>();
-        // Тот, кто вызвал команду (охранник)
         PlayerController guard = sender.identity.GetComponent<PlayerController>();
 
         if (captive != null)
         {
-            captive.RpcTeleport(jailInsidePoint.position); // Телепорт вора
-            captive.SetCuffed(false, null); // Снимаем наручники
+            captive.RpcTeleport(jailInsidePoint.position);
+            captive.SetCuffed(false, null);
+            _prisonerCount++;
+            RpcUpdatePrisonerCount(_prisonerCount);
         }
 
         if (guard != null)
         {
-            guard.SetEscorting(null); // Охранник больше никого не ведет
+            guard.SetEscorting(null);
             var eq = guard.GetComponent<PlayerEquipmentManager>();
-            if (eq != null) eq.SetEquipmentAccess(true); // Возвращаем оружие
+            if (eq != null) eq.SetEquipmentAccess(true);
+        }
+
+        _isOpen = false;
+        _currentState = DoorState.LockedWithPrisoner;
+    }
+
+    [Server]
+    public void BreakDoor()
+    {
+        if (_currentState == DoorState.LockedWithPrisoner)
+        {
+            _currentState = DoorState.Broken;
+            _isOpen = true;
+            RpcDoorBroken();
+        }
+    }
+
+    [ClientRpc]
+    private void RpcDoorBroken()
+    {
+        Debug.Log("Дверь карцера взломана и открыта!");
+    }
+
+    #endregion
+
+    #region Prison Zone & Counting
+
+    private bool IsInsidePrisonZone(PlayerController player)
+    {
+        if (prisonZone == null)
+        {
+            Debug.LogError("Prison Zone НЕ НАЗНАЧЕН!");
+            return false;
         }
         
-        _isOpen = false; // Закрываем дверь автоматически
+        bool inside = prisonZone.bounds.Contains(player.transform.position);
+        Debug.Log($"CHECK: player pos={player.transform.position}, bounds={prisonZone.bounds}, inside={inside}");
+        
+        // Дополнительная проверка: попробуем найти коллайдер через Physics.OverlapSphere
+        Collider[] hits = Physics.OverlapSphere(player.transform.position, 0.1f);
+        bool foundTrigger = System.Array.Exists(hits, c => c == prisonZone);
+        Debug.Log($"Player is inside trigger collider via OverlapSphere: {foundTrigger}");
+        
+        return inside;
     }
 
-    [Command(requiresAuthority = false)]
-    private void CmdToggle() => _isOpen = !_isOpen;
-
-    void Update()
+    private void OnTriggerEnter(Collider other)
     {
-        float targetAngle = _isOpen ? 90f : 0f;
-        transform.localRotation = Quaternion.Slerp(transform.localRotation, Quaternion.Euler(0, targetAngle, 0), Time.deltaTime * 5f);
+        if (!isServer) return;
+        if (!other.CompareTag("Player")) return;
+
+        var lobbyData = other.GetComponent<PlayerLobbyData>();
+        if (lobbyData != null && lobbyData.currentTeam == PlayerTeam.Thieves)
+        {
+            _prisonerCount++;
+            RpcUpdatePrisonerCount(_prisonerCount);
+        }
     }
+
+    private void OnTriggerExit(Collider other)
+    {
+        if (!isServer) return;
+        if (!other.CompareTag("Player")) return;
+        
+        var lobbyData = other.GetComponent<PlayerLobbyData>();
+        if (lobbyData != null && lobbyData.currentTeam == PlayerTeam.Thieves)
+        {
+            _prisonerCount = Mathf.Max(0, _prisonerCount - 1);
+            
+            // Если больше нет заключённых и дверь была сломана – восстанавливаем
+            if (_prisonerCount == 0 && _currentState == DoorState.Broken)
+            {
+                _currentState = DoorState.Closed;
+                _isOpen = true;
+            }
+        }
+    }
+
+    [ClientRpc]
+    private void RpcUpdatePrisonerCount(int count)
+    {
+        Debug.Log($"В карцере {count} грабителей");
+    }
+
+    public int GetPrisonerCount() => _prisonerCount;
+
+    #endregion
+
+    #region Visual
+
+    private void Update()
+    {
+        float targetAngle = _isOpen ? openAngle : 0f;
+        transform.localRotation = Quaternion.Slerp(
+            transform.localRotation,
+            Quaternion.Euler(0, targetAngle, 0),
+            Time.deltaTime * 5f
+        );
+    }
+
+    #endregion
 }

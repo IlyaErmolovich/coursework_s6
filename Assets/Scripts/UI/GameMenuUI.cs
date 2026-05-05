@@ -21,6 +21,10 @@ public class GameMenuUI : MonoBehaviour
     [Header("Stun UI")]
     [SerializeField] private GameObject stunOverlay;
 
+    [Header("Hacking Progress")]
+    [SerializeField] private Slider hackingProgressSlider;
+    [SerializeField] private GameObject hackingProgressPanel;
+
     private bool _isOpen;
     private PlayerInventory _localInventory;
     private PlayerInteraction _localInteraction;
@@ -31,6 +35,9 @@ public class GameMenuUI : MonoBehaviour
     {
         if (escapePanel != null) escapePanel.SetActive(false);
         if (interactionText != null) interactionText.gameObject.SetActive(false);
+
+        if (hackingProgressPanel != null) hackingProgressPanel.SetActive(false);
+            JailDoor.OnHackProgressChanged += OnHackProgress;
         
         _isOpen = false;
         ApplyCursorState();
@@ -147,5 +154,23 @@ public class GameMenuUI : MonoBehaviour
             NetworkManager.singleton.StopHost();
         else if (NetworkClient.isConnected)
             NetworkManager.singleton.StopClient();
+    }
+
+    void OnDestroy()
+    {
+        JailDoor.OnHackProgressChanged -= OnHackProgress;
+    }
+
+    private void OnHackProgress(float progress)
+    {
+        if (hackingProgressPanel == null) return;
+        if (progress < 0f || progress >= 1f)
+        {
+            hackingProgressPanel.SetActive(false);
+            return;
+        }
+        hackingProgressPanel.SetActive(true);
+        if (hackingProgressSlider != null)
+            hackingProgressSlider.value = progress;
     }
 }
