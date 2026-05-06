@@ -4,7 +4,9 @@
 TagManager:
   serializedVersion: 3
   tags:
-  - Crystal
+  - GuardSpawnPoint
+  - ThiefSpawnPoint
+  - ItemSpawnPoint
   layers:
   - Default
   - TransparentFX

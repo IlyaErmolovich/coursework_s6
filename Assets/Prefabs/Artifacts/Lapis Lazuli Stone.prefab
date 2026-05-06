@@ -1,0 +1,148 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1001 &3681980002969359029
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: -8679921383154817045, guid: 5704620b63d78154f940287f179ca564, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 5704620b63d78154f940287f179ca564, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 5704620b63d78154f940287f179ca564, type: 3}
+      propertyPath: m_LocalScale.z
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 5704620b63d78154f940287f179ca564, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 5704620b63d78154f940287f179ca564, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 5704620b63d78154f940287f179ca564, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 5704620b63d78154f940287f179ca564, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 5704620b63d78154f940287f179ca564, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 5704620b63d78154f940287f179ca564, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 5704620b63d78154f940287f179ca564, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 5704620b63d78154f940287f179ca564, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 5704620b63d78154f940287f179ca564, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 5704620b63d78154f940287f179ca564, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 5704620b63d78154f940287f179ca564, type: 3}
+      propertyPath: m_Name
+      value: Lapis Lazuli Stone
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 5704620b63d78154f940287f179ca564, type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 8164078558771037576, guid: 5704620b63d78154f940287f179ca564, type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 5704620b63d78154f940287f179ca564, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 8029016312673120325}
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 5704620b63d78154f940287f179ca564, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 7618713502087467972}
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 5704620b63d78154f940287f179ca564, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 639197444311567222}
+  m_SourcePrefab: {fileID: 100100000, guid: 5704620b63d78154f940287f179ca564, type: 3}
+--- !u!1 &4600546453391781860 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 919132149155446097, guid: 5704620b63d78154f940287f179ca564, type: 3}
+  m_PrefabInstance: {fileID: 3681980002969359029}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &8029016312673120325
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4600546453391781860}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9b91ecbcc199f4492b9a91e820070131, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Mirror::Mirror.NetworkIdentity
+  sceneId: 0
+  _assetId: 299991975
+  serverOnly: 0
+  visibility: 0
+  hasSpawned: 0
+--- !u!65 &7618713502087467972
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4600546453391781860}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 0.26411, y: 0.168322, z: 0.198155}
+  m_Center: {x: 0.005649999, y: 0.077895, z: 0.006982498}
+--- !u!114 &639197444311567222
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4600546453391781860}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e24f98fadc1eb054f8329f042ff516e0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::PickupItem
+  syncDirection: 0
+  syncMode: 0
+  syncInterval: 0
+  itemName: "\u041A\u0430\u043C\u0435\u043D\u044C \u043B\u0430\u0437\u0443\u0440\u0438\u0442\u0430"
+  value: 1400

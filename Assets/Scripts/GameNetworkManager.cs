@@ -2,6 +2,7 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 using Mirror;
 using System.Linq;
+using System.Collections.Generic;
 
 public class GameNetworkManager : NetworkManager
 {
@@ -9,43 +10,70 @@ public class GameNetworkManager : NetworkManager
     public GameObject guardPrefab;
     public GameObject thiefPrefab;
 
+    [Header("Spawn Points (будут найдены автоматически на сцене Game)")]
+    private Transform[] guardSpawnPoints;
+    private Transform[] thiefSpawnPoints;
+
     public override void OnServerAddPlayer(NetworkConnectionToClient conn)
     {
-        // В лобби спавним базу (LobbyPlayer)
-        // В игре OnServerSceneChanged заменит его автоматически
         base.OnServerAddPlayer(conn);
     }
 
-    // Добавляем второй параметр (PlayerLobbyData lobbyData) в скобки
+    // Новый метод: получить точку для команды с учётом занятости
+    private Transform GetTeamStartPosition(PlayerTeam team)
+    {
+        Transform[] points = (team == PlayerTeam.Guards) ? guardSpawnPoints : thiefSpawnPoints;
+        if (points == null || points.Length == 0)
+        {
+            Debug.LogWarning($"Нет точек спавна для команды {team}!");
+            return null;
+        }
+
+        // Ищем свободную точку (где нет других игроков)
+        List<Transform> available = new List<Transform>();
+        foreach (var point in points)
+        {
+            bool occupied = false;
+            foreach (var conn in NetworkServer.connections.Values)
+            {
+                if (conn.identity != null && Vector3.Distance(conn.identity.transform.position, point.position) < 0.5f)
+                {
+                    occupied = true;
+                    break;
+                }
+            }
+            if (!occupied) available.Add(point);
+        }
+
+        if (available.Count == 0)
+        {
+            Debug.LogWarning($"Все точки для команды {team} заняты, берём первую попавшуюся");
+            return points[0];
+        }
+        return available[Random.Range(0, available.Count)];
+    }
+
+    // Обновлённый метод замены игрока в игре
     private void ReplacePlayerForGame(NetworkConnectionToClient conn, PlayerLobbyData lobbyData)
     {
-        // 1. ОПРЕДЕЛЯЕМ ПРЕФАБ (проверьте еще раз: вор это Thieves, охранник это Guards)[cite: 3, 4]
         GameObject prefabToSpawn = (lobbyData.currentTeam == PlayerTeam.Thieves) ? thiefPrefab : guardPrefab;
         
-        Transform startPos = GetStartPosition();
-        GameObject gamePlayer = Instantiate(prefabToSpawn, 
-            startPos != null ? startPos.position : Vector3.zero, 
-            startPos != null ? startPos.rotation : Quaternion.identity);
+        Transform startPos = GetTeamStartPosition(lobbyData.currentTeam);
+        Vector3 spawnPos = startPos != null ? startPos.position : Vector3.zero;
+        Quaternion spawnRot = startPos != null ? startPos.rotation : Quaternion.identity;
 
-        // 2. КОПИРУЕМ ДАННЫЕ[cite: 4]
+        GameObject gamePlayer = Instantiate(prefabToSpawn, spawnPos, spawnRot);
+
         var newLobbyData = gamePlayer.GetComponent<PlayerLobbyData>();
         if (newLobbyData != null)
         {
             newLobbyData.playerName = lobbyData.playerName;
-            newLobbyData.currentTeam = lobbyData.currentTeam; 
+            newLobbyData.currentTeam = lobbyData.currentTeam;
         }
 
-        // 3. СПАВНИМ И ЗАМЕНЯЕМ[cite: 4]
-        // Важно: Сохраняем ссылку на старый объект до замены
         GameObject oldLobbyObject = conn.identity.gameObject;
-
-        // Сначала спавним новый объект для этого конкретного владельца[cite: 4]
         NetworkServer.Spawn(gamePlayer, conn);
-        
-        // Переключаем управление[cite: 4]
         NetworkServer.ReplacePlayerForConnection(conn, gamePlayer, true);
-
-        // Удаляем старый объект, чтобы он не мешался[cite: 3, 4]
         NetworkServer.Destroy(oldLobbyObject);
     }
 
@@ -55,18 +83,23 @@ public class GameNetworkManager : NetworkManager
 
         if (sceneName == "Game")
         {
-            // Используем ToList(), чтобы зафиксировать состояние подключений на этот момент[cite: 5]
+            // ---- НОВОЕ: находим точки спавна по тегам ----
+            var guards = GameObject.FindGameObjectsWithTag("GuardSpawnPoint");
+            guardSpawnPoints = guards.Select(go => go.transform).ToArray();
+            var thieves = GameObject.FindGameObjectsWithTag("ThiefSpawnPoint");
+            thiefSpawnPoints = thieves.Select(go => go.transform).ToArray();
+
+            Debug.Log($"Найдено точек для охраны: {guardSpawnPoints.Length}, для воров: {thiefSpawnPoints.Length}");
+
+            // Заменяем игроков
             var connections = NetworkServer.connections.Values.ToList();
-            
             foreach (var conn in connections)
             {
-                // Проверяем, что у соединения есть объект и он живой
                 if (conn != null && conn.identity != null)
                 {
                     PlayerLobbyData oldData = conn.identity.GetComponent<PlayerLobbyData>();
                     if (oldData != null)
                     {
-                        // Вызываем замену, передавая данные конкретного игрока
                         ReplacePlayerForGame(conn, oldData);
                     }
                 }
