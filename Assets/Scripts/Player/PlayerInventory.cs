@@ -30,4 +30,17 @@ public class PlayerInventory : NetworkBehaviour
             Debug.Log($"Предмет поднят! Слоты: {_occupiedSlots}/{maxSlots}. Деньги: {_totalMoney}");
         }
     }
+
+    [Command]
+    public void CmdDepositMoney(int amount)
+    {
+        if (_totalMoney <= 0) return;
+
+        int deposited = _totalMoney;
+        _totalMoney = 0;
+        _occupiedSlots = 0; // Все слоты освобождаются
+
+        if (TeamScoreManager.singleton != null)
+            TeamScoreManager.singleton.AddDeposit(deposited);
+    }
 }

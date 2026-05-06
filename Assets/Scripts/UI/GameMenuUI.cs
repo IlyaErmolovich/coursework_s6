@@ -11,6 +11,7 @@ public class GameMenuUI : MonoBehaviour
     [Header("Inventory HUD")]
     [SerializeField] private TextMeshProUGUI moneyText;
     [SerializeField] private TextMeshProUGUI slotsText;
+    [SerializeField] public TextMeshProUGUI teamScoreText;
     
     [Header("Interaction Hint")]
     [SerializeField] private TextMeshProUGUI interactionText;
@@ -119,6 +120,9 @@ public class GameMenuUI : MonoBehaviour
             if (moneyText != null) moneyText.text = $"$: {_localInventory.TotalMoney}";
             if (slotsText != null) slotsText.text = $"Slots: {_localInventory.OccupiedSlots}/{_localInventory.MaxSlots}";
         }
+
+        if (teamScoreText != null)
+            teamScoreText.gameObject.SetActive(isThief);
     }
 
     public void Resume()
@@ -172,5 +176,21 @@ public class GameMenuUI : MonoBehaviour
         hackingProgressPanel.SetActive(true);
         if (hackingProgressSlider != null)
             hackingProgressSlider.value = progress;
+    }
+
+    private void OnEnable()
+    {
+        TeamScoreManager.OnDepositUpdated += UpdateTeamScore;
+    }
+
+    private void OnDisable()
+    {
+        TeamScoreManager.OnDepositUpdated -= UpdateTeamScore;
+    }
+
+    private void UpdateTeamScore(int score)
+    {
+        if (teamScoreText != null)
+            teamScoreText.text = $"Сдано: ${score}";
     }
 }
