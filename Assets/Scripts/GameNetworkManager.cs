@@ -14,8 +14,24 @@ public class GameNetworkManager : NetworkManager
     private Transform[] guardSpawnPoints;
     private Transform[] thiefSpawnPoints;
 
+    public override void OnServerConnect(NetworkConnectionToClient conn)
+    {
+        if (SceneManager.GetActiveScene().name == "Game" || (GameManager.singleton != null && GameManager.singleton.IsMatchActive))
+        {
+            Debug.Log("Игра уже идёт, подключение отклонено.");
+            conn.Disconnect();
+            return;
+        }
+        base.OnServerConnect(conn);
+    }
+    
     public override void OnServerAddPlayer(NetworkConnectionToClient conn)
     {
+        if (SceneManager.GetActiveScene().name == "Game")
+        {
+            Debug.Log("Игра уже начата, подключение запрещено.");
+            return;
+        }
         base.OnServerAddPlayer(conn);
     }
 

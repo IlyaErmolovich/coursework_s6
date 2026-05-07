@@ -22,6 +22,8 @@ public class GameManager : NetworkBehaviour
     private int _imprisonedThiefCount;
 
     public bool IsMatchEnded => _matchEnded;
+    [SyncVar] private bool _isMatchActive = false;
+    public bool IsMatchActive => _isMatchActive;
 
     private void Awake()
     {
@@ -31,6 +33,7 @@ public class GameManager : NetworkBehaviour
 
     public override void OnStartServer()
     {
+        _isMatchActive = true;
         _timeLeft = matchDuration;
         _totalThiefCount = CountThieves();
         _imprisonedThiefCount = 0;
@@ -91,6 +94,7 @@ public class GameManager : NetworkBehaviour
     [Server]
     public void EndMatch(string message)
     {
+        _isMatchActive = false;
         if (_matchEnded) return;
         _matchEnded = true;
         CancelInvoke(nameof(ServerUpdateTimer));

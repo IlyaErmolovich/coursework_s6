@@ -67,6 +67,20 @@ public class PlayerController : NetworkBehaviour
     private Vector3 _lastPosition;
     private float _calculatedSpeed;
 
+    [SyncVar] private bool _isImprisoned = false;
+    public bool IsImprisoned => _isImprisoned;
+
+    [SyncVar] private bool _syncIsGrounded;
+    public bool SyncIsGrounded => _syncIsGrounded;
+
+    public bool IsGrounded => _controller != null && _controller.isGrounded;
+    
+    [Server]
+    public void SetImprisoned(bool imprisoned)
+    {
+        _isImprisoned = imprisoned;
+    }
+
     [Server]
     public void DecreaseStamina(float amount)
     {

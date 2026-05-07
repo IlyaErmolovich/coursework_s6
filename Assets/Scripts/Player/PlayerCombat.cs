@@ -63,21 +63,26 @@ public class PlayerCombat : NetworkBehaviour
         }
     }
 
+    private bool IsThief(PlayerController player)
+    {
+        var lobby = player.GetComponent<PlayerLobbyData>();
+        return lobby != null && lobby.currentTeam == PlayerTeam.Thieves;
+    }
+
     public void ProcessStunHit()
     {
         if (!isLocalPlayer) return;
         if (_controller != null && _controller.IsStunned) return;
 
-        Vector3 origin = transform.position + Vector3.up * stunHeight; 
+        Vector3 origin = transform.position + Vector3.up * stunHeight;
         Vector3 direction = transform.forward;
 
         if (Physics.SphereCast(origin, attackRadius, direction, out RaycastHit hit, attackDistance, playerLayer, QueryTriggerInteraction.Collide))
         {
             PlayerController victim = hit.collider.GetComponentInParent<PlayerController>();
-
             if (victim != null && victim.gameObject != gameObject)
             {
-                
+                if (!IsThief(victim)) return;
                 CmdApplyCombatEffects(victim, stunDuration, staminaDamage);
             }
         }

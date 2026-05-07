@@ -144,10 +144,7 @@ public class JailDoor : NetworkBehaviour, IInteractable
         {
             captive.RpcTeleport(jailInsidePoint.position);
             captive.SetCuffed(false, null);
-            _prisonerCount++;
-            var gm = FindObjectOfType<GameManager>();
-            if (gm != null) gm.OnThiefImprisoned();
-            RpcUpdatePrisonerCount(_prisonerCount);
+            captive.SetImprisoned(true);
         }
 
         if (guard != null)
@@ -206,11 +203,18 @@ public class JailDoor : NetworkBehaviour, IInteractable
         if (!isServer) return;
         if (!other.CompareTag("Player")) return;
 
-        var lobbyData = other.GetComponent<PlayerLobbyData>();
-        if (lobbyData != null && lobbyData.currentTeam == PlayerTeam.Thieves)
+        var playerData = other.GetComponent<PlayerLobbyData>();
+        if (playerData != null && playerData.currentTeam == PlayerTeam.Thieves)
         {
-            _prisonerCount++;
-            RpcUpdatePrisonerCount(_prisonerCount);
+            var controller = other.GetComponent<PlayerController>();
+            // Учитываем только если вор реально посажен охранником
+            if (controller != null && controller.IsImprisoned)
+            {
+                _prisonerCount++;
+                RpcUpdatePrisonerCount(_prisonerCount);
+                var gm = FindObjectOfType<GameManager>();
+                if (gm != null) gm.OnThiefImprisoned();
+            }
         }
     }
 
@@ -220,17 +224,24 @@ public class JailDoor : NetworkBehaviour, IInteractable
         if (!other.CompareTag("Player")) return;
         
         var lobbyData = other.GetComponent<PlayerLobbyData>();
-        if (lobbyData != null && lobbyData.currentTeam == PlayerTeam.Thieves)
+        if (lobbyData == null || lobbyData.currentTeam != PlayerTeam.Thieves) return;
+
+        var controller = other.GetComponent<PlayerController>();
+        if (controller != null && controller.IsImprisoned)
         {
             _prisonerCount = Mathf.Max(0, _prisonerCount - 1);
+            RpcUpdatePrisonerCount(_prisonerCount);
+            
             var gm = FindObjectOfType<GameManager>();
             if (gm != null) gm.OnThiefEscaped();
             
-            if (_prisonerCount == 0 && _currentState == DoorState.Broken)
-            {
-                _currentState = DoorState.Closed;
-                _isOpen = true;
-            }
+            controller.SetImprisoned(false);
+        }
+        
+        if (_prisonerCount == 0 && _currentState == DoorState.Broken)
+        {
+            _currentState = DoorState.Closed;
+            _isOpen = true;
         }
     }
 

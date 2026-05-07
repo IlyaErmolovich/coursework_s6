@@ -34,15 +34,13 @@ public class ThiefInteractable : NetworkBehaviour, IInteractable
     [Command(requiresAuthority = false)]
     void CmdApplyCuffs(NetworkIdentity guardIdentity)
     {
-        _rootController.SetCuffed(true, guardIdentity);
-        
-        
         var guardController = guardIdentity.GetComponent<PlayerController>();
+        if (guardController != null && guardController.GetEscortedPlayer() != null)
+            return;
+
+        _rootController.SetCuffed(true, guardIdentity);
         if (guardController != null)
-        {
             guardController.SetEscorting(_rootController);
-        }
-        
         var guardEquipment = guardIdentity.GetComponent<PlayerEquipmentManager>();
         if (guardEquipment != null) guardEquipment.SetEquipmentAccess(false);
     }

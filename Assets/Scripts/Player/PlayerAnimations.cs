@@ -1,5 +1,6 @@
 using UnityEngine;
 using Mirror;
+using System.Collections;
 
 public class PlayerAnimations : NetworkBehaviour
 {
@@ -15,6 +16,8 @@ public class PlayerAnimations : NetworkBehaviour
     private int _cuffedLayerIndex;
     private Vector3 _lastPosition;
     private float _calculatedSpeed;
+    [SyncVar] private bool _syncIsGrounded;
+    public bool SyncIsGrounded => _syncIsGrounded;
 
     private void Start()
     {
@@ -38,9 +41,11 @@ public class PlayerAnimations : NetworkBehaviour
         _lastPosition = transform.position;
 
         
-        bool isGrounded = _controller.GetComponent<CharacterController>().enabled 
-            ? _controller.GetComponent<CharacterController>().isGrounded 
-            : true; 
+        bool isGrounded;
+        if (isLocalPlayer)
+            isGrounded = _controller.IsGrounded;
+        else
+            isGrounded = _syncIsGrounded;        
 
         _animator.SetBool("isGrounded", isGrounded);
 
@@ -70,6 +75,13 @@ public class PlayerAnimations : NetworkBehaviour
         HandleWeightsSmoothing();
         HandleAttackLayerBlending();
     } 
+
+    [ServerCallback]
+    void FixedUpdate()
+    {
+        if (_controller != null)
+            _syncIsGrounded = _controller.IsGrounded;
+    }
 
     private void HandleProxyLocomotion()
     {
@@ -154,8 +166,14 @@ public class PlayerAnimations : NetworkBehaviour
     [ClientRpc]
     private void RpcJump()
     {
-        
         _animator.SetTrigger("jump");
+        StartCoroutine(ResetJumpTrigger());
+    }
+
+    private IEnumerator ResetJumpTrigger()
+    {
+        yield return new WaitForSeconds(0.5f);
+        _animator.ResetTrigger("jump");
     }
 
     [Command]
