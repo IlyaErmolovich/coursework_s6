@@ -19,7 +19,7 @@ public class GameNetworkManager : NetworkManager
         base.OnServerAddPlayer(conn);
     }
 
-    // Новый метод: получить точку для команды с учётом занятости
+    
     private Transform GetTeamStartPosition(PlayerTeam team)
     {
         Transform[] points = (team == PlayerTeam.Guards) ? guardSpawnPoints : thiefSpawnPoints;
@@ -29,7 +29,7 @@ public class GameNetworkManager : NetworkManager
             return null;
         }
 
-        // Ищем свободную точку (где нет других игроков)
+        
         List<Transform> available = new List<Transform>();
         foreach (var point in points)
         {
@@ -53,7 +53,7 @@ public class GameNetworkManager : NetworkManager
         return available[Random.Range(0, available.Count)];
     }
 
-    // Обновлённый метод замены игрока в игре
+    
     private void ReplacePlayerForGame(NetworkConnectionToClient conn, PlayerLobbyData lobbyData)
     {
         GameObject prefabToSpawn = (lobbyData.currentTeam == PlayerTeam.Thieves) ? thiefPrefab : guardPrefab;
@@ -83,7 +83,7 @@ public class GameNetworkManager : NetworkManager
 
         if (sceneName == "Game")
         {
-            // ---- НОВОЕ: находим точки спавна по тегам ----
+            
             var guards = GameObject.FindGameObjectsWithTag("GuardSpawnPoint");
             guardSpawnPoints = guards.Select(go => go.transform).ToArray();
             var thieves = GameObject.FindGameObjectsWithTag("ThiefSpawnPoint");
@@ -91,7 +91,7 @@ public class GameNetworkManager : NetworkManager
 
             Debug.Log($"Найдено точек для охраны: {guardSpawnPoints.Length}, для воров: {thiefSpawnPoints.Length}");
 
-            // Заменяем игроков
+            
             var connections = NetworkServer.connections.Values.ToList();
             foreach (var conn in connections)
             {

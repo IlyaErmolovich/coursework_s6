@@ -2138,7 +2138,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Mirror.Transports::kcp2k.KcpTransport
   port: 7777
-  DualMode: 1
+  DualMode: 0
   NoDelay: 1
   Interval: 10
   Timeout: 10000

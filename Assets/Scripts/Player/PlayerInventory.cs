@@ -38,7 +38,7 @@ public class PlayerInventory : NetworkBehaviour
 
         int deposited = _totalMoney;
         _totalMoney = 0;
-        _occupiedSlots = 0; // Все слоты освобождаются
+        _occupiedSlots = 0; 
 
         if (TeamScoreManager.singleton != null)
             TeamScoreManager.singleton.AddDeposit(deposited);
