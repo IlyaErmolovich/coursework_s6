@@ -80,16 +80,16 @@ public class GameMenuUI : MonoBehaviour
             return;
         }
 
-        // 1. Определяем команду игрока[cite: 15]
+        
         bool isThief = _localLobbyData != null && _localLobbyData.currentTeam == PlayerTeam.Thieves;
 
-        // 2. ВЗАИМОДЕЙСТВИЕ (Подсказки)
+        
         if (_localInteraction != null && interactionText != null)
         {
-            // Сначала получаем объект[cite: 19]
+            
             var interactable = _localInteraction.GetCurrentInteractable;
             
-            // Проверяем: есть ли объект И разрешен ли он для текущего игрока
+            
             if (interactable != null && (isThief || interactable.CanGuardsInteract))
             {
                 interactionText.gameObject.SetActive(true);
@@ -101,7 +101,7 @@ public class GameMenuUI : MonoBehaviour
             }
         }
 
-        // 3. СТАМИНА[cite: 20]
+        
         if (staminaSlider != null)
         {
             staminaSlider.gameObject.SetActive(isThief);
@@ -111,7 +111,7 @@ public class GameMenuUI : MonoBehaviour
             }
         }
 
-        // 4. ИНВЕНТАРЬ[cite: 20]
+        
         if (moneyText != null) moneyText.gameObject.SetActive(isThief);
         if (slotsText != null) slotsText.gameObject.SetActive(isThief);
 

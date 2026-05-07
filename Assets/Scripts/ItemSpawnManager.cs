@@ -29,12 +29,12 @@ public class ItemSpawnManager : NetworkBehaviour
             return;
         }
 
-        // Перемешиваем точки
+        
         spawnPoints = spawnPoints.OrderBy(x => Random.value).ToList();
 
         int idx = 0;
 
-        // Спавним уникальные артефакты
+        
         foreach (var artifact in uniqueArtifacts)
         {
             if (idx >= spawnPoints.Count) break;
@@ -42,7 +42,7 @@ public class ItemSpawnManager : NetworkBehaviour
             idx++;
         }
 
-        // Остальные точки – деньги
+        
         while (idx < spawnPoints.Count)
         {
             if (moneyPrefabs.Length == 0) break;

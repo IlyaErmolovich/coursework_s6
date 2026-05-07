@@ -6,7 +6,7 @@ public class DoorInteractable : NetworkBehaviour, IInteractable
     [SyncVar] private bool _isOpen = false;
     [SerializeField] private float openAngle = 90f;
 
-    // Разрешаем охране открывать двери!
+    
     public bool CanGuardsInteract => true; 
 
     public string GetInteractionText(PlayerInventory inventory) => 

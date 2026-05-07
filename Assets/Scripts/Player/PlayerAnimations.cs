@@ -31,13 +31,13 @@ public class PlayerAnimations : NetworkBehaviour
 
     private void Update()
     {
-        // Рассчитываем скорость перемещения для всех (и для себя, и для прокси)
-        // Это работает даже если CharacterController выключен
+        
+        
         float distanceMoved = Vector3.Distance(transform.position, _lastPosition);
         _calculatedSpeed = distanceMoved / Time.deltaTime;
         _lastPosition = transform.position;
 
-        // Параметр земли берем из контроллера только если он активен, иначе считаем true (или через Raycast)
+        
         bool isGrounded = _controller.GetComponent<CharacterController>().enabled 
             ? _controller.GetComponent<CharacterController>().isGrounded 
             : true; 
@@ -46,7 +46,7 @@ public class PlayerAnimations : NetworkBehaviour
 
         if (_controller.IsCuffed)
         {
-            // Вызываем обновленный метод
+            
             HandleCuffedLocomotion();
         }
         else if (isLocalPlayer)
@@ -63,7 +63,7 @@ public class PlayerAnimations : NetworkBehaviour
         }
         else
         {
-            // Для других игроков (не в наручниках)
+            
             HandleProxyLocomotion();
         }
         
@@ -85,7 +85,7 @@ public class PlayerAnimations : NetworkBehaviour
 
     private void HandleCuffedLocomotion()
     {
-        // Используем расчетную скорость вместо controller.velocity
+        
         float targetY = (_calculatedSpeed > 0.1f) ? 1f : 0f;
         
         float step = _controller.AnimationSmoothness * Time.deltaTime;
@@ -141,20 +141,20 @@ public class PlayerAnimations : NetworkBehaviour
     {
         if (isLocalPlayer)
         {
-            CmdJump(); // Локальный игрок просит сервер синхронизировать прыжок
+            CmdJump(); 
         }
     }
 
     [Command]
     private void CmdJump()
     {
-        RpcJump(); // Сервер говорит всем клиентам нажать на триггер
+        RpcJump(); 
     }
 
     [ClientRpc]
     private void RpcJump()
     {
-        // Этот код выполнится у всех игроков на их экранах
+        
         _animator.SetTrigger("jump");
     }
 

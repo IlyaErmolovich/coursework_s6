@@ -6,7 +6,7 @@ public class JailDoor : NetworkBehaviour, IInteractable
 {
     [Header("Door Visual")]
     [SerializeField] private float openAngle = 90f;
-    [SyncVar] private bool _isOpen = true;  // по умолчанию открыта
+    [SyncVar] private bool _isOpen = true;  
 
     public enum DoorState { Closed, Broken, LockedWithPrisoner }
     [SyncVar] private DoorState _currentState = DoorState.Closed;
@@ -15,12 +15,12 @@ public class JailDoor : NetworkBehaviour, IInteractable
     [SerializeField] private float holdDuration = 2f;
 
     [Header("Prison Zone")]
-    [SerializeField] private Collider prisonZone;       // Trigger-коллайдер внутри камеры
+    [SerializeField] private Collider prisonZone;       
 
     [Header("References")]
-    [SerializeField] private Transform jailInsidePoint; // точка телепортации вора
+    [SerializeField] private Transform jailInsidePoint; 
 
-    // Событие для UI прогресса взлома
+    
     public static System.Action<float> OnHackProgressChanged;
 
     [SyncVar] private int _prisonerCount;
@@ -40,7 +40,7 @@ public class JailDoor : NetworkBehaviour, IInteractable
 
         if (isGuard)
         {
-            if (controller.GetEscortedPlayer() != null) // убрали && _currentState != DoorState.Broken
+            if (controller.GetEscortedPlayer() != null) 
                 return "Нажмите E, чтобы посадить в карцер";
             return "";
         }
@@ -59,7 +59,7 @@ public class JailDoor : NetworkBehaviour, IInteractable
 
         if (isGuard)
         {
-            // Можно взаимодействовать, если ведёт вора (дверь может быть даже сломанной)
+            
             return controller.GetEscortedPlayer() != null;
         }
         else
@@ -76,7 +76,7 @@ public class JailDoor : NetworkBehaviour, IInteractable
         
         Debug.Log($"🎮 Interact вызван: isGuard={isGuard}, InsidePrisonZone={IsInsidePrisonZone(controller)}");
 
-        // ДЛЯ ВОРА: если он внутри зоны – НЕЛЬЗЯ взаимодействовать
+        
         if (!isGuard && IsInsidePrisonZone(controller))
         {
             Debug.Log("Изнутри карцера нельзя взаимодействовать с дверью!");
@@ -191,7 +191,7 @@ public class JailDoor : NetworkBehaviour, IInteractable
         bool inside = prisonZone.bounds.Contains(player.transform.position);
         Debug.Log($"CHECK: player pos={player.transform.position}, bounds={prisonZone.bounds}, inside={inside}");
         
-        // Дополнительная проверка: попробуем найти коллайдер через Physics.OverlapSphere
+        
         Collider[] hits = Physics.OverlapSphere(player.transform.position, 0.1f);
         bool foundTrigger = System.Array.Exists(hits, c => c == prisonZone);
         Debug.Log($"Player is inside trigger collider via OverlapSphere: {foundTrigger}");
@@ -222,7 +222,7 @@ public class JailDoor : NetworkBehaviour, IInteractable
         {
             _prisonerCount = Mathf.Max(0, _prisonerCount - 1);
             
-            // Если больше нет заключённых и дверь была сломана – восстанавливаем
+            
             if (_prisonerCount == 0 && _currentState == DoorState.Broken)
             {
                 _currentState = DoorState.Closed;

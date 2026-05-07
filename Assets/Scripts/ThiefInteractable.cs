@@ -3,7 +3,7 @@ using Mirror;
 
 public class ThiefInteractable : NetworkBehaviour, IInteractable
 {
-    // Ссылка на контроллер в корне префаба
+    
     private PlayerController _rootController;
 
     void Start()
@@ -27,7 +27,7 @@ public class ThiefInteractable : NetworkBehaviour, IInteractable
 
     public void Interact(PlayerInventory inv)
     {
-        // Передаем NetworkIdentity охранника
+        
         CmdApplyCuffs(inv.GetComponent<NetworkIdentity>());
     }
 
@@ -36,7 +36,7 @@ public class ThiefInteractable : NetworkBehaviour, IInteractable
     {
         _rootController.SetCuffed(true, guardIdentity);
         
-        // НОВОЕ: Находим контроллер охранника и записываем ему в SyncVar текущего вора
+        
         var guardController = guardIdentity.GetComponent<PlayerController>();
         if (guardController != null)
         {

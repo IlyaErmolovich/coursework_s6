@@ -8,7 +8,7 @@ public class TeamScoreManager : NetworkBehaviour
     [SyncVar] private int _totalDeposited = 0;
     public int TotalDeposited => _totalDeposited;
 
-    // Событие для обновления UI
+    
     public static System.Action<int> OnDepositUpdated;
 
     private void Awake()
@@ -21,7 +21,7 @@ public class TeamScoreManager : NetworkBehaviour
     public void AddDeposit(int amount)
     {
         _totalDeposited += amount;
-        // Оповещаем всех клиентов (через RPC)
+        
         RpcUpdateDepositUI(_totalDeposited);
     }
 

@@ -14,7 +14,7 @@ public class PlayerLobbyData : NetworkBehaviour
 
     private void Awake()
     {
-        // Это не даст Unity удалить объект при загрузке сцены Game
+        
         DontDestroyOnLoad(gameObject);
     }
 
@@ -23,8 +23,8 @@ public class PlayerLobbyData : NetworkBehaviour
         string savedName = PlayerPrefs.GetString("PlayerName", "Player " + netId);
         CmdSetName(savedName);
         
-        // ПРОВЕРКА: Автоназначение только если мы в Лобби[cite: 3, 4]
-        // Замените "Lobby" на точное название вашей сцены с лобби
+        
+        
         if (UnityEngine.SceneManagement.SceneManager.GetActiveScene().name == "Lobby") 
         {
             CmdAutoAssignTeam();

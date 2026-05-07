@@ -39,12 +39,12 @@ public class PlayerController : NetworkBehaviour
     public float AnimationSmoothness => animationSmoothness;
 
     [Header("Jump Settings")]
-    [SerializeField] private float jumpHeight = 1.5f; // Высота прыжка в метрах
+    [SerializeField] private float jumpHeight = 1.5f; 
     
     [Header("Cuffed Settings")]
-    [SerializeField] private float stopDistance = 1.8f;  // Дистанция, на которой грабитель останавливается
-    [SerializeField] private float followDistance = 1.5f; // На каком расстоянии от охранника он должен стоять
-    [SerializeField] private float followSpeedMultiplier = 1.2f; // Насколько быстрее обычного он идет за охранником
+    [SerializeField] private float stopDistance = 1.8f;  
+    [SerializeField] private float followDistance = 1.5f; 
+    [SerializeField] private float followSpeedMultiplier = 1.2f; 
 
     [Header("Visuals")]
     [SerializeField] private GameObject handcuffsModel;
@@ -71,7 +71,7 @@ public class PlayerController : NetworkBehaviour
     public void DecreaseStamina(float amount)
     {
         _currentStamina = Mathf.Max(_currentStamina - amount, 0f);
-        // Синхронизация произойдет автоматически через [SyncVar]
+        
     }
 
     public override void OnStartLocalPlayer()
@@ -89,25 +89,25 @@ public class PlayerController : NetworkBehaviour
         _controller = GetComponent<CharacterController>();
         _currentStamina = maxStamina;
         
-        // Добавьте это для теста:
+        
         var lobbyData = GetComponent<PlayerLobbyData>();
         Debug.Log($"Игрок заспавнен. Команда: {lobbyData.currentTeam}");
     }
 
     private void Update()
     {
-        // --- ЭТОТ БЛОК ВЫПОЛНЯЕТСЯ ТОЛЬКО ДЛЯ ТОГО, КТО УПРАВЛЯЕТ ПЕРСОНАЖЕМ ---
+        
         if (isLocalPlayer)
         {
-            // 1. Гравитация (только для себя, остальные синхронизируют позицию через NetworkTransform)
+            
             ApplyGravity();
 
-            // 2. Логика следования за охранником
+            
             if (_isCuffed && _escortTarget != null)
             {
                 HandleClientEscortLogic();
             }
-            // 3. Обычное управление
+            
             else if (!_isStunned)
             {
                 UpdateSprintState();
@@ -118,28 +118,28 @@ public class PlayerController : NetworkBehaviour
         }
     }
 
-    // Метод обязательно должен быть public, чтобы JailDoor его видел
+    
 [ClientRpc]
 public void RpcTeleport(Vector3 newPosition)
 {
-    // 1. Выключаем контроллер
+    
     if (_controller == null) _controller = GetComponent<CharacterController>();
     if (_controller != null) _controller.enabled = false;
 
-    // 2. Перемещаем
+    
     transform.position = newPosition;
 
-    // 3. Сообщаем сетевому компоненту о телепортации через SendMessage
-    // Это сработает, даже если мы не прописываем тип NetworkTransform в коде
+    
+    
     SendMessage("OnTeleport", newPosition, SendMessageOptions.DontRequireReceiver);
 
-    // 4. Включаем обратно через физический кадр
+    
     StartCoroutine(ReEnableController());
 }
 
     private System.Collections.IEnumerator ReEnableController()
     {
-        yield return new WaitForFixedUpdate(); // Ждем один такт физики
+        yield return new WaitForFixedUpdate(); 
         if (_controller != null) _controller.enabled = true;
     }
 
@@ -148,8 +148,8 @@ public void RpcTeleport(Vector3 newPosition)
         if (_controller.isGrounded && _velocity.y < 0) _velocity.y = -2f;
         _velocity.y += gravity * Time.deltaTime;
         
-        // Двигаем только если мы локальный игрок или сервер (если нет Client Authority)
-        // В нашем случае — только локальный игрок.
+        
+        
         _controller.Move(_velocity * Time.deltaTime);
     }
 
@@ -159,7 +159,7 @@ public void RpcTeleport(Vector3 newPosition)
         Vector3 offset = transform.position - targetPos;
         float currentDistance = offset.magnitude;
 
-        // ПОВОРОТ
+        
         Vector3 lookDir = targetPos - transform.position;
         lookDir.y = 0;
         if (lookDir.sqrMagnitude > 0.1f)
@@ -167,11 +167,11 @@ public void RpcTeleport(Vector3 newPosition)
             transform.rotation = Quaternion.Lerp(transform.rotation, Quaternion.LookRotation(lookDir), Time.deltaTime * 5f);
         }
 
-        // ПЕРЕМЕЩЕНИЕ
-        // Если расстояние больше установленной дистанции остановки — идем к цели
+        
+        
         if (currentDistance > stopDistance) 
         {
-            // Рассчитываем точку, в которую нужно прийти (на расстоянии followDistance от охранника)
+            
             Vector3 moveDest = targetPos + offset.normalized * followDistance;
             Vector3 moveDirection = (moveDest - transform.position).normalized;
             
@@ -188,11 +188,11 @@ public void RpcTeleport(Vector3 newPosition)
 
     private void OnCuffedChanged(bool oldVal, bool newVal)
     {
-        // 1. Обновляем слой анимации
+        
         var anims = GetComponentInChildren<PlayerAnimations>();
         if (anims != null) anims.UpdateCuffedLayer(newVal);
 
-        // 2. Включаем/выключаем саму модель
+        
         if (handcuffsModel != null)
         {
             handcuffsModel.SetActive(newVal);
@@ -205,7 +205,7 @@ public void RpcTeleport(Vector3 newPosition)
         _escortedIdentity = target != null ? target.netIdentity : null;
     }
 
-    // Метод для получения объекта того, кого ведем (используется в UI)
+    
     public PlayerController GetEscortedPlayer()
     {
         if (_escortedIdentity == null) return null;
@@ -214,17 +214,17 @@ public void RpcTeleport(Vector3 newPosition)
 
     private void UpdateSprintState()
     {
-        // Проверяем команду через LobbyData
+        
         var lobbyData = GetComponent<PlayerLobbyData>();
         if (lobbyData != null && lobbyData.currentTeam == PlayerTeam.Guards)
         {
-            _canSprint = false; // Охранник никогда не бегает
+            _canSprint = false; 
             return;
         }
 
         bool isTryingToSprint = _isSprinting && _moveInput.y > 0.1f;
 
-        // Условие 2: Если мы еще НЕ бежим, то начать можем ТОЛЬКО при 100% стамины
+        
         if (!_canSprint)
         {
             if (isTryingToSprint && _currentStamina >= maxStamina - 0.1f)
@@ -234,7 +234,7 @@ public void RpcTeleport(Vector3 newPosition)
         }
         else
         {
-            // Условие 3: Если мы УЖЕ бежим, то прекращаем, если отпустили кнопку или стамина кончилась
+            
             if (!isTryingToSprint || _currentStamina <= 0)
             {
                 _canSprint = false;
@@ -245,11 +245,11 @@ public void RpcTeleport(Vector3 newPosition)
     [Server]
     public void Stun(float duration)
     {
-        // Если игрок уже находится в состоянии стана, выходим, чтобы не перезапускать таймер
+        
         if (_isStunned) return; 
 
         _isStunned = true;
-        // Убираем CancelInvoke, так как теперь метод не будет вызываться повторно во время стана
+        
         Invoke(nameof(ResetStun), duration);
     }
 
@@ -261,22 +261,22 @@ public void RpcTeleport(Vector3 newPosition)
     
     private void ApplyMovement()
     {
-        // Если на земле, обнуляем накопленную вертикальную скорость
+        
         if (_controller.isGrounded && _velocity.y < 0) _velocity.y = -2f;
 
-        // ЛОГИКА ПРЫЖКА
+        
         if (_jumpRequested && _controller.isGrounded)
         {
-            // Формула импульса: v = sqrt(h * -2 * g)
+            
             _velocity.y = Mathf.Sqrt(jumpHeight * -2f * gravity);
             
-            // Вызываем запуск анимации взлета
+            
             var anims = GetComponentInChildren<PlayerAnimations>();
             if (anims != null) anims.SetJumpTrigger();
         }
         _jumpRequested = false;
 
-        // Твой текущий код горизонтального перемещения
+        
         Vector3 targetDirection = transform.right * _moveInput.x + transform.forward * _moveInput.y;
         float currentSpeedMagnitude = new Vector3(_currentVelocity.x, 0, _currentVelocity.z).magnitude;
         float currentSprintFactor = _canSprint ? sprintMultiplier : 1f;
@@ -289,7 +289,7 @@ public void RpcTeleport(Vector3 newPosition)
         _currentVelocity = targetDirection.normalized * smoothSpeed;
         _controller.Move(_currentVelocity * Time.deltaTime);
 
-        // ПРИМЕНЕНИЕ ГРАВИТАЦИИ
+        
         _velocity.y += gravity * Time.deltaTime;
         _controller.Move(_velocity * Time.deltaTime);
     }
@@ -307,7 +307,7 @@ public void RpcTeleport(Vector3 newPosition)
 
     private void HandleStamina()
     {
-        // Теперь тратим стамину только если бег РЕАЛЬНО разрешен
+        
         if (_canSprint)
         {
             _currentStamina = Mathf.Max(_currentStamina - staminaDrainRate * Time.deltaTime, 0f);
@@ -331,7 +331,7 @@ public void RpcTeleport(Vector3 newPosition)
 
     public void OnScroll(InputValue value)
     {
-        // Если курсор виден (меню открыто), игнорируем прокрутку оружия
+        
         if (Cursor.visible) return;
 
         float scrollY = value.Get<Vector2>().y;

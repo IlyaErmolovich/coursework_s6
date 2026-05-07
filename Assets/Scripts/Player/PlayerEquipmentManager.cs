@@ -19,7 +19,7 @@ public class PlayerEquipmentManager : NetworkBehaviour
 
     public void NextWeapon()
     {
-        if (!_canUseEquipment) return; // Если ведем грабителя, переключать нельзя
+        if (!_canUseEquipment) return; 
         if (weapons.Length == 0) return;
         
         int nextIndex = _currentWeaponIndex + 1;
@@ -51,6 +51,6 @@ public class PlayerEquipmentManager : NetworkBehaviour
     public void SetEquipmentAccess(bool allowed)
     {
         _canUseEquipment = allowed;
-        if (!allowed) CmdSetWeapon(-1); // Принудительно убираем оружие из рук[cite: 10]
+        if (!allowed) CmdSetWeapon(-1); 
     }
 }
