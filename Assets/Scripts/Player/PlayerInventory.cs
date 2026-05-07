@@ -17,6 +17,10 @@ public class PlayerInventory : NetworkBehaviour
     public int TotalMoney => _totalMoney;
     public int OccupiedSlots => _occupiedSlots;
     public int MaxSlots => maxSlots;
+    [SyncVar] private bool _hasArtifact = false;
+
+    [Command]
+    public void CmdSetHasArtifact(bool has) => _hasArtifact = has;
 
     public bool HasFreeSlot() => _occupiedSlots < maxSlots;
 
@@ -34,13 +38,20 @@ public class PlayerInventory : NetworkBehaviour
     [Command]
     public void CmdDepositMoney(int amount)
     {
-        if (_totalMoney <= 0) return;
+        if (_totalMoney <= 0 && !_hasArtifact) return;
 
         int deposited = _totalMoney;
         _totalMoney = 0;
-        _occupiedSlots = 0; 
+        _occupiedSlots = 0;
+        
+        if (_hasArtifact)
+        {
+            _hasArtifact = false;
+            if (TeamScoreManager.singleton != null)
+                TeamScoreManager.singleton.AddArtifactDeposit();
+        }
 
-        if (TeamScoreManager.singleton != null)
+        if (TeamScoreManager.singleton != null && deposited > 0)
             TeamScoreManager.singleton.AddDeposit(deposited);
     }
 }

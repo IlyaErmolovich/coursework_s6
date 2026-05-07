@@ -12,6 +12,10 @@ public class TeamScoreManager : NetworkBehaviour
     
     public static System.Action<int> OnDepositUpdated;
 
+    [SyncVar] private int _artifactsDeposited = 0;
+    public int ArtifactsDeposited => _artifactsDeposited;
+    public static System.Action<int> OnArtifactDepositUpdated;
+
     private void Awake()
     {
         if (singleton == null) singleton = this;
@@ -30,5 +34,18 @@ public class TeamScoreManager : NetworkBehaviour
     private void RpcUpdateDepositUI(int newTotal)
     {
         OnDepositUpdated?.Invoke(newTotal);
+    }
+
+    [Server]
+    public void AddArtifactDeposit()
+    {
+        _artifactsDeposited++;
+        RpcUpdateArtifactUI(_artifactsDeposited);
+    }
+
+    [ClientRpc]
+    private void RpcUpdateArtifactUI(int newTotal)
+    {
+        OnArtifactDepositUpdated?.Invoke(newTotal);
     }
 }

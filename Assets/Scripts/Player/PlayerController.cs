@@ -76,6 +76,8 @@ public class PlayerController : NetworkBehaviour
 
     public override void OnStartLocalPlayer()
     {
+        if (GameManager.singleton != null && GameManager.singleton.IsMatchEnded) return;
+
         if (cameraTransform != null)
         {
             cameraTransform.gameObject.SetActive(true);
@@ -96,25 +98,23 @@ public class PlayerController : NetworkBehaviour
 
     private void Update()
     {
-        
-        if (isLocalPlayer)
-        {
-            
-            ApplyGravity();
+        if (!isLocalPlayer) return;
+        if (GameManager.singleton != null && GameManager.singleton.IsMatchEnded) return;
+
+        ApplyGravity();
 
             
-            if (_isCuffed && _escortTarget != null)
-            {
-                HandleClientEscortLogic();
-            }
+        if (_isCuffed && _escortTarget != null)
+        {
+            HandleClientEscortLogic();
+        }
             
-            else if (!_isStunned)
-            {
-                UpdateSprintState();
-                HandleStamina();
-                ApplyMovement();
-                ApplyLook();
-            }
+        else if (!_isStunned)
+        {
+            UpdateSprintState();
+            HandleStamina();
+            ApplyMovement();
+            ApplyLook();
         }
     }
 

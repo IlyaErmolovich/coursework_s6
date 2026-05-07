@@ -145,6 +145,8 @@ public class JailDoor : NetworkBehaviour, IInteractable
             captive.RpcTeleport(jailInsidePoint.position);
             captive.SetCuffed(false, null);
             _prisonerCount++;
+            var gm = FindObjectOfType<GameManager>();
+            if (gm != null) gm.OnThiefImprisoned();
             RpcUpdatePrisonerCount(_prisonerCount);
         }
 
@@ -221,7 +223,8 @@ public class JailDoor : NetworkBehaviour, IInteractable
         if (lobbyData != null && lobbyData.currentTeam == PlayerTeam.Thieves)
         {
             _prisonerCount = Mathf.Max(0, _prisonerCount - 1);
-            
+            var gm = FindObjectOfType<GameManager>();
+            if (gm != null) gm.OnThiefEscaped();
             
             if (_prisonerCount == 0 && _currentState == DoorState.Broken)
             {

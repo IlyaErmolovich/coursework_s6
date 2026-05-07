@@ -12,6 +12,7 @@ public class GameMenuUI : MonoBehaviour
     [SerializeField] private TextMeshProUGUI moneyText;
     [SerializeField] private TextMeshProUGUI slotsText;
     [SerializeField] public TextMeshProUGUI teamScoreText;
+     [SerializeField] public TextMeshProUGUI artifactCountText;
     
     [Header("Interaction Hint")]
     [SerializeField] private TextMeshProUGUI interactionText;
@@ -25,6 +26,9 @@ public class GameMenuUI : MonoBehaviour
     [Header("Hacking Progress")]
     [SerializeField] private Slider hackingProgressSlider;
     [SerializeField] private GameObject hackingProgressPanel;
+
+    [Header("Victory Conditions")]
+    [SerializeField] private TextMeshProUGUI targetMoneyText;   
 
     private bool _isOpen;
     private PlayerInventory _localInventory;
@@ -44,8 +48,10 @@ public class GameMenuUI : MonoBehaviour
         ApplyCursorState();
     }
 
-    void Update()
+    private void Update()
     {
+        if (GameManager.singleton != null && GameManager.singleton.IsMatchEnded) return;
+
         if (Keyboard.current != null && Keyboard.current.escapeKey.wasPressedThisFrame)
         {
             ToggleMenu();
@@ -118,11 +124,17 @@ public class GameMenuUI : MonoBehaviour
         if (isThief)
         {
             if (moneyText != null) moneyText.text = $"$: {_localInventory.TotalMoney}";
-            if (slotsText != null) slotsText.text = $"Slots: {_localInventory.OccupiedSlots}/{_localInventory.MaxSlots}";
+            if (slotsText != null) slotsText.text = $"Слоты: {_localInventory.OccupiedSlots}/{_localInventory.MaxSlots}";
         }
 
-        if (teamScoreText != null)
-            teamScoreText.gameObject.SetActive(isThief);
+        if (isThief)
+        {
+            if (moneyText != null) moneyText.text = $"$: {_localInventory.TotalMoney}";
+            if (slotsText != null) slotsText.text = $"Слоты: {_localInventory.OccupiedSlots}/{_localInventory.MaxSlots}";
+            
+            if (targetMoneyText != null && GameManager.singleton != null)
+                targetMoneyText.text = $"Цель: ${GameManager.singleton.targetDepositScore}";
+        }
     }
 
     public void Resume()
@@ -135,6 +147,8 @@ public class GameMenuUI : MonoBehaviour
 
     public void ToggleMenu()
     {
+        if (GameManager.singleton != null && GameManager.singleton.IsMatchEnded) return;
+
         _isOpen = !_isOpen;
         if (escapePanel != null) escapePanel.SetActive(_isOpen);
         
@@ -145,6 +159,8 @@ public class GameMenuUI : MonoBehaviour
 
     private void ApplyCursorState()
     {
+        if (GameManager.singleton != null && GameManager.singleton.IsMatchEnded) return;
+
         Cursor.lockState = _isOpen ? CursorLockMode.None : CursorLockMode.Locked;
         Cursor.visible = _isOpen;
 
@@ -181,11 +197,18 @@ public class GameMenuUI : MonoBehaviour
     private void OnEnable()
     {
         TeamScoreManager.OnDepositUpdated += UpdateTeamScore;
+        TeamScoreManager.OnArtifactDepositUpdated += UpdateArtifactCount;
     }
 
     private void OnDisable()
     {
         TeamScoreManager.OnDepositUpdated -= UpdateTeamScore;
+    }
+
+    private void UpdateArtifactCount(int count)
+    {
+        if (artifactCountText != null)
+            artifactCountText.text = $"Артефактов сдано: {count}";
     }
 
     private void UpdateTeamScore(int score)

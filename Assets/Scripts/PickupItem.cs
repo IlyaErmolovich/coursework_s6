@@ -26,6 +26,9 @@ public class PickupItem : NetworkBehaviour, IInteractable
     public void Interact(PlayerInventory inventory)
     {
         inventory.CmdAddItem(value);
+        if (isArtifact)
+            inventory.CmdSetHasArtifact(true);
+            
         PlayerAudioManager playerAudio = inventory.GetComponent<PlayerAudioManager>();
         if (playerAudio != null) playerAudio.PlayPickupLocal();
 
