@@ -83,22 +83,6 @@ public class PlayerCombat : NetworkBehaviour
         }
     }
 
-    
-    
-    
-    
-    
-
-    
-    
-
-    
-    
-        
-    
-    
-    
-    
     [Command]
     private void CmdApplyCombatEffects(PlayerController target, float stunDur, float stamDamage)
     {
