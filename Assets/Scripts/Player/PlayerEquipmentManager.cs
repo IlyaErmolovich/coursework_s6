@@ -17,14 +17,20 @@ public class PlayerEquipmentManager : NetworkBehaviour
 
     [SyncVar] private bool _canUseEquipment = true;
 
+    [ClientRpc]
+    public void RpcHideWeapon()
+    {
+        foreach (var weapon in weapons)
+            if (weapon.modelObject != null) weapon.modelObject.SetActive(false);
+        _currentWeaponIndex = -1;
+    }
+
     public void NextWeapon()
     {
-        if (!_canUseEquipment) return; 
+        if (!_canUseEquipment) return;
         if (weapons.Length == 0) return;
-        
         int nextIndex = _currentWeaponIndex + 1;
-        if (nextIndex >= weapons.Length) nextIndex = -1; 
-        
+        if (nextIndex >= weapons.Length) nextIndex = -1;
         CmdSetWeapon(nextIndex);
     }
 
@@ -34,15 +40,9 @@ public class PlayerEquipmentManager : NetworkBehaviour
     private void OnWeaponChanged(int oldIdx, int newIdx)
     {
         foreach (var weapon in weapons)
-        {
             if (weapon.modelObject != null) weapon.modelObject.SetActive(false);
-        }
-
-        if (newIdx >= 0 && newIdx < weapons.Length)
-        {
-            if (weapons[newIdx].modelObject != null)
-                weapons[newIdx].modelObject.SetActive(true);
-        }
+        if (newIdx >= 0 && newIdx < weapons.Length && weapons[newIdx].modelObject != null)
+            weapons[newIdx].modelObject.SetActive(true);
     }
 
     public bool IsAnyWeaponDrawn() => _currentWeaponIndex >= 0;
@@ -51,6 +51,9 @@ public class PlayerEquipmentManager : NetworkBehaviour
     public void SetEquipmentAccess(bool allowed)
     {
         _canUseEquipment = allowed;
-        if (!allowed) CmdSetWeapon(-1); 
+        if (!allowed)
+        {
+            RpcHideWeapon();
+        }
     }
 }

@@ -145,6 +145,12 @@ public class JailDoor : NetworkBehaviour, IInteractable
             captive.RpcTeleport(jailInsidePoint.position);
             captive.SetCuffed(false, null);
             captive.SetImprisoned(true);
+
+            // СЧЁТЧИК И ПОБЕДА ПРЯМО ЗДЕСЬ
+            _prisonerCount++;
+            RpcUpdatePrisonerCount(_prisonerCount);
+            var gm = FindObjectOfType<GameManager>();
+            if (gm != null) gm.OnThiefImprisoned();
         }
 
         if (guard != null)
@@ -207,13 +213,10 @@ public class JailDoor : NetworkBehaviour, IInteractable
         if (playerData != null && playerData.currentTeam == PlayerTeam.Thieves)
         {
             var controller = other.GetComponent<PlayerController>();
-            // Учитываем только если вор реально посажен охранником
             if (controller != null && controller.IsImprisoned)
             {
                 _prisonerCount++;
                 RpcUpdatePrisonerCount(_prisonerCount);
-                var gm = FindObjectOfType<GameManager>();
-                if (gm != null) gm.OnThiefImprisoned();
             }
         }
     }

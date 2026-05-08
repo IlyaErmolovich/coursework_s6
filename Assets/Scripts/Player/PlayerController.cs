@@ -114,7 +114,7 @@ public class PlayerController : NetworkBehaviour
     {
         if (!isLocalPlayer) return;
         if (GameManager.singleton != null && GameManager.singleton.IsMatchEnded) return;
-
+        
         ApplyGravity();
 
             
@@ -130,6 +130,9 @@ public class PlayerController : NetworkBehaviour
             ApplyMovement();
             ApplyLook();
         }
+
+        if (isServer)
+        _syncIsGrounded = IsGrounded;
     }
 
     

@@ -241,4 +241,10 @@ public class PlayerAnimations : NetworkBehaviour
             _audio.CmdPlaySwing();
         }
     }
+
+    [ClientRpc]
+    public void RpcResetJumpTrigger()
+    {
+        StartCoroutine(ResetJumpTrigger());
+    }
 }
