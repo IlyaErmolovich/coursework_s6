@@ -4054,7 +4054,7 @@ MonoBehaviour:
   syncMode: 0
   syncInterval: 0
   matchDuration: 600
-  targetDepositScore: 4000
+  targetDepositScore: 8000
   timerText: {fileID: 604610006}
   victoryPanel: {fileID: 1216670819}
   victoryMessageText: {fileID: 1613205736}
@@ -4280,7 +4280,7 @@ BoxCollider:
     serializedVersion: 2
     m_Bits: 0
   m_LayerOverridePriority: 0
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3

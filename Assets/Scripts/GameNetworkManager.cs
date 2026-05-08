@@ -99,7 +99,6 @@ public class GameNetworkManager : NetworkManager
 
         if (sceneName == "Game")
         {
-            
             var guards = GameObject.FindGameObjectsWithTag("GuardSpawnPoint");
             guardSpawnPoints = guards.Select(go => go.transform).ToArray();
             var thieves = GameObject.FindGameObjectsWithTag("ThiefSpawnPoint");
@@ -107,18 +106,31 @@ public class GameNetworkManager : NetworkManager
 
             Debug.Log($"Найдено точек для охраны: {guardSpawnPoints.Length}, для воров: {thiefSpawnPoints.Length}");
 
-            
-            var connections = NetworkServer.connections.Values.ToList();
-            foreach (var conn in connections)
+            StartCoroutine(ReplacePlayersAfterDelay());
+        }
+    }
+
+    private System.Collections.IEnumerator ReplacePlayersAfterDelay()
+    {
+        yield return new WaitForSeconds(0.5f);
+        
+        var connections = NetworkServer.connections.Values.ToList();
+        Debug.Log($"Замена игроков: всего подключений {connections.Count}");
+        
+        foreach (var conn in connections)
+        {
+            if (conn != null && conn.identity != null)
             {
-                if (conn != null && conn.identity != null)
+                PlayerLobbyData oldData = conn.identity.GetComponent<PlayerLobbyData>();
+                if (oldData != null)
                 {
-                    PlayerLobbyData oldData = conn.identity.GetComponent<PlayerLobbyData>();
-                    if (oldData != null)
-                    {
-                        ReplacePlayerForGame(conn, oldData);
-                    }
+                    ReplacePlayerForGame(conn, oldData);
+                    Debug.Log($"Игрок {oldData.playerName} заменён");
                 }
+            }
+            else
+            {
+                Debug.LogWarning($"Соединение {conn?.connectionId} не имеет identity, возможно клиент не загрузился");
             }
         }
     }
