@@ -72,9 +72,16 @@ public class PlayerController : NetworkBehaviour
 
     [SyncVar] private bool _syncIsGrounded;
     public bool SyncIsGrounded => _syncIsGrounded;
-
+    private bool _lastGrounded;
     public bool IsGrounded => _controller != null && _controller.isGrounded;
     
+    [ClientRpc]
+    public void RpcSetGrounded(bool grounded)
+    {
+        var anims = GetComponentInChildren<PlayerAnimations>();
+        if (anims != null) anims.OnGroundedChanged(grounded);
+    }
+
     [Server]
     public void SetImprisoned(bool imprisoned)
     {
@@ -112,6 +119,16 @@ public class PlayerController : NetworkBehaviour
 
     private void Update()
     {
+        if (isServer)
+        {
+            bool grounded = IsGrounded;
+            if (grounded != _lastGrounded)
+            {
+                _lastGrounded = grounded;
+                RpcSetGrounded(grounded);
+            }
+        }
+
         if (!isLocalPlayer) return;
         if (GameManager.singleton != null && GameManager.singleton.IsMatchEnded) return;
         
@@ -130,9 +147,6 @@ public class PlayerController : NetworkBehaviour
             ApplyMovement();
             ApplyLook();
         }
-
-        if (isServer)
-        _syncIsGrounded = IsGrounded;
     }
 
     

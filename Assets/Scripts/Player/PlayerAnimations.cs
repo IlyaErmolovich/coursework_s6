@@ -16,8 +16,6 @@ public class PlayerAnimations : NetworkBehaviour
     private int _cuffedLayerIndex;
     private Vector3 _lastPosition;
     private float _calculatedSpeed;
-    [SyncVar] private bool _syncIsGrounded;
-    public bool SyncIsGrounded => _syncIsGrounded;
 
     private void Start()
     {
@@ -34,20 +32,12 @@ public class PlayerAnimations : NetworkBehaviour
 
     private void Update()
     {
-        
-        
         float distanceMoved = Vector3.Distance(transform.position, _lastPosition);
         _calculatedSpeed = distanceMoved / Time.deltaTime;
         _lastPosition = transform.position;
 
-        
-        bool isGrounded;
         if (isLocalPlayer)
-            isGrounded = _controller.IsGrounded;
-        else
-            isGrounded = _syncIsGrounded;        
-
-        _animator.SetBool("isGrounded", isGrounded);
+            _animator.SetBool("isGrounded", _controller.IsGrounded);
 
         if (_controller.IsCuffed)
         {
@@ -75,13 +65,6 @@ public class PlayerAnimations : NetworkBehaviour
         HandleWeightsSmoothing();
         HandleAttackLayerBlending();
     } 
-
-    [ServerCallback]
-    void FixedUpdate()
-    {
-        if (_controller != null)
-            _syncIsGrounded = _controller.IsGrounded;
-    }
 
     private void HandleProxyLocomotion()
     {
@@ -161,6 +144,15 @@ public class PlayerAnimations : NetworkBehaviour
     private void CmdJump()
     {
         RpcJump(); 
+    }
+
+    public void OnGroundedChanged(bool grounded)
+    {
+        _animator.SetBool("isGrounded", grounded);
+        if (grounded)
+        {
+            StartCoroutine(ResetJumpTrigger());
+        }
     }
 
     [ClientRpc]
