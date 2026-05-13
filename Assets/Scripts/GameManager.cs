@@ -94,10 +94,18 @@ public class GameManager : NetworkBehaviour
     [Server]
     public void EndMatch(string message)
     {
-        _isMatchActive = false;
         if (_matchEnded) return;
         _matchEnded = true;
         CancelInvoke(nameof(ServerUpdateTimer));
+
+        var ts = TeamScoreManager.singleton;
+        int money = (ts != null) ? ts.TotalDeposited : 0;
+        int artifacts = (ts != null) ? ts.ArtifactsDeposited : 0;
+        float elapsed = matchDuration - _timeLeft;
+        string winner = message.Contains("Грабители") ? "Thieves" : "Guards";
+
+        MySQLHelper.SaveMatchResult(winner, money, artifacts, elapsed);
+
         RpcShowVictory(message);
         RpcStopAllPlayers();
     }

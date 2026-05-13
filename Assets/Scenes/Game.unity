@@ -4053,8 +4053,8 @@ MonoBehaviour:
   syncDirection: 0
   syncMode: 0
   syncInterval: 0
-  matchDuration: 600
-  targetDepositScore: 8000
+  matchDuration: 60
+  targetDepositScore: 1000
   timerText: {fileID: 604610006}
   victoryPanel: {fileID: 1216670819}
   victoryMessageText: {fileID: 1613205736}
