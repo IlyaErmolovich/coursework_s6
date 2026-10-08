@@ -1456,6 +1456,7 @@ GameObject:
   - component: {fileID: -5257501137675945060}
   - component: {fileID: -3158457962747633076}
   - component: {fileID: 8539230958569271936}
+  - component: {fileID: -4614802916656618644}
   m_Layer: 3
   m_Name: RobberPlayer
   m_TagString: Player
@@ -1510,7 +1511,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5223590591996085966}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: a553cb17010b2403e8523b558bffbc14, type: 3}
   m_Name: 
@@ -1739,6 +1740,23 @@ MonoBehaviour:
   swingAirSound: {fileID: 8300000, guid: 7412b1e48ebc6eb4b8040a4cd0d9d3ff, type: 3}
   hitTargetSound: {fileID: 8300000, guid: 68228b7c736170f4fbd9af932ba22c6a, type: 3}
   itemPickupSound: {fileID: 8300000, guid: a932fbac1c4e0eb44adc95beb7b5f941, type: 3}
+--- !u!114 &-4614802916656618644
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5223590591996085966}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f557c8e348dec084b80952a6311fb597, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::CustomNetworkSync
+  syncDirection: 0
+  syncMode: 0
+  syncInterval: 0
+  interpolationDelay: 0.15
+  sendRate: 0.05
 --- !u!1 &5236436202854922296
 GameObject:
   m_ObjectHideFlags: 0
