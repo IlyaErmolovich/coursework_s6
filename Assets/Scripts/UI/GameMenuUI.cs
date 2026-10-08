@@ -35,6 +35,11 @@ public class GameMenuUI : MonoBehaviour
     private PlayerInteraction _localInteraction;
     private PlayerController _localController;
     private PlayerLobbyData _localLobbyData;
+    private int _displayedMoney = int.MinValue;
+    private int _displayedSlots = int.MinValue;
+    private int _displayedMaxSlots = int.MinValue;
+    private int _displayedTarget = int.MinValue;
+    private string _displayedInteractionText;
 
     void Start()
     {
@@ -68,7 +73,8 @@ public class GameMenuUI : MonoBehaviour
     {
         if (_localController != null && stunOverlay != null)
         {
-            stunOverlay.SetActive(_localController.IsStunned);
+            bool stunned = _localController.IsStunned;
+            if (stunOverlay.activeSelf != stunned) stunOverlay.SetActive(stunned);
         }
     }
 
@@ -98,19 +104,24 @@ public class GameMenuUI : MonoBehaviour
             
             if (interactable != null && (isThief || interactable.CanGuardsInteract))
             {
-                interactionText.gameObject.SetActive(true);
-                interactionText.text = interactable.GetInteractionText(_localInventory);
+                if (!interactionText.gameObject.activeSelf) interactionText.gameObject.SetActive(true);
+                string hint = interactable.GetInteractionText(_localInventory);
+                if (_displayedInteractionText != hint)
+                {
+                    interactionText.text = hint;
+                    _displayedInteractionText = hint;
+                }
             }
             else
             {
-                interactionText.gameObject.SetActive(false);
+                if (interactionText.gameObject.activeSelf) interactionText.gameObject.SetActive(false);
             }
         }
 
         
         if (staminaSlider != null)
         {
-            staminaSlider.gameObject.SetActive(isThief);
+            if (staminaSlider.gameObject.activeSelf != isThief) staminaSlider.gameObject.SetActive(isThief);
             if (isThief && _localController != null)
             {
                 staminaSlider.value = _localController.StaminaProgress;
@@ -118,22 +129,36 @@ public class GameMenuUI : MonoBehaviour
         }
 
         
-        if (moneyText != null) moneyText.gameObject.SetActive(isThief);
-        if (slotsText != null) slotsText.gameObject.SetActive(isThief);
+        if (moneyText != null && moneyText.gameObject.activeSelf != isThief) moneyText.gameObject.SetActive(isThief);
+        if (slotsText != null && slotsText.gameObject.activeSelf != isThief) slotsText.gameObject.SetActive(isThief);
 
         if (isThief)
         {
-            if (moneyText != null) moneyText.text = $"$: {_localInventory.TotalMoney}";
-            if (slotsText != null) slotsText.text = $"Слоты: {_localInventory.OccupiedSlots}/{_localInventory.MaxSlots}";
-        }
+            int money = _localInventory.TotalMoney;
+            if (moneyText != null && money != _displayedMoney)
+            {
+                moneyText.text = $"$: {money}";
+                _displayedMoney = money;
+            }
 
-        if (isThief)
-        {
-            if (moneyText != null) moneyText.text = $"$: {_localInventory.TotalMoney}";
-            if (slotsText != null) slotsText.text = $"Слоты: {_localInventory.OccupiedSlots}/{_localInventory.MaxSlots}";
-            
+            int slots = _localInventory.OccupiedSlots;
+            int maxSlots = _localInventory.MaxSlots;
+            if (slotsText != null && (slots != _displayedSlots || maxSlots != _displayedMaxSlots))
+            {
+                slotsText.text = $"Слоты: {slots}/{maxSlots}";
+                _displayedSlots = slots;
+                _displayedMaxSlots = maxSlots;
+            }
+
             if (targetMoneyText != null && GameManager.singleton != null)
-                targetMoneyText.text = $"Цель: ${GameManager.singleton.targetDepositScore}";
+            {
+                int target = GameManager.singleton.targetDepositScore;
+                if (target != _displayedTarget)
+                {
+                    targetMoneyText.text = $"Цель: ${target}";
+                    _displayedTarget = target;
+                }
+            }
         }
     }
 

@@ -7,6 +7,9 @@ public class PickupItem : NetworkBehaviour, IInteractable
     [SerializeField] private string itemName = "Предмет";
     [SerializeField, SyncVar] private int value = 100;
     [SyncVar] private bool isArtifact = false;
+    private int _cachedValue = int.MinValue;
+    private string _cachedItemName;
+    private string _cachedInteractionText;
 
     public bool CanGuardsInteract => false;
     public bool IsArtifact => isArtifact;
@@ -18,7 +21,13 @@ public class PickupItem : NetworkBehaviour, IInteractable
     {
         if (!inventory.HasFreeSlot()) 
             return "Нет свободного места";
-        return $"Нажмите E, чтобы взять {itemName} (Стоимость: {value})";
+        if (_cachedInteractionText == null || _cachedValue != value || _cachedItemName != itemName)
+        {
+            _cachedValue = value;
+            _cachedItemName = itemName;
+            _cachedInteractionText = $"Нажмите E, чтобы взять {itemName} (Стоимость: {value})";
+        }
+        return _cachedInteractionText;
     }
 
     public bool CanInteract(PlayerInventory inventory) => inventory.HasFreeSlot();

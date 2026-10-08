@@ -27,6 +27,9 @@ public class JailDoor : NetworkBehaviour, IInteractable
 
     private Coroutine _hackCoroutine;
     private bool _isHacking = false;
+    private float _cachedHoldDuration = float.NaN;
+    private string _cachedHackHint;
+    private bool _reportedMissingPrisonZone;
 
     public bool CanGuardsInteract => true;
 
@@ -46,7 +49,14 @@ public class JailDoor : NetworkBehaviour, IInteractable
         }
 
         if (_currentState == DoorState.LockedWithPrisoner && !IsInsidePrisonZone(controller))
-            return $"Зажмите E, чтобы взломать ({holdDuration} сек)";
+        {
+            if (_cachedHackHint == null || _cachedHoldDuration != holdDuration)
+            {
+                _cachedHoldDuration = holdDuration;
+                _cachedHackHint = $"Зажмите E, чтобы взломать ({holdDuration} сек)";
+            }
+            return _cachedHackHint;
+        }
 
         return "";
     }
@@ -189,19 +199,17 @@ public class JailDoor : NetworkBehaviour, IInteractable
     {
         if (prisonZone == null)
         {
-            Debug.LogError("Prison Zone НЕ НАЗНАЧЕН!");
+            if (!_reportedMissingPrisonZone)
+            {
+                Debug.LogError("Prison Zone НЕ НАЗНАЧЕН!");
+                _reportedMissingPrisonZone = true;
+            }
             return false;
         }
-        
-        bool inside = prisonZone.bounds.Contains(player.transform.position);
-        Debug.Log($"CHECK: player pos={player.transform.position}, bounds={prisonZone.bounds}, inside={inside}");
-        
-        
-        Collider[] hits = Physics.OverlapSphere(player.transform.position, 0.1f);
-        bool foundTrigger = System.Array.Exists(hits, c => c == prisonZone);
-        Debug.Log($"Player is inside trigger collider via OverlapSphere: {foundTrigger}");
-        
-        return inside;
+
+        // The OverlapSphere result was used only by a diagnostic log. The actual
+        // interaction decision has always used the zone bounds.
+        return prisonZone.bounds.Contains(player.transform.position);
     }
 
     private void OnTriggerEnter(Collider other)

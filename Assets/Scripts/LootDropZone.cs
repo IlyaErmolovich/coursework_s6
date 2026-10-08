@@ -6,6 +6,10 @@ public class LootDropZone : NetworkBehaviour, IInteractable
     [Header("Settings")]
     [SerializeField] private string zoneName = "Фургон";
     [SerializeField] private float interactionRadius = 3f;
+    private string _cachedApproachZoneName;
+    private string _cachedApproachText;
+    private int _cachedMoney = int.MinValue;
+    private string _cachedDepositText;
 
     public bool CanGuardsInteract => false;
 
@@ -26,9 +30,23 @@ public class LootDropZone : NetworkBehaviour, IInteractable
         if (!IsThief(inventory)) return "";
 
         float dist = GetDistanceToPlayer(inventory);
-        if (dist > interactionRadius) return $"Подойдите к {zoneName}";
+        if (dist > interactionRadius)
+        {
+            if (_cachedApproachText == null || _cachedApproachZoneName != zoneName)
+            {
+                _cachedApproachZoneName = zoneName;
+                _cachedApproachText = $"Подойдите к {zoneName}";
+            }
+            return _cachedApproachText;
+        }
         if (inventory.TotalMoney <= 0) return "Нет денег для сдачи";
-        return $"Нажмите E, чтобы сдать награбленное (${inventory.TotalMoney})";
+        int money = inventory.TotalMoney;
+        if (_cachedDepositText == null || _cachedMoney != money)
+        {
+            _cachedMoney = money;
+            _cachedDepositText = $"Нажмите E, чтобы сдать награбленное (${money})";
+        }
+        return _cachedDepositText;
     }
 
     public bool CanInteract(PlayerInventory inventory)

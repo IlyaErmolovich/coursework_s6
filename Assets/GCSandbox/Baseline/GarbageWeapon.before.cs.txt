@@ -1,0 +1,56 @@
+using System.Collections;
+using Mirror;
+using UnityEngine;
+using UnityEngine.InputSystem;
+
+/// <summary>
+/// Baseline for Lab 2. Deliberately allocates memory while firing.
+/// Keep this version unchanged until the "before" Profiler measurements are captured.
+/// </summary>
+public class GarbageWeapon : NetworkBehaviour
+{
+    [SerializeField] private GameObject bulletPrefab;
+    [SerializeField] private float bulletLifetime = 0.5f;
+
+    private void Update()
+    {
+        // The Host is both server and local player. Hold Space in the Game view.
+        if (!isServer || Keyboard.current == null || !Keyboard.current.spaceKey.isPressed || bulletPrefab == null)
+            return;
+
+        FireShot();
+    }
+
+    private void FireShot()
+    {
+        if (!isServer || bulletPrefab == null)
+            return;
+
+        Vector3 spawnPosition = transform.position + new Vector3(
+            Random.Range(-3f, 3f), 0f, Random.Range(1f, 5f));
+
+        // Intentionally expensive: a new networked GameObject every frame.
+        GameObject bullet = Instantiate(bulletPrefab, spawnPosition, Quaternion.identity);
+        NetworkServer.Spawn(bullet);
+        StartCoroutine(DestroyAfterTime(bullet));
+
+        // Intentionally expensive: ToString + string concatenation on every shot.
+        string combatLog = "Игрок выстрелил снарядом №" + Random.Range(0, 1000).ToString();
+        RpcSendLog(combatLog);
+    }
+
+    private IEnumerator DestroyAfterTime(GameObject bullet)
+    {
+        // Intentionally allocates a new yield instruction for each bullet.
+        yield return new WaitForSeconds(bulletLifetime);
+
+        if (NetworkServer.active && bullet != null)
+            NetworkServer.Destroy(bullet);
+    }
+
+    [ClientRpc]
+    private void RpcSendLog(string combatLog)
+    {
+        Debug.Log(combatLog);
+    }
+}
